@@ -15,6 +15,19 @@ public abstract class Persona {
 		this.id = id;
 		this.contrasena = contrasena;
 	}
+	
+	
+
+	public Persona(String nombre, String apellido, String dni, String id, String contrasena) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.id = id;
+		this.contrasena = contrasena;
+	}
+
+
 
 	public String getNombre() {
 		return nombre;
