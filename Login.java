@@ -4,6 +4,7 @@ public class Login {
 	/*
 	String dat= "dat";
 	char gi=dat.charAt(0);
+	*/
 	final char tipo[] = {'c','e'};
 	final char empleado[]= {'v','a','r','i'};
 	final String tipo_de_usuario[]={"cliente","ventas","administrador","restauracion","reparacion"};
