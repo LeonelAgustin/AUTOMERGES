@@ -17,6 +17,7 @@ public class Vendedor extends Persona {
 		this.tipo_cuenta = tipo_cuenta;
 	}
 
-	
+    	
+   
 
 }

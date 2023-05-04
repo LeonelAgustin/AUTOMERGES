@@ -6,8 +6,8 @@ public class Login {
 	char gi=dat.charAt(0);
 	*/
 	final char tipo[] = {'c','e'};
-	final char empleado[]= {'v','a','r','i'};
-	final String tipo_de_usuario[]={"cliente","ventas","administrador","restauracion","reparacion"};
+	final char empleado[]= {'v','a','r','i','d'};
+	final String tipo_de_usuario[]={"cliente","ventas","administrador","restauracion","reparacion","deposito"};
 	private boolean resul; 
 	
 
@@ -43,7 +43,17 @@ public class Login {
 		if (value.charAt(1)==empleado[3]) {
 			return tipo_de_usuario[4];
 		}	
+		if (value.charAt(1)==empleado[4]) {
+			return tipo_de_usuario[5];
+		}	
+		
+		if (value.charAt(1)==' ') {
+			return "error";
+		}
+		
 	}
+	
+	
 	
 	return "0"; 
 	}

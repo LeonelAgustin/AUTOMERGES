@@ -2,29 +2,30 @@ package Logica;
 
 public class Ventas {
 
-    private Persona persona;
+    private Cliente cliente;
     private Pieza pieza;
     private Auto auto;
     final public String transaccion[] ={"compra","venta","reparacion","restauracion"};
-    private String tipo_transaccion;
+    private String asunto;
+    //private double precio;
     //
-	public Ventas(Persona persona, Auto auto,int tipo) {
-		super();
-		this.persona = persona;
+	public Ventas(Cliente cliente, Auto auto,int tipo) {
+		this.cliente = cliente;
 		this.auto = auto;
-		this.tipo_transaccion=transaccion[tipo];
+		this.asunto=transaccion[tipo];
 	}
-	public Ventas(Persona persona, Pieza pieza,int tipo) {
-		super();
-		this.persona = persona;
+	
+	public Ventas(Cliente cliente, Pieza pieza,int tipo) {
+		this.cliente = cliente;
 		this.pieza = pieza;
-		this.tipo_transaccion=transaccion[tipo];
+		this.asunto=transaccion[tipo];
 	}
-	public Persona getPersona() {
-		return persona;
+	
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public Auto getAuto() {
 		return auto;
@@ -38,11 +39,11 @@ public class Ventas {
 	public void setPieza(Pieza pieza) {
 		this.pieza = pieza;
 	}
-	public String getTipo_transaccion() {
-		return tipo_transaccion;
+	public String getasunto() {
+		return asunto;
 	}
-	public void setTipo_transaccion(String tipo_transaccion) {
-		this.tipo_transaccion = tipo_transaccion;
+	public void setasunto(String asunto) {
+		this.asunto = asunto;
 	}
     	
    

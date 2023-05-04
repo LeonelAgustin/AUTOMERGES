@@ -1,6 +1,6 @@
 package main;
 
-import javax.swing.JCheckBox;
+import javax.swing.*;
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -26,7 +26,7 @@ public class Main {
 			String usuario;
 			char aux[]= {' ',' '}; 
 			final String tipo_de_cuenta[]= {"cliente", "empleado"};
-			final String tipo_de_empleado[]={"ventas","administrador","restauracion","reparacion"};
+			final String tipo_de_empleado[]={"ventas","administrador","restauracion","reparacion","deposito"};
 
 			JCheckBox chec=new JCheckBox("Prueba");
 			//filtra cliente de empleado
@@ -34,6 +34,7 @@ public class Main {
 					  "Selector de opciones",JOptionPane.YES_NO_CANCEL_OPTION,
 					   JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
 					   tipo_de_cuenta,tipo_de_cuenta[0]);
+			if (seleccion!=-1) {
 			if (seleccion==0) {
 				aux[1]='x';
 			
@@ -43,7 +44,9 @@ public class Main {
 					  "Selector de opciones",JOptionPane.YES_NO_CANCEL_OPTION,
 					   JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
 					   tipo_de_empleado,tipo_de_empleado[0]);
+			if (seleccion2!=-1) {
 			aux[1] = tipo_de_empleado[seleccion2].charAt(0);
+			}
 			}	     
 			//ingrese el id de usuario y la contraseña 
 			
@@ -55,6 +58,7 @@ public class Main {
 			Login back = new Login(false);
 			//String test_frase="ev54";
 			JOptionPane.showMessageDialog(null, back.d(usuario));
+			}
 	}
 
 }
