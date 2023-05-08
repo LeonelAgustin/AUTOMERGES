@@ -2,7 +2,7 @@ package automerges;
 
 import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class Pieza {
 	private int numero_de_pieza;
@@ -58,10 +58,10 @@ public class Pieza {
 	public LinkedList<Pieza> getPiezas() {
 		return Piezas;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Numero de Pieza: "+numero_de_pieza+"\nNombre: "+nombre+"\nPrecio:"+precio+"\nImportado: "+importada;
+		return "Numero de Pieza: "+numero_de_pieza+"\nNombre: "+nombre+"\nPrecio:"+precio+"\nImportado: "+importada +"\n ";
 	}
 	private LinkedList<Pieza> PiezasPausadas = new LinkedList<Pieza>();
 	public String IniciarProceso(){
@@ -82,13 +82,15 @@ public class Pieza {
 	public boolean PararProceso(){
 		JOptionPane.showMessageDialog(null, Piezas);
 		int piez=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de pieza, del cual desea parar el proceso"));
+	
 		if (Piezas.isEmpty()) {
 			JOptionPane.showMessageDialog(null,"La lista esta vacia");
 			return false;
 		}else {
 			 for (Pieza elemento : Piezas)
 			        if(elemento.getNumero_de_pieza()==piez) {
-			        	System.out.println("Paro el proceso de la pieza: "+elemento.getNumero_de_pieza()); 
+			        	JOptionPane.showMessageDialog(null,"Paro el proceso de la pieza: "+elemento.getNumero_de_pieza() );
+			        	//System.out.println("Paro el proceso de la pieza: "+elemento.getNumero_de_pieza()); 
 			        	PiezasPausadas.add(Piezas.get(piez));
 			    		Piezas.remove(piez);
 			    		
@@ -106,7 +108,8 @@ public class Pieza {
 		}else {
 			 for (Pieza elemento : PiezasPausadas)
 			        if(elemento.getNumero_de_pieza()==pie) {
-			        	System.out.println("Reanudo la pieza: "+elemento.getNumero_de_pieza()); 
+			        	JOptionPane.showMessageDialog(null, "Reanudo la pieza: "+elemento.getNumero_de_pieza());
+			        	//System.out.println("Reanudo la pieza: "+elemento.getNumero_de_pieza()); 
 			        	Piezas.add(PiezasPausadas.get(pie));
 			        	PiezasPausadas.remove(pie);
 		}
@@ -115,18 +118,23 @@ public class Pieza {
 	}      	
         
 	public boolean BorrarProceso(){
+		JOptionPane.showMessageDialog(null, Piezas);
 		int piee=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de pieza para borrar el proceso"));
+		//piee=piee+1;
 		if (Piezas.isEmpty()) {
 			JOptionPane.showMessageDialog(null,"La lista esta vacia");
 			return false;
-		}else {
-			 for (Pieza elemento : Piezas)
+		}else if(piee==getNumero_de_pieza()){
+		 for (Pieza elemento : Piezas)
 			        if(elemento.getNumero_de_pieza()==piee) {
-			        	System.out.println("removio el elemento: "+elemento.getNumero_de_pieza()); 
+			        	JOptionPane.showMessageDialog(null, "removio el elemento: "+elemento.getNumero_de_pieza());
+			        	//System.out.println("removio el elemento: "+elemento.getNumero_de_pieza()); 
 			        	Piezas.remove(piee);
 		}
-			 return true;
 		}
+		return true;
+		//JOptionPane.showMessageDialog(null, "Elimino el proceso "+getNumero_de_pieza());
+	
 	}
 	public String Lista() {
 		if (Piezas.isEmpty()) {
