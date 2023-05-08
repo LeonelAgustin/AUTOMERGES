@@ -65,7 +65,8 @@ public String datosVehiculo() {
         	switch (caso) {
 			case 1:
 				JOptionPane.showMessageDialog(null, "La pieza/vehiculo andaba mal y a pesar de intentar las reparaciones basicas \n se la diste al final al mecanico para que la revisara");
-				 vehiculo auto1 = new vehiculo(marc, mod, pat, año, res, esta);
+				esta = "se mando al mecanico";
+				vehiculo auto1 = new vehiculo(marc, mod, pat, año, res, esta);
 
 			        automoviles.add(auto1);
 				break;
@@ -75,7 +76,7 @@ public String datosVehiculo() {
 			case 3:
 				JOptionPane.showMessageDialog(null, "La pieza/vehiculo se realizo las reparaciones basicas y anduvo");
 				 vehiculo auto3 = new vehiculo(marc, mod, pat, año, res, esta);
-
+				 esta= "se realizo las reparaciones basicas y ando";
 			        automoviles.add(auto3);
 				break;
 			default:
