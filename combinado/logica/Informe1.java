@@ -1,7 +1,6 @@
 package logica;
 
-
-public class Informe {
+public class Informe1 {
 	
 	private int cod_informe;
     private Cliente cliente;
@@ -15,13 +14,13 @@ public class Informe {
     private int horasT;
     private Mecanico empleado;
     
-	public Informe(Cliente cliente, Vehiculo auto,int tipo) {
+	public Informe1(Cliente cliente, Vehiculo auto,int tipo) {
 		this.cliente = cliente;
 		this.auto = auto;
 		this.asunto=transaccion[tipo];
 	}
 	
-	public Informe(Cliente cliente, Pieza pieza,int tipo) {
+	public Informe1(Cliente cliente, Pieza pieza,int tipo) {
 		this.cliente = cliente;
 		this.pieza = pieza;
 		this.asunto=transaccion[tipo];

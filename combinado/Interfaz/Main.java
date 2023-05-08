@@ -1,6 +1,7 @@
 package Interfaz;
 
-import javax.swing.*;
+
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 public class Main {

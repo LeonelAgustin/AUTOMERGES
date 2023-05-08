@@ -2,21 +2,21 @@ package logica;
 
 public class Pieza {
 	private int numero_de_sere;
+
+	private double precio;
+	private String importada;
+	private String estado;
 	
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
 
-	private double precio;
-	private String importada;
-	private int estado;
-	
 	public int getNumero_de_sere() {
 		return numero_de_sere;
 	}
@@ -56,13 +56,16 @@ public class Pieza {
 	}
 
 
-	public Pieza(int num,double precio,String importada,int estado){
-		this.setNumero_de_sere(num);
-		this.setPrecio(precio);
-		this.setImportada(importada);
-		this.setEstado(estado);
+	public Pieza(int numero_de_sere, double precio, String importada, String estado) {
+		super();
+		this.numero_de_sere = numero_de_sere;
+		this.precio = precio;
+		this.importada = importada;
+		this.estado = estado;
 	}
 
 
 	
+
+
 }

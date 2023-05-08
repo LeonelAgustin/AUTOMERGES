@@ -13,6 +13,7 @@ public class Mecanico extends Persona{
 		this.turno = turno;
 	}
 
+	
 	public int getId_mecanico() {
 		return id_mecanico;
 	}
@@ -38,16 +39,24 @@ public class Mecanico extends Persona{
 
 
 	public void loginMecanico() {
+		String usuario = JOptionPane.showInputDialog("Ingrese su usuario como mecanico");
+		int contra = Integer.parseInt(JOptionPane.showInputDialog("ingrese su contrasenia de mecanico"));
+		JOptionPane.showMessageDialog(null, "Bienvenido mecanico:"+usuario);
 		
 	}
 	
-	public Informe completarInforme(Informe informe) {
+	public Informe1 completarInforme() {
 		 /*completar y devuelve el informe*/
+		Informe1 informe = null;
+		double precio1 = 0;
+		double total;
 		int res;
 		int res2;
-		String nombre = JOptionPane.showInputDialog("Revisando informe como el mecanico:"+informe.getEmpleado().getId_mecanico()+"\nComplete su nombre en el informe");
+		int horas = 0;
+		String nombre = "";
+		nombre = JOptionPane.showInputDialog("Revisando informe como  mecanico\nComplete su nombre en el informe");
 		informe.getEmpleado().setNombre(nombre);
-		String apellido = JOptionPane.showInputDialog("Revisando informe como el mecanico:"+informe.getEmpleado().getId_mecanico()+"\nComplete su apellido en el informe");
+		String apellido = JOptionPane.showInputDialog("Revisando informe como  mecanico\nComplete su apellido en el informe");
 		informe.getEmpleado().setNombre(apellido);
 		
 		switch (informe.getasunto()) {
@@ -83,23 +92,33 @@ public class Mecanico extends Persona{
 			} while (res == 0);
 			informe.setTerminado(true);
 		case "reparacion":
-			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Reparacion\nIndique si necesita una pieza particular para repara el vehiculo el vehiculo:"+informe.getAuto().getModelo()+"\n1-Necesito una pieza del deposito\n2-Tengo la pieza necesaria"));
+			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Reparacion\nIndique si necesita una pieza particular para reparar  el vehiculo:"+informe.getAuto().getModelo()+"\n1-Necesito una pieza de fabrica\n2-Tengo la pieza necesaria"));
 			if (a==1) {
 				this.generarOrden();
 			} if (a==2) {
 				do {
-					informe.getPieza().getEstado();
-					informe.getPieza().getImportada();
-					informe.getPieza().getImportada();
-					informe.getPieza().getNumero_de_sere();
-					informe.getPieza().setPrecio(Double.parseDouble(JOptionPane.showInputDialog("Indique el precio de la pieza que utilizo")));
+					JOptionPane.showMessageDialog(null, "Indique los datos de la pieza para completar el informe");
+					
+					informe.getPieza().setEstado(JOptionPane.showInputDialog("Indique el estado de la pieza"));
+					
+					informe.getPieza().setImportada(JOptionPane.showInputDialog("Indique si la pieza es importada"));
+					
+					informe.getPieza().setNumero_de_sere(Integer.parseInt(JOptionPane.showInputDialog("Indique el numerode serie de la pieza")));
+					
+					informe.getPieza().setPrecio(Double.parseDouble(JOptionPane.showInputDialog("Indique el precio de la pieza")));
+					
 					
 					res2 = Integer.parseInt(JOptionPane.showInputDialog("Indique si utilizo otra pieza  extra para el trabajo\n1-Utilice otra pieza\n2-Ya informe todas las piezas que utilice"));
 				} while (res2==1);
-				int horas = Integer.parseInt(JOptionPane.showInputDialog("Indique cuantas horas le llevo hacer la reparacion"));
 				
+				horas = Integer.parseInt(JOptionPane.showInputDialog("Indique cuantas horas le llevo hacer la reparacion"));
+				precio1 = informe.getPieza().getPrecio();
 			}
-			this.generarOrden();
+			
+			total = (precio1/2)*horas;
+			informe.setPrecio(total);
+			JOptionPane.showMessageDialog(null, "Informe completado para pasar al vendedor\nNumero:"+informe.getCod_informe()+"\nAsunto:"+informe.getasunto()+"\nAuto:"+informe.getAuto().getModelo()+"\nPieza Nº:"+informe.getPieza().getNumero_de_sere()+"\nMateriales:"+informe.getMateriales()+"\nCliente:"+informe.getCliente().getNombre()+"\nPrecio a cobrar:"+informe.getPrecio()+"\nMecanico:"+informe.getEmpleado().getNombre());
+			
 			break;
 		}
 		
@@ -107,8 +126,16 @@ public class Mecanico extends Persona{
 	}
 	
 	public Orden generarOrden () {
+		Mecanico nulo = null;
+		JOptionPane.showMessageDialog(null, "Indique los datos necesarios para generar la Orden");
+		int ord= 123;
+		String nombre = JOptionPane.showInputDialog("ingrese su nombre como responsable dela pieza solicitada");
+		String np = JOptionPane.showInputDialog("ingrese el nombre de la pieza que necesita que fabriquen");
+		Orden solicitada = new Orden(ord,nulo,np);
 		
-		return null;
+		JOptionPane.showMessageDialog(null, "Orden generada\nNumero:"+solicitada.getCod_orden()+"\nSolicitante:"+nombre+"\nPieza solicitada:"+solicitada.getNombrePieza());
+		
+		return solicitada;
 	}
 		
 	}

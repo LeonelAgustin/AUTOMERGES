@@ -34,19 +34,19 @@ public class EncargadoTaller extends Persona {
 		return "EncargadoTaller [id_Etaller=" + id_Etaller + ", claveT=" + claveT + "]";
 	}
 
-	public Informe completarInforme(Informe informe) {
+	public Informe1 completarInforme(Informe1 informe1) {
 
-		switch (informe.getasunto()) {
+		switch (informe1.getasunto()) {
 		case "restauracion":
 
-			String info = "Revisando informe como Encargado del taller\nCodigo:"+informe.getCod_informe()+"\nAsunto:restauracion\nVehiculo:"
-					+ informe.getAuto().getModelo() + "\nDueño:" + informe.getCliente().getNombre() + "\nTerminado:"
-					+ informe.isTerminado() + "\nHoras de trabajo:0" + "\nMateriales:Sin especificar" + "Mecanico:Sin asignar\n";
+			String info = "Revisando informe como Encargado del taller\nCodigo:"+informe1.getCod_informe()+"\nAsunto:restauracion\nVehiculo:"
+					+ informe1.getAuto().getModelo() + "\nDueño:" + informe1.getCliente().getNombre() + "\nTerminado:"
+					+ informe1.isTerminado() + "\nHoras de trabajo:0" + "\nMateriales:Sin especificar" + "Mecanico:Sin asignar\n";
 
 			String nombre = JOptionPane
 					.showInputDialog(info + "Ingrese el mecanico a quien quiere asignarle el trabajo");
 
-			informe.getEmpleado().setNombre(nombre);
+			informe1.getEmpleado().setNombre(nombre);
 
 			JOptionPane.showMessageDialog(null, "asignado trabajo de restauracion al mecanico:" + nombre);
 
@@ -54,20 +54,20 @@ public class EncargadoTaller extends Persona {
 
 		case "reparacion":
 
-			String info1 = "Revisando informe como Encargado del taller\nCodigo:"+informe.getCod_informe()+"\nAsunto:reparacion\nVehiculo:"
-					+ informe.getAuto().getModelo() + "\nDueño:" + informe.getCliente().getNombre() + "\nTerminado:"
-					+ informe.isTerminado() + "\nHoras de trabajo:0" +"\nPieza:Sin especificar"+ "\n" + "Mecanico:Sin asignar\n";
+			String info1 = "Revisando informe como Encargado del taller\nCodigo:"+informe1.getCod_informe()+"\nAsunto:reparacion\nVehiculo:"
+					+ informe1.getAuto().getModelo() + "\nDueño:" + informe1.getCliente().getNombre() + "\nTerminado:"
+					+ informe1.isTerminado() + "\nHoras de trabajo:0" +"\nPieza:Sin especificar"+ "\n" + "Mecanico:Sin asignar\n";
 
 			int identificador1 = Integer.parseInt(JOptionPane.showInputDialog(info1 + "Ingrese el id del mecanico a quien quiere asignarle el trabajo")); 
 					
 
-			informe.getEmpleado().setId_mecanico(identificador1);
+			informe1.getEmpleado().setId_mecanico(identificador1);
 
 			JOptionPane.showMessageDialog(null, "asignado trabajo de reparacion al mecanico :" + identificador1 );
 
 			break;
 		}
 		//devuelve el informe completado
-		return informe;
+		return informe1;
 	}
 }

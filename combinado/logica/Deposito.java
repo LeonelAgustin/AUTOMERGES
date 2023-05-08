@@ -134,7 +134,7 @@ public class Deposito {
 				case 1:
 					JOptionPane.showMessageDialog(null,
 							"La pieza/vehiculo andaba mal y a pesar de intentar las reparaciones basicas \n se la diste al final al mecanico para que la revisara");
-					Pieza piezaas1 = new Pieza(n_s, pre, impo, esta);
+					Pieza piezaas1 = null /*new Pieza(n_s, pre, impo, esta)*/;
 
 					piezas.add(piezaas1);
 					break;
@@ -145,7 +145,7 @@ public class Deposito {
 				case 3:
 					JOptionPane.showMessageDialog(null,
 							"La pieza/vehiculo se realizo las reparaciones basicas y anduvo");
-					Pieza piezaas3 = new Pieza(n_s, pre, impo, esta);
+					Pieza piezaas3 = null /*new Pieza(n_s, pre, impo, esta)*/;
 
 					piezas.add(piezaas3);
 					break;
@@ -153,7 +153,7 @@ public class Deposito {
 					break;
 				}
 			} else {
-				Pieza piezaas = new Pieza(n_s, pre, impo, esta);
+				Pieza piezaas = null /*new Pieza(n_s, pre, impo, esta)*/;
 
 				piezas.add(piezaas);
 			}
