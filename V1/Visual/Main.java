@@ -19,7 +19,7 @@ public class Main {
 
 		JCheckBox chec=new JCheckBox("Prueba");
 		//filtra cliente de empleado
-		int seleccion = JOptionPane.showOptionDialog( null,"Seleccione una opcion",
+		int seleccion = JOptionPane.showOptionDialog( chec,"Seleccione una opcion",
 				  "Selector de opciones",JOptionPane.YES_NO_CANCEL_OPTION,
 				   JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
 				   tipo_de_cuenta,tipo_de_cuenta[0]);
@@ -51,13 +51,17 @@ public class Main {
 		//JOptionPane.showMessageDialog(null, back.d(usuario));
 		if (back.d(usuario)=="ev" || back.isResul()) {
 			
-			Vendedor vendedor = new Vendedor("Elsa","Capunta", "5993982836", "302", "abc");
-			Cliente cliente = new Cliente("Elsa","Capunta", "5993982836", "302", "abc");
+				
+			
+			Vendedor vendedor = new Vendedor("Elsa","Prime", "5993982836", "302", "abc");
+			Cliente cliente = new Cliente("Elsa","Segundo", "5993982836", "302", "abc");
 			Vehiculo vehiculo = new Vehiculo("fiat","207", "AGT178", 12, "null", false, 0);
 			Pieza pieza = new Pieza(30, 4.00, "no", 0);
 			String Contrasena = JOptionPane.showInputDialog(null, "Ingrese la contraseña");
 			if (Contrasena.equals(vendedor.getContrasena()) ) {
+				do {
 				vendedor.vendedor(vehiculo, pieza, cliente);
+				} while (JOptionPane.showInputDialog("0 para salir").equals("1"));
 			}else {
 				
 			}

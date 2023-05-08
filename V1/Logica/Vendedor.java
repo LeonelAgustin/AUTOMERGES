@@ -32,7 +32,7 @@ public class Vendedor extends Persona {
 		Informe informef = new Informe(cliente, pieza, 0, true);
 		switch (seleccion) {
 		case 0:
-			JOptionPane.showMessageDialog(null, "comprar auto" + vehiculo);
+			JOptionPane.showMessageDialog(null, "comprar auto\n" + vehiculo);
 			informe.setIsfactura(false);
 			informe.setCliente(cliente);
 			informe.setasunto("compra");
@@ -40,7 +40,7 @@ public class Vendedor extends Persona {
 			JOptionPane.showMessageDialog(null, informe.toString());
 			break;
 		case 1:
-			JOptionPane.showMessageDialog(null, "Vender auto"+vehiculo);
+			JOptionPane.showMessageDialog(null, "Vender auto\\n"+vehiculo);
 			informe.setIsfactura(true);
 			informe.setCliente(cliente);
 			informe.setasunto("venta");
@@ -48,21 +48,21 @@ public class Vendedor extends Persona {
 			JOptionPane.showMessageDialog(null, informe.toString());
 			break;
 		case 2:
-			JOptionPane.showMessageDialog(null, "Comprar pieza"+pieza);
+			JOptionPane.showMessageDialog(null, "Comprar pieza\\n"+pieza);
 			informef.setIsfactura(false);
 			informef.setCliente(cliente);
 			informef.setasunto("venta");
 			informef.setPieza(pieza);
 			JOptionPane.showMessageDialog(null, informef.toString());
 			break;		case 3:
-			JOptionPane.showMessageDialog(null, "Vender pieza"+pieza);
+			JOptionPane.showMessageDialog(null, "Vender pieza\\n"+pieza);
 			informef.setIsfactura(true);
 			informef.setCliente(cliente);
 			informef.setasunto("venta");
 			informef.setPieza(pieza);
 			JOptionPane.showMessageDialog(null, informef.toString());
 			break;		case 4:
-			JOptionPane.showMessageDialog(null, "Reparar auto"+vehiculo);
+			JOptionPane.showMessageDialog(null, "Reparar auto\\n"+vehiculo);
 			informe.setIsfactura(false);
 			informe.setCliente(cliente);
 			informe.setasunto("venta");

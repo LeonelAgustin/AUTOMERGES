@@ -71,14 +71,14 @@ public class Informe {
 	public String toString() {
 		if (isfactura) {
 			if (isauto) {
-				return "factura \n cliente=" + cliente + "\n  auto=" + vehiculo + "\n asunto=" + asunto ;
+				return "factura \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\nauto=" + vehiculo.getMarca() + "  "+ vehiculo.getModelo() + "\nasunto=" + asunto ;
 			}
-			return "factura \n cliente=" + cliente + "\n pieza=" + pieza + "asunto=" + asunto ;
+			return "factura \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\npieza=" + pieza.getNumero_de_sere() + "\nasunto=" + asunto ;
 		}else {
 			if (isauto) {
-				return "Informe \n cliente=" + cliente + "\n  auto=" + vehiculo + "\n asunto=" + asunto ;
+				return "Informe \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\nauto=" +  vehiculo.getMarca() + "  "+ vehiculo.getModelo() + "\nasunto=" + asunto ;
 			}
-			return "Informe \n cliente=" + cliente + "\n pieza=" + pieza + "asunto=" + asunto ;
+			return "Informe \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\npieza=" + pieza.getNumero_de_sere() + "\nasunto=" + asunto ;
 		}
 		
 	}
