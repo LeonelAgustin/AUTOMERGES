@@ -1,6 +1,7 @@
 package Logica;
 
-import javax.swing.JCheckBox;
+import javax.swing.JCheckBox; 
+
 import javax.swing.JOptionPane;
 
 public class Vendedor extends Persona {

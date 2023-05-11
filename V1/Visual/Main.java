@@ -1,6 +1,6 @@
 package Visual;
 
-import javax.swing.*;
+import javax.swing.*; 
 
 import Logica.Cliente;
 import Logica.Login;
