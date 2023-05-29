@@ -4,7 +4,7 @@ public class Vehiculo {
 	private String marca;
 	private String modelo;
 	private String patente; 
-	private int año; 
+	private int ano; 
 	private String restauracion;
 	private boolean reparacion;
 	private int estado;
@@ -33,11 +33,11 @@ public class Vehiculo {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
-	public int getAño() {
-		return año;
+	public int getAno() {
+		return ano;
 	}
-	public void setAño(int año) {
-		this.año = año;
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 
 	public void setRestauracion(String restauracion) {
@@ -51,7 +51,7 @@ public class Vehiculo {
 	}
 	@Override
 	public String toString() {
-		return "vehiculo [marca=" + marca + ", modelo=" + modelo + ", patente=" + patente + ", año=" + año
+		return "vehiculo [marca=" + marca + ", modelo=" + modelo + ", patente=" + patente + ", ano=" + ano
 				+ ", restauracion=" + restauracion + ", reparacion=" + reparacion + ", estado=" + estado + "]";
 	}
 	/*
@@ -65,11 +65,11 @@ public class Vehiculo {
 
 	}
 	*/
-	public Vehiculo(String marca, String modelo, String patente, int año, String restauracion, boolean reparacion,int estado) {
+	public Vehiculo(String marca, String modelo, String patente, int ano, String restauracion, boolean reparacion,int estado) {
 		this.marca = marca;
 		this.modelo = modelo;
 		this.patente = patente;
-		this.año = año;
+		this.ano = ano;
 		this.restauracion = restauracion;
 		this.reparacion = reparacion;
 		this.estado = estado;
