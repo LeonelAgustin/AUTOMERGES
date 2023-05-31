@@ -2,6 +2,21 @@ package deposito;
 
 public class pieza {
 	private int numero_de_sere;
+	private String nombre;
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	private double precio;
+	private String importada;
+	private int estado;
+	
 	public int getEstado() {
 		return estado;
 	}
@@ -12,9 +27,6 @@ public class pieza {
 	}
 
 
-	private double precio;
-	private String importada;
-	private int estado;
 	
 	public int getNumero_de_sere() {
 		return numero_de_sere;
@@ -33,8 +45,8 @@ public class pieza {
 
 	@Override
 	public String toString() {
-		return "pieza [numero_de_sere=" + numero_de_sere + ", precio=" + precio + ", importada=" + importada
-				+ ", estado=" + estado + "]";
+		return "pieza [numero_de_sere=" + numero_de_sere + ", nombre=" + nombre + ", precio=" + precio + ", importada="
+				+ importada + ", estado=" + estado + "]";
 	}
 
 
@@ -55,7 +67,8 @@ public class pieza {
 	}
 
 
-	public pieza(int num,double precio,String importada,int estado){
+	public pieza(String nombre,int num,double precio,String importada,int estado){
+		this.setNombre(nombre);
 		this.setNumero_de_sere(num);
 		this.setPrecio(precio);
 		this.setImportada(importada);

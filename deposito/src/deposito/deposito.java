@@ -96,6 +96,7 @@ public String datosPieza() {
 	JOptionPane.showMessageDialog(null, "ingrese datos de las piezas para el informe");
 	int opcio; 
     do {
+    	String nom = JOptionPane.showInputDialog("ingrese nombre de la pieza");
     	int n_s = Integer.parseInt(JOptionPane.showInputDialog("introduzca el numero de serie"));
         double pre = (int) Integer.parseInt(JOptionPane.showInputDialog("ingrese el valor de la pieza"));
         String impo = JOptionPane.showInputDialog("introduzca si fue importado ");
@@ -107,7 +108,7 @@ public String datosPieza() {
         	switch (caso) {
 			case 1:
 				JOptionPane.showMessageDialog(null, "La pieza/vehiculo andaba mal y a pesar de intentar las reparaciones basicas \n se la diste al final al mecanico para que la revisara");
-				pieza piezaas1 = new pieza(n_s,pre,impo,esta);
+				pieza piezaas1 = new pieza(nom,n_s,pre,impo,esta);
 
 		        piezas.add(piezaas1);
 				break;
@@ -116,7 +117,7 @@ public String datosPieza() {
 			break;
 			case 3:
 				JOptionPane.showMessageDialog(null, "La pieza/vehiculo se realizo las reparaciones basicas y anduvo");
-				 pieza piezaas3 = new pieza(n_s,pre,impo,esta);
+				 pieza piezaas3 = new pieza(nom,n_s,pre,impo,esta);
 
 			        piezas.add(piezaas3);
 				break;
@@ -124,7 +125,7 @@ public String datosPieza() {
 				break;
 			}
 		} else {
-			 pieza piezaas = new pieza(n_s,pre,impo,esta);
+			 pieza piezaas = new pieza(nom,n_s,pre,impo,esta);
 
 		        piezas.add(piezaas);
 		}
