@@ -142,11 +142,50 @@ public class Empleados {
 	}
 
 	public boolean RegistrarUsuario(String contrasena, String dni, String nombre, String apellido, String direccion,
-			String altura, String telefono) {	
+			String altura, String telefono) {
 		Verificar verificar = new Verificar();
-		verificar.verificarcontrasena(contrasena);
-		
-		
+		if (!verificar.verificarcontrasena(contrasena)) {
+			do {
+				contrasena = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificarcontrasena(contrasena));
+		}
+
+		if (!verificar.verificardni(dni)) {
+			do {
+				dni = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificardni(dni));
+		}
+
+		if (!verificar.verificarnombre(nombre)) {
+			do {
+				nombre = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificarnombre(nombre));
+		}
+
+		if (!verificar.verificarapellido(apellido)) {
+			do {
+				apellido = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificarapellido(apellido));
+		}
+
+		if (!verificar.verificardireccion(direccion)) {
+			do {
+				direccion = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificardireccion(direccion));
+		}
+
+		if (!verificar.verificaraltura(altura)) {
+			do {
+				altura = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificaraltura(altura));
+		}
+
+		if (!verificar.verificartelefono(telefono)) {
+			do {
+				telefono = JOptionPane.showInputDialog(verificar);
+			} while (!verificar.verificartelefono(telefono));
+		}
+
 		return true;
 	}
 

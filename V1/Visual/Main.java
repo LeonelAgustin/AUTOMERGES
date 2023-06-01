@@ -70,30 +70,35 @@ public class Main {
 
 		JCheckBox chec = new JCheckBox("Prueba");
 		// filtra cliente de empleado
-		int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por defecto.
-				tipo_de_cuenta, tipo_de_cuenta[0]);
-		String user = JOptionPane.showInputDialog("ingrese el dni");
-		String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
-		System.err.println('\u00BA');
-		
-		Empleados empleado = new Empleados(0, 0, null, null, null, null);
-		Empleados cliente = new Empleados(0, 0, null, null);
-		empleado.RegistrarUsuario("123abc","","","","","","");
-		if (seleccion == 1) {	
-			if (empleado.TraerEmleados(pass, user)) {
-				System.err.println(empleado);
-			} else {
-				System.err.println("error");
-			}
-		} else {
-			if (cliente.TraerUsuarios(pass, user)) {
-				System.err.println(cliente);
-			} else {
-				System.err.println("error");
-			}
-		}
+		boolean key = false;
+		do {
 
+			int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+																							// defecto.
+					tipo_de_cuenta, tipo_de_cuenta[0]);
+			String user = JOptionPane.showInputDialog("ingrese el dni");
+			String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
+			System.err.println('\u00BA');
+
+			Empleados empleado = new Empleados(0, 0, null, null, null, null);
+			Empleados cliente = new Empleados(0, 0, null, null);
+			empleado.RegistrarUsuario("123abc", "", "", "", "", "", "");
+			if (seleccion == 1) {
+				if (empleado.TraerEmleados(pass, user)) {
+					System.err.println(empleado);
+				} else {
+					System.err.println("error");
+				}
+			} else {
+				if (cliente.TraerUsuarios(pass, user)) {
+					System.err.println(cliente);
+				} else {
+					System.err.println("error");
+				}
+			}
+
+		} while (key);
 	}
 
 }

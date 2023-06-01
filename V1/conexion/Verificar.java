@@ -68,7 +68,12 @@ public class Verificar {
 			if (Character.isAlphabetic(q) && q == '\u00e1' && q == '\u00e9' && q == '\u00ed' && q == '\u00f3'
 					&& q == '\u00fa' && q == '\u00c1' && q == '\u00c9' && q == '\u00cd' && q == '\u00d3'
 					&& q == '\u00da' && q == '\u00f1' && q == '\u00d1') {
-				error = error + "el caracter " + q + "\n";
+				if (error.equals("")) {
+					error = "el caracter " + q + "\n";
+				}else {
+					error = error + " , " + q;
+				}
+				
 			}
 		}
 		if (error.equals("")) {
