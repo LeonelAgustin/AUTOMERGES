@@ -5,19 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import conexion.Conexion;
+import conexion.Verificar;
 
 // esto es una clase de testeo de nuevas interacciones o funciones
 public class Empleados {
 
 	Conexion con = new Conexion();
-	
+
 	Connection conexion = con.conectar();
-	
+
 	PreparedStatement stmt;
-	
-	private int id ,dni;
-	private String nombre ,apellido,tipo;
+
+	private int id, dni;
+	private String nombre, apellido, tipo;
 
 	public Empleados(int id, int dni, String nombre, String apellido, String clave, String tipo) {
 		super();
@@ -35,8 +38,7 @@ public class Empleados {
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -77,8 +79,9 @@ public class Empleados {
 		this.tipo = tipo;
 	}
 
-	public boolean TraerEmleados(String clave ,String usuario) {
-		String sql = "SELECT empleado.idempleado,persona.nombre,persona.apellido,persona.dni,empleado_tipo.Nombre clase FROM `empleado` INNER JOIN empleado_tipo on empleado_tipo.idempleado_tipo = empleado.empleado_tipo_idempleado_tipo INNER JOIN persona on Persona.idPersona=empleado.Persona_idPersona WHERE persona.dni = " + usuario + " && empleado.clave LIKE \""+clave +"\";";
+	public boolean TraerEmleados(String clave, String usuario) {
+		String sql = "SELECT empleado.idempleado,persona.nombre,persona.apellido,persona.dni,empleado_tipo.Nombre clase FROM `empleado` INNER JOIN empleado_tipo on empleado_tipo.idempleado_tipo = empleado.empleado_tipo_idempleado_tipo INNER JOIN persona on Persona.idPersona=empleado.Persona_idPersona WHERE persona.dni = "
+				+ usuario + " && empleado.clave LIKE \"" + clave + "\";";
 		String[] datos = new String[5];
 		try {
 
@@ -108,14 +111,9 @@ public class Empleados {
 
 	}
 
-	
-	
-	
-	
-	
-
-	public boolean TraerUsuarios(String clave ,String usuario) {
-		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE persona.dni = " + usuario + " && cliente.clave LIKE \""+clave +"\";";
+	public boolean TraerUsuarios(String clave, String usuario) {
+		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE persona.dni = "
+				+ usuario + " && cliente.clave LIKE \"" + clave + "\";";
 		String[] datos = new String[5];
 		try {
 
@@ -142,11 +140,20 @@ public class Empleados {
 		}
 
 	}
-	
-	@Override
-	public String toString() {
-		return "Empleados [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", tipo=" + tipo + "]";
+
+	public boolean RegistrarUsuario(String contrasena, String dni, String nombre, String apellido, String direccion,
+			String altura, String telefono) {	
+		Verificar verificar = new Verificar();
+		verificar.verificarcontrasena(contrasena);
+		
+		
+		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Empleados [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", tipo="
+				+ tipo + "]";
+	}
+
 }

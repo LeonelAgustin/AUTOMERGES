@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 	//true = defecto  false = davinci
-private boolean demo_setting=false;
+private boolean demo_setting=true;
 Connection con ;
 	
 	public Connection conectar() {

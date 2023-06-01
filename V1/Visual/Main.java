@@ -75,11 +75,11 @@ public class Main {
 				tipo_de_cuenta, tipo_de_cuenta[0]);
 		String user = JOptionPane.showInputDialog("ingrese el dni");
 		String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
-
+		System.err.println('\u00BA');
 		
 		Empleados empleado = new Empleados(0, 0, null, null, null, null);
 		Empleados cliente = new Empleados(0, 0, null, null);
-		
+		empleado.RegistrarUsuario("123abc","","","","","","");
 		if (seleccion == 1) {	
 			if (empleado.TraerEmleados(pass, user)) {
 				System.err.println(empleado);
