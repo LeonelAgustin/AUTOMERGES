@@ -218,20 +218,30 @@ public class Login {
 	
 	public boolean registro(String contrasena, String dni, String nombre, String apellido, String direccion,
 			String altura, String telefono) {
-	
 		
 		String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES ('?','?','?','?','?','?')";
 		
-		
-		
 		try {
 			stmt = conexion.prepareStatement(sql);
+			stmt.setFloat(1, Float.parseFloat(dni));
+			stmt.setString(2,nombre);
+			stmt.setString(3, apellido);
+			stmt.setString(4, direccion);
+			stmt.setInt(5, Integer.parseInt(altura));
+			stmt.setFloat(6,Float.parseFloat(telefono));
+			stmt.executeUpdate();
+			conexion.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-	
+		sql = "SELECT idPersona FROM `persona` WHERE `dni`= "+dni+" && `nombre` = \""+nombre+"\" &&`apellido` = \""+ apellido+"\" && `direccion`= \""+ direccion+"\" && `altura` = \""+altura+"\" &&`telefono`=\""+telefono+"\"";
 		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		String[] datos = new String[5];
 		
