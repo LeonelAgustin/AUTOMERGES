@@ -120,6 +120,7 @@ public class Login {
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
 				this.setTipo(datos[4]);
+				conexion.close();
 				return true;
 			}
 
@@ -150,6 +151,7 @@ public class Login {
 				this.setNombre(datos[1]);
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
+				conexion.close();
 				return true;
 			}
 
@@ -214,11 +216,55 @@ public class Login {
 
 	
 	
+	public boolean registro(String contrasena, String dni, String nombre, String apellido, String direccion,
+			String altura, String telefono) {
+	
+		
+		String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES ('?','?','?','?','?','?')";
+		
+		
+		
+		try {
+			stmt = conexion.prepareStatement(sql);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	
+		
+		
+		String[] datos = new String[5];
+		
+		
+		try {
+
+			stmt = conexion.prepareStatement(sql);
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				datos[0] = String.valueOf(result.getInt(1));
+				datos[1] = result.getString(2);
+				datos[2] = result.getString(3);
+				datos[3] = String.format("%.0f", result.getFloat(4));
+
+				this.setId(Integer.parseInt(datos[0]));
+				this.setNombre(datos[1]);
+				this.setApellido(datos[2]);
+				this.setDni(Integer.parseInt(datos[3]));
+				conexion.close();
+				return true;
+			}
+
+			return false;
+
+		} catch (Exception excepcion) {
+			System.out.println(excepcion.getMessage());
+			return false;
+		}
+
+	}
 	
 	
-	
-	
-	
+
 	
 	
 	
