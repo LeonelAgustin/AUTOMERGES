@@ -174,37 +174,37 @@ public class Login {
 
 		if (!verificar.verificardni(dni)) {
 			do {
-				dni = JOptionPane.showInputDialog(verificar);
+				dni = JOptionPane.showInputDialog("ingresa nuevamente tu dni");
 			} while (!verificar.verificardni(dni));
 		}
 
 		if (!verificar.verificarnombre(nombre)) {
 			do {
-				nombre = JOptionPane.showInputDialog(verificar);
+				nombre = JOptionPane.showInputDialog("ingresa nuevamente tu nombre");
 			} while (!verificar.verificarnombre(nombre));
 		}
 
 		if (!verificar.verificarapellido(apellido)) {
 			do {
-				apellido = JOptionPane.showInputDialog(verificar);
+				apellido = JOptionPane.showInputDialog("ingresa nuevamente tu apellido");
 			} while (!verificar.verificarapellido(apellido));
 		}
 
 		if (!verificar.verificardireccion(direccion)) {
 			do {
-				direccion = JOptionPane.showInputDialog(verificar);
+				direccion = JOptionPane.showInputDialog("ingresa nuevamente tu direccion");
 			} while (!verificar.verificardireccion(direccion));
 		}
 
 		if (!verificar.verificaraltura(altura)) {
 			do {
-				altura = JOptionPane.showInputDialog(verificar);
+				altura = JOptionPane.showInputDialog("ingrese nuevamente la altura de tu direccion");
 			} while (!verificar.verificaraltura(altura));
 		}
 
 		if (!verificar.verificartelefono(telefono)) {
 			do {
-				telefono = JOptionPane.showInputDialog(verificar);
+				telefono = JOptionPane.showInputDialog("ingresa nuevamente tu telefono");
 			} while (!verificar.verificartelefono(telefono));
 		}
 
