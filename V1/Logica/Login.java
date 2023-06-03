@@ -28,10 +28,30 @@ public class Login {
 	private int id, dni;
 	private String nombre, apellido,tipo;
 	
+
+	public Login(int id, int dni, String nombre, String apellido, String clave, String tipo) {
+		super();
+		this.id = id;
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.tipo = tipo;
+	}
+
+	public Login(int id, int dni, String nombre, String apellido) {
+		super();
+		this.id = id;
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+
+	/*
+	
 	public Login(boolean resul) {
 		this.resul = resul;
 	}
-
+	 */
 	public boolean isResul() {
 		return resul;
 	}
@@ -148,7 +168,7 @@ public class Login {
 		Verificar verificar = new Verificar();
 		if (!verificar.verificarcontrasena(contrasena)) {
 			do {
-				contrasena = JOptionPane.showInputDialog(verificar);
+				contrasena = JOptionPane.showInputDialog("ingrese la contrase\u00f1a nuevamente");
 			} while (!verificar.verificarcontrasena(contrasena));
 		}
 

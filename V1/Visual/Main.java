@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 import Logica.Cliente;
-import Logica.Empleados;
 import Logica.Login;
 import Logica.Persona;
 import Logica.Pieza;
@@ -19,6 +18,7 @@ public class Main {
 		String usuario;
 		char aux[] = { ' ', ' ' };
 		final String tipo_de_cuenta[] = { "cliente", "empleado" };
+		final String opciones[] = { "Registrarse", "Logearse" };
 		/*
 		 * final String
 		 * tipo_de_empleado[]={"ventas","administrador","restauracion","reparacion",
@@ -71,33 +71,56 @@ public class Main {
 		JCheckBox chec = new JCheckBox("Prueba");
 		// filtra cliente de empleado
 		boolean key = false;
+		Login empleado = new Login(0, 0, null, null, null, null);
+		Login cliente = new Login(0, 0, null, null);
 		do {
 
-			int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
+			int seleccion2 = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
 					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
-																							// defecto.
-					tipo_de_cuenta, tipo_de_cuenta[0]);
-			String user = JOptionPane.showInputDialog("ingrese el dni");
-			String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
-			System.err.println('\u00BA');
+					opciones, opciones[0]);
 
-			Empleados empleado = new Empleados(0, 0, null, null, null, null);
-			Empleados cliente = new Empleados(0, 0, null, null);
-			empleado.RegistrarUsuario("123abc", "", "", "", "", "", "");
-			if (seleccion == 1) {
-				if (empleado.TraerEmleados(pass, user)) {
-					System.err.println(empleado);
-				} else {
-					System.err.println("error");
+			if (seleccion2 == 0) {
+				try {
+					String dni = JOptionPane.showInputDialog("ingresa tu dni");
+					String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
+					String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
+					String direccion = JOptionPane.showInputDialog("ingresa tu direccion");
+					String altura = JOptionPane.showInputDialog("ingrese la altura de tu direccion");
+					String telefono = JOptionPane.showInputDialog("ingresa tu telefono");
+					String contrasena =JOptionPane.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
+					empleado.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+				} catch (Exception e) {
+					JOptionPane.showConfirmDialog(chec,"error intentado registrar el usuario");
 				}
+				
 			} else {
-				if (cliente.TraerUsuarios(pass, user)) {
-					System.err.println(cliente);
+
+				int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+						tipo_de_cuenta, tipo_de_cuenta[0]);
+				String user = JOptionPane.showInputDialog("ingrese el dni");
+				String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
+				System.err.println('\u00BA');
+
+
+			
+				if (seleccion == 1) {
+					if (empleado.TraerEmleados(pass, user)) {
+						System.err.println(empleado);
+					} else {
+						System.err.println("error");
+					}
 				} else {
-					System.err.println("error");
+					if (cliente.TraerUsuarios(pass, user)) {
+						System.err.println(cliente);
+					} else {
+						System.err.println("error");
+					}
 				}
 			}
-
+			
+			
+			
 		} while (key);
 	}
 
