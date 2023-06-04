@@ -106,6 +106,7 @@ public class Main {
 			
 				if (seleccion == 1) {
 					if (empleado.TraerEmleados(pass, user)) {
+						empleado.menu_transport();
 						System.err.println(empleado);
 					} else {
 						System.err.println("error");

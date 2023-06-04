@@ -133,7 +133,7 @@ public class Login {
 
 	}
 
-	public boolean TraerUsuarios(String clave, String usuario) {
+	public boolean  TraerUsuarios(String clave, String usuario) {
 		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE persona.dni = "
 				+ usuario + " && cliente.clave LIKE \"" + clave + "\";";
 		String[] datos = new String[5];
@@ -268,10 +268,13 @@ public class Login {
 	
 	
 	
-	public void menu_transport(String tipo_User ) {
-		switch (tipo_User) {
+	public void menu_transport() {
+		boolean userkey = true;
+		switch (this.tipo) {
 		case "Ventas":
-			
+			do {
+				System.err.println("error");
+			} while (userkey);
 			break;
 		case "Mecanico":
 			
