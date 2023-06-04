@@ -27,6 +27,7 @@ public class Login {
 
 	private int id, dni;
 	private String nombre, apellido,tipo;
+	private String clave;
 	
 
 	public Login(int id, int dni, String nombre, String apellido, String clave, String tipo) {
@@ -36,6 +37,7 @@ public class Login {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipo = tipo;
+		this.clave=clave;
 	}
 
 	public Login(int id, int dni, String nombre, String apellido) {
@@ -44,6 +46,7 @@ public class Login {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.clave = null;
 	}
 
 	/*
@@ -95,11 +98,19 @@ public class Login {
 	public String getApellido() {
 		return apellido;
 	}
-
+	
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+	
 	public boolean TraerEmleados(String clave, String usuario) {
 		String sql = "SELECT empleado.idempleado,persona.nombre,persona.apellido,persona.dni,empleado_tipo.Nombre clase FROM `empleado` INNER JOIN empleado_tipo on empleado_tipo.idempleado_tipo = empleado.empleado_tipo_idempleado_tipo INNER JOIN persona on Persona.idPersona=empleado.Persona_idPersona WHERE persona.dni = "
 				+ usuario + " && empleado.clave LIKE \"" + clave + "\";";
@@ -121,6 +132,7 @@ public class Login {
 				this.setDni(Integer.parseInt(datos[3]));
 				this.setTipo(datos[4]);
 				conexion.close();
+				this.clave=clave;
 				return true;
 			}
 
@@ -152,6 +164,7 @@ public class Login {
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
 				conexion.close();
+				this.clave=clave;
 				return true;
 			}
 
@@ -256,7 +269,6 @@ public class Login {
 			stmt.setString(2,contrasena);
 			stmt.executeUpdate();
 			conexion.close();
-			conexion.close();
 			return true;
 
 		} catch (Exception excepcion) {
@@ -273,7 +285,8 @@ public class Login {
 		switch (this.tipo) {
 		case "Ventas":
 			do {
-				System.err.println("error");
+				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo);
+				vendedor.menu_ventas();
 			} while (userkey);
 			break;
 		case "Mecanico":

@@ -8,9 +8,9 @@ public class Vendedor extends Persona {
 
 	private String tipo_cuenta;
 
-	public Vendedor(String nombre, String apellido, String dni , String id, String contrasena) {
+	public Vendedor(String nombre, String apellido, String dni , String id, String contrasena,String tipo_cuenta) {
 		super(nombre, apellido, dni , id, contrasena);
-		this.tipo_cuenta="Vendedor";
+		this.tipo_cuenta=tipo_cuenta;
 	}
 	
 	public String getTipo_cuenta() {
@@ -21,6 +21,10 @@ public class Vendedor extends Persona {
 		this.tipo_cuenta = tipo_cuenta;
 	}
 
+	public void menu_ventas() {
+		JOptionPane.showMessageDialog(null, "test");
+	}
+	
     public boolean vendedor(Vehiculo vehiculo ,Pieza pieza,Cliente cliente) {
 		final String tipo_de_empleado[]={"Comprar auto","Vender auto","Comprar pieza","Vender pieza","Reparar auto","ver Stock","Salir"};
     	JCheckBox chec=new JCheckBox("Prueba");
@@ -122,4 +126,5 @@ public class Vendedor extends Persona {
     public void revisar_deposito() {
     	
     }
+    
 }
