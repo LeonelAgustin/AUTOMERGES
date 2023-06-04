@@ -236,35 +236,28 @@ public class Login {
 		}
 		
 		sql = "SELECT idPersona FROM `persona` WHERE `dni`= "+dni+" && `nombre` = \""+nombre+"\" &&`apellido` = \""+ apellido+"\" && `direccion`= \""+ direccion+"\" && `altura` = \""+altura+"\" &&`telefono`=\""+telefono+"\"";
+		int id = 0 ;
 		
 		try {
-			
+			ResultSet resulta = stmt.executeQuery();
+			id=resulta.getInt(1);
 		} catch (Exception e) {
-			// TODO: handle exception
+			id=-1;
 		}
 		
-		String[] datos = new String[5];
+		//String[] datos = new String[5];
 		
+		sql =  "INSERT INTO `cliente`(`Persona_idPersona`, `clave`) VALUES ('?','?')";
 		
 		try {
 
 			stmt = conexion.prepareStatement(sql);
-			ResultSet result = stmt.executeQuery();
-			while (result.next()) {
-				datos[0] = String.valueOf(result.getInt(1));
-				datos[1] = result.getString(2);
-				datos[2] = result.getString(3);
-				datos[3] = String.format("%.0f", result.getFloat(4));
-
-				this.setId(Integer.parseInt(datos[0]));
-				this.setNombre(datos[1]);
-				this.setApellido(datos[2]);
-				this.setDni(Integer.parseInt(datos[3]));
-				conexion.close();
-				return true;
-			}
-
-			return false;
+			stmt.setInt(1, id);
+			stmt.setString(2,contrasena);
+			stmt.executeUpdate();
+			conexion.close();
+			conexion.close();
+			return true;
 
 		} catch (Exception excepcion) {
 			System.out.println(excepcion.getMessage());
@@ -274,7 +267,32 @@ public class Login {
 	}
 	
 	
-
+	
+	public void menu_transport(String tipo_User ) {
+		switch (tipo_User) {
+		case "Ventas":
+			
+			break;
+		case "Mecanico":
+			
+			break;
+		case "Encargado del deposito":
+			
+			break;
+		case "fabricante":
+			
+			break;
+		case "Administrador":
+			
+			break;
+		case "Encargado de taller":
+			
+			break;
+		default:
+			
+			break;
+		}
+	}
 	
 	
 	

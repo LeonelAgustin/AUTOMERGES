@@ -391,5 +391,63 @@ public class Verificar {
 		}
 
 	}
+	
+	
+
+	public boolean verificarid(String id) {
+		String error = "";
+		char errorcaracter[] = new char[id.length()];
+		int errorconter = 0;
+
+		if (id.length() >= 8 && id.length() <= 20) {
+
+			for (int i = 0; i < id.length(); i++) {
+				char q = id.charAt(i);
+
+				if (q < '0' || q > '9') {
+					errorcaracter[errorconter] = q;
+					errorconter++;
+					//error = error + "el caracter " + q + "\n";
+				}
+			}
+
+		} else {
+
+			if (id.length() <= 8 && id.length() >= 0) {
+				error = "el id tiene que tener un minimo de 8 numeros " + id.length();
+			} else {
+
+				if (id.length() >= 20) {
+					error = "el id tiene que tener un maximo de 20 numeros" + id.length();
+				}
+
+			}
+
+		}
+		
+		if (errorconter >= 1) {
+			if (errorconter == 1) {
+				error = "el caracter " + errorcaracter[0] + " es invalido";
+			} else {
+				error = "los caracteres ";
+				for (int i = 0; i < errorconter; i++) {
+					error = error + "\"" + " " + errorcaracter[i] + " " + "\"" + ",";
+				}
+				error = error + " son invalidos";
+			}
+
+		}
+
+		if (error.equals("")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, error);
+			return false;
+		}
+
+	}
+	
+	
+	
 
 }
