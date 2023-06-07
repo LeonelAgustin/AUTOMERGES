@@ -15,7 +15,7 @@ public class Login {
 	char gi=dat.charAt(0);
 	*/
 	//final char tipo[] = {'c','e'};
-	final char empleado[]= {'v','a','r','i','d'};
+	//final char empleado[]= {'v','a','r','i','d'};
 	//final String tipo_de_usuario[]={"cliente","ventas","administrador","restauracion","reparacion","deposito"};
 	private boolean resul; 
 
@@ -222,7 +222,7 @@ public class Login {
 				telefono = JOptionPane.showInputDialog("ingresa nuevamente tu telefono");
 			} while (!verificar.verificartelefono(telefono));
 		}
-
+		
 		return true;
 	}
 
@@ -231,8 +231,9 @@ public class Login {
 	
 	public boolean registro(String contrasena, String dni, String nombre, String apellido, String direccion,
 			String altura, String telefono) {
-		
-		String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES ('?','?','?','?','?','?')";
+		dni=dni+".00";
+		 telefono=telefono+".00";
+		String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES (?,?,?,?,?,?)";
 		
 		try {
 			stmt = conexion.prepareStatement(sql);
@@ -243,31 +244,51 @@ public class Login {
 			stmt.setInt(5, Integer.parseInt(altura));
 			stmt.setFloat(6,Float.parseFloat(telefono));
 			stmt.executeUpdate();
-			conexion.close();
+			//conexion.close();
+			
+			return true;
 		} catch (Exception e) {
+			System.err.println("test");
 			System.out.println(e.getMessage());
+			return false;
 		}
-		
-		sql = "SELECT idPersona FROM `persona` WHERE `dni`= "+dni+" && `nombre` = \""+nombre+"\" &&`apellido` = \""+ apellido+"\" && `direccion`= \""+ direccion+"\" && `altura` = \""+altura+"\" &&`telefono`=\""+telefono+"\"";
-		int id = 0 ;
-		
+	}
+	
+	public boolean registro1(String contrasena, String dni, String nombre, String apellido, String direccion,
+			String altura, String telefono) {
+		//float dnif=Float.parseFloat( dni+".00");
+		//float telefonof=Float.parseFloat(telefono+".00");
+		String sql = "SELECT idPersona FROM `persona` ORDER BY idPersona DESC LIMIT 1;";
 		try {
+			stmt = conexion.prepareStatement(sql);
 			ResultSet resulta = stmt.executeQuery();
-			id=resulta.getInt(1);
-			conexion.close();
+			
+			while (resulta.next()) {
+					this.id=resulta.getInt(1);
+			}
+
+			System.err.println(this.id);
+			//conexion.close();
+			return true;
 		} catch (Exception e) {
-			id=-1;
+			//id=-1;
+			System.out.println(e.getMessage());
+			return false;
 		}
+	}
 		
+	public boolean registro2(String contrasena, String dni, String nombre, String apellido, String direccion,
+			String altura, String telefono) {
 		//String[] datos = new String[5];
 		
-		sql =  "INSERT INTO `cliente`(`Persona_idPersona`, `clave`) VALUES ('?','?')";
+	String	sql =  "INSERT INTO `cliente`(`Persona_idPersona`, `clave`) VALUES (?,?)";
 		
 		try {
 
 			stmt = conexion.prepareStatement(sql);
-			stmt.setInt(1, id);
+			stmt.setInt(1, this.id);
 			stmt.setString(2,contrasena);
+
 			stmt.executeUpdate();
 			conexion.close();
 			return true;

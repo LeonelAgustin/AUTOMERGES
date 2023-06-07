@@ -239,7 +239,7 @@ public class Verificar {
 
 				if ((q < 'a' || q > 'z') && (q < 'A' || q > 'Z') && q != '\u00e1' && q != '\u00e9' && q != '\u00ed'
 						&& q != '\u00f3' && q != '\u00fa' && q != '\u00c1' && q != '\u00c9' && q != '\u00cd'
-						&& q != '\u00d3' && q != '\u00da' && q != '\u00f1' && q != '\u00d1') {
+						&& q != '\u00d3' && q != '\u00da' && q != '\u00f1' && q != '\u00d1' && q != ' ') {
 					errorcaracter[errorconter] = q;
 					errorconter++;
 					// error = error + "el caracter " + q + "\n";
@@ -572,6 +572,46 @@ public class Verificar {
 
 	}
 	
-	
+	public boolean verificarmodelo(String modelo) {
+		String error = "";
+		char errorcaracter[] = new char[modelo.length()];
+		int errorconter = 0;
+		// System.err.println(contrasena.length());
+		if (modelo.length() >= 4 && modelo.length() <= 45) {
+
+			for (int i = 0; i < modelo.length(); i++) {
+				char q = modelo.charAt(i);
+
+				if ((q < 'a' || q > 'z') && (q < 'A' || q > 'Z') && q != '\u00e1' && q != '\u00e9' && q != '\u00ed'
+						&& q != '\u00f3' && q != '\u00fa' && q != '\u00c1' && q != '\u00c9' && q != '\u00cd'
+						&& q != '\u00d3' && q != '\u00da' && q != '\u00f1' && q != '\u00d1') {
+					errorcaracter[errorconter] = q;
+					errorconter++;
+					// error = error + "el caracter " + q + " no es numerico\n";
+				}
+			}
+
+		}else {
+			
+			if (modelo.length() <= 4 && modelo.length() >= 0) {
+				error = "la modelo tiene que tener un minimo de 4 caracteres " + modelo.length();
+			} else {
+
+				if (modelo.length() >= 45) {
+					error = "la modelo tiene que tener un maximo de 45 caracteres" + modelo.length();
+				}
+
+			}
+			
+		}
+		// System.err.println(error);
+		if (error.equals("")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, error);
+			return false;
+		}
+
+	}
 
 }

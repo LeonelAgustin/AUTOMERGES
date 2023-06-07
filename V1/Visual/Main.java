@@ -83,11 +83,29 @@ public class Main {
 					String altura = JOptionPane.showInputDialog("ingrese la altura de tu direccion");
 					String telefono = JOptionPane.showInputDialog("ingresa tu telefono");
 					String contrasena =JOptionPane.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
-					empleado.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+					boolean aprobacion= empleado.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+					if (aprobacion) {
+						aprobacion=false;
+						aprobacion=empleado.registro(contrasena, dni, nombre, apellido, direccion, altura, telefono);
+					}
+					do {
+						//System.err.println("cargando... 20%");
+					} while (!aprobacion);
+						aprobacion=false;
+						aprobacion=empleado.registro1(contrasena, dni, nombre, apellido, direccion, altura, telefono);
+					do {
+						//System.err.println("cargando... 50%");
+					} while (!aprobacion);
+						System.err.println(empleado.getId());
+						empleado.registro2(contrasena, dni, nombre, apellido, direccion, altura, telefono);
+					
+					
+					
+					
 				} catch (Exception e) {
 					JOptionPane.showConfirmDialog(chec,"error intentado registrar el usuario");
 				}
-				
+					
 			} else {
 
 				int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",

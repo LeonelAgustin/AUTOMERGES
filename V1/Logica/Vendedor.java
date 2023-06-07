@@ -7,6 +7,8 @@ import javax.swing.JCheckBox;
 
 import javax.swing.JOptionPane;
 
+import negocio.Verificar;
+
 public class Vendedor extends Persona {
 	LinkedList<Vehiculo> carro = new LinkedList<Vehiculo>();
 	private String tipo_cuenta;
@@ -98,71 +100,137 @@ public class Vendedor extends Persona {
 	}
 
 	public void buscar_auto(boolean isventa) {
-		String sql ="*" ;
+		String sql = "*";
 		final String tr[] = { "buscar por a\u00f1o", "buscar por modelo", "buscar por marca", "buscar por precio",
 				"buscar por id", "buscar por patente", "Salir" };
 		String dato;
 		int seleccion2;
 		if (!isventa) {
 			seleccion2 = JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Selector de opciones",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por defecto.
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+																							// defecto.
 					tr, tr[0]);
 			this.carro.clear();
 			switch (seleccion2) {
 			case 0:
 				dato = JOptionPane.showInputDialog("ingrese el ano del auto");
-				 sql = "SELECT * FROM `vehiculo` WHERE `año` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `año` = " + dato;
 				break;
 			case 1:
 				dato = JOptionPane.showInputDialog("ingrese el modelo del auto");
-				 sql = "SELECT * FROM `vehiculo` WHERE `modelo` LIKE \"%"+dato+"%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `modelo` LIKE \"%" + dato + "%\"";
 				break;
 			case 2:
 				dato = JOptionPane.showInputDialog("ingrese la marca del auto");
-				 sql =  "SELECT * FROM `vehiculo` WHERE `marca` LIKE \"%"+dato+"%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `marca` LIKE \"%" + dato + "%\"";
 				break;
 			case 3:
 				dato = JOptionPane.showInputDialog("ingrese el precio del auto");
-				 sql = "SELECT * FROM `vehiculo` WHERE `Precio` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `Precio` = " + dato;
 				break;
 			case 4:
 				dato = JOptionPane.showInputDialog("ingrese el id del auto");
-				 sql = "SELECT * FROM `vehiculo` WHERE `Id_auto` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `Id_auto` = " + dato;
 				break;
 			case 5:
 				dato = JOptionPane.showInputDialog("ingrese el patente del auto");
-				 sql = "SELECT * FROM `vehiculo` WHERE `Patente` LIKE \"%"+dato+"%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `Patente` LIKE \"%" + dato + "%\"";
 				break;
 
 			default:
 				sql = "*";
 				break;
 			}
-			
+
 			if (!sql.equals("*")) {
 				try {
 					ResultSet resulta = stmt.executeQuery();
-					//id=resulta.getInt(1);
+					// id=resulta.getInt(1);
 					conexion.close();
 				} catch (Exception e) {
-					//id=-1;
+					// id=-1;
 				}
-				
+
 			}
-			
-		}else {
-			
-			
-			
+
+		} else {
+
 		}
 	}
 
-	public void registrar_auto() {
-
+	public void registrar_auto(String cliente) {
+		boolean z;
+		String marca = JOptionPane.showInputDialog("ingresa la marca del vehiculo");
+		String modelo = JOptionPane.showInputDialog("ingresa tu nombre");
+		String patente = JOptionPane.showInputDialog("ingresa tu apellido");
+		String ano = JOptionPane.showInputDialog("ingresa tu direccion");
+		String id = "0";
+		//String cliente = JOptionPane.showInputDialog("ingresa tu telefono");
+		String precio = JOptionPane.showInputDialog("ingresa tu telefono");
+		String estado = JOptionPane.showInputDialog("ingresa tu telefono");
+		Verificar verificar = new Verificar();
+		do {
+			if (verificar.verificarmarca(marca)) {
+				marca = JOptionPane.showInputDialog("ingrese una marca valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		z=true;
+		do {
+			if (verificar.verificarmodelo(modelo)) {
+				modelo = JOptionPane.showInputDialog("ingrese un modelo valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		z=true;
+		do {
+			if (verificar.verificarpatente(patente)) {
+				patente = JOptionPane.showInputDialog("ingrese una patente valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		z=true;
+		do {
+			if (verificar.verificarano(ano)) {
+				ano = JOptionPane.showInputDialog("ingrese una ano valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		z=true;
+		do {
+			if (verificar.verificarprecio(precio)) {
+				precio = JOptionPane.showInputDialog("ingrese un precio valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		z=true;
+		do {
+			if (verificar.verificarestado(estado)) {
+				estado = JOptionPane.showInputDialog("ingrese un estado valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (z);
+		
+		Vehiculo vehiculo = new Vehiculo(0, patente, marca, modelo, 0, 0, null, precio);
+		
+		
+		
 	}
 
 	public void buscar_pieza() {
-
+		
 	}
 
 	public void vender_auto() {
@@ -170,11 +238,11 @@ public class Vendedor extends Persona {
 	}
 
 	public void registrar_venta() {
-		//generar factura
+		// generar factura
 	}
 
 	public void registrar_cliente() {
-		//copia del registro de main
+		// copia del registro de main
 		Login login = new Login(0, 0, null, null, null, null);
 		String dni = JOptionPane.showInputDialog("ingresa tu dni");
 		String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
@@ -182,8 +250,12 @@ public class Vendedor extends Persona {
 		String direccion = JOptionPane.showInputDialog("ingresa tu direccion");
 		String altura = JOptionPane.showInputDialog("ingrese la altura de tu direccion");
 		String telefono = JOptionPane.showInputDialog("ingresa tu telefono");
-		String contrasena =JOptionPane.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
-		login.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+		String contrasena = JOptionPane
+				.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
+		boolean aprobacion= login.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+		if (aprobacion) {
+			login.registro(contrasena, dni, nombre, apellido, direccion, altura, telefono);
+		}
 	}
 
 	public void comprar_pieza() {
