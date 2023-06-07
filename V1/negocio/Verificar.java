@@ -449,12 +449,52 @@ public class Verificar {
 		Matcher mat = pat.matcher(patente);
 
 		if (mat.matches()) {
-			
-		}else {
+
+		} else {
 			error = patente + " no es una patente valida";
 		}
-		
-		//System.err.println(error);
+
+		// System.err.println(error);
+		if (error.equals("")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, error);
+			return false;
+		}
+
+	}
+
+	public boolean verificarmarca(String marca) {
+		String error = "";
+		char errorcaracter[] = new char[marca.length()];
+		int errorconter = 0;
+		// System.err.println(contrasena.length());
+		if (marca.length() >= 4 && marca.length() <= 45) {
+
+			for (int i = 0; i < marca.length(); i++) {
+				char q = marca.charAt(i);
+
+				if (q < '0' || q > '9') {
+					errorcaracter[errorconter] = q;
+					errorconter++;
+					// error = error + "el caracter " + q + " no es numerico\n";
+				}
+			}
+
+		}else {
+			
+			if (marca.length() <= 4 && marca.length() >= 0) {
+				error = "la marca tiene que tener un minimo de 4 caracteres " + marca.length();
+			} else {
+
+				if (marca.length() >= 45) {
+					error = "la marca tiene que tener un maximo de 45 caracteres" + marca.length();
+				}
+
+			}
+			
+		}
+		// System.err.println(error);
 		if (error.equals("")) {
 			return true;
 		} else {
@@ -464,21 +504,20 @@ public class Verificar {
 
 	}
 	
-	
-	public boolean verificarmarca(String marca) {
+	public boolean verificarano(String ano) {
 		String error = "";
 		// System.err.println(contrasena.length());
 
-		Pattern pat = Pattern.compile("([a­zA­Z]{3,4})*([0-9]{3,3})");
-		Matcher mat = pat.matcher(marca);
+		Pattern pat = Pattern.compile("([0-9]{4,4})");
+		Matcher mat = pat.matcher(ano);
 
 		if (mat.matches()) {
-			
-		}else {
-			error = marca + " no es una patente valida";
+
+		} else {
+			error = ano + " no es una a\u00f1o valida";
 		}
-		
-		//System.err.println(error);
+
+		// System.err.println(error);
 		if (error.equals("")) {
 			return true;
 		} else {
@@ -487,5 +526,52 @@ public class Verificar {
 		}
 
 	}
+	
+	public boolean verificarestado(String estado) {
+		String error = "";
+		// System.err.println(contrasena.length());
+		boolean stop = estado.length()==1;
+		Pattern pat = Pattern.compile("([0-5]{1,1})");
+		Matcher mat = pat.matcher(estado);
+
+		if (mat.matches()&&stop) {
+
+		} else {
+			error = estado + " no es una estado valida";
+		}
+		
+		// System.err.println(error);
+		if (error.equals("")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, error);
+			return false;
+		}
+
+	}
+	
+	public boolean verificarprecio(String precio) {
+		String error = "";
+		// System.err.println(contrasena.length());
+		Pattern pat = Pattern.compile("([0-9]{1,28})([.]{1})([0-9]{2})");
+		Matcher mat = pat.matcher(precio);
+
+		if (mat.matches()) {
+
+		} else {
+			error = precio + " no es una precio valido";
+		}
+		
+		// System.err.println(error);
+		if (error.equals("")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, error);
+			return false;
+		}
+
+	}
+	
+	
 
 }
