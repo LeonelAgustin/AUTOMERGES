@@ -1,22 +1,17 @@
 package Visual;
 
-import java.util.LinkedList;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
-import javax.swing.*;
-
-import Logica.Cliente;
 import Logica.Login;
-import Logica.Persona;
-import Logica.Pieza;
-import Logica.Vehiculo;
-import Logica.Vendedor;
+
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		String usuario;
-		char aux[] = { ' ', ' ' };
+		//String usuario;
+		//char aux[] = { ' ', ' ' };
 		final String tipo_de_cuenta[] = { "cliente", "empleado" };
 		final String opciones[] = { "Registrarse", "Logearse" };
 		/*
@@ -113,6 +108,9 @@ public class Main {
 					}
 				} else {
 					if (cliente.TraerUsuarios(pass, user)) {
+						
+						
+						
 						System.err.println(cliente);
 					} else {
 						System.err.println("error");

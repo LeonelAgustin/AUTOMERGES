@@ -77,5 +77,41 @@ public class Vehiculo {
 	
 	
 	
+	//ventas module //unir con juan 
+	private int id;
+	private String precio;
+	private Cliente cliente;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getPrecio() {
+		return precio;
+	}
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Vehiculo(int id,String patente,String marca, String modelo, int ano, int estado,Cliente cliente, String precio) {
+		this.marca = marca;
+		this.modelo = modelo;
+		this.patente = patente;
+		this.ano = ano;
+		this.id = id;
+		this.cliente = cliente;
+		this.precio = precio;
+		this.estado = estado;
+	}
+	
+	
+	
 	
 }

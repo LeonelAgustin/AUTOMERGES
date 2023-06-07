@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 import conexion.Conexion;
-import conexion.Verificar;
+import negocio.Verificar;
 
 public class Login {
 	/*
@@ -150,7 +150,7 @@ public class Login {
 				+ usuario + " && cliente.clave LIKE \"" + clave + "\";";
 		String[] datos = new String[5];
 		try {
-
+			
 			stmt = conexion.prepareStatement(sql);
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
@@ -254,6 +254,7 @@ public class Login {
 		try {
 			ResultSet resulta = stmt.executeQuery();
 			id=resulta.getInt(1);
+			conexion.close();
 		} catch (Exception e) {
 			id=-1;
 		}
