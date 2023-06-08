@@ -250,8 +250,7 @@ public class Vendedor extends Persona {
 		String direccion = JOptionPane.showInputDialog("ingresa tu direccion");
 		String altura = JOptionPane.showInputDialog("ingrese la altura de tu direccion");
 		String telefono = JOptionPane.showInputDialog("ingresa tu telefono");
-		String contrasena = JOptionPane
-				.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
+		String contrasena = JOptionPane.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
 		boolean aprobacion= login.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
 		if (aprobacion) {
 			login.registro(contrasena, dni, nombre, apellido, direccion, altura, telefono);
