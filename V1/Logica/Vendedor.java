@@ -1,5 +1,7 @@
 package Logica;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 
@@ -7,12 +9,20 @@ import javax.swing.JCheckBox;
 
 import javax.swing.JOptionPane;
 
+import conexion.Conexion;
 import negocio.Verificar;
 
 public class Vendedor extends Persona {
 	LinkedList<Vehiculo> carro = new LinkedList<Vehiculo>();
 	private String tipo_cuenta;
 
+
+	Conexion con = new Conexion();
+
+	Connection conexion = con.conectar();
+
+	PreparedStatement stmt;
+	
 	public Vendedor(String nombre, String apellido, String dni, String id, String contrasena, String tipo_cuenta) {
 		super(nombre, apellido, dni, id, contrasena);
 		this.tipo_cuenta = tipo_cuenta;
@@ -114,7 +124,7 @@ public class Vendedor extends Persona {
 			switch (seleccion2) {
 			case 0:
 				dato = JOptionPane.showInputDialog("ingrese el ano del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `año` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `aï¿½o` = " + dato;
 				break;
 			case 1:
 				dato = JOptionPane.showInputDialog("ingrese el modelo del auto");
@@ -158,7 +168,7 @@ public class Vendedor extends Persona {
 		}
 	}
 
-	public void registrar_auto(String cliente) {
+	public void registrar_auto(int cliente) {
 		boolean z;
 		String marca = JOptionPane.showInputDialog("ingresa la marca del vehiculo");
 		String modelo = JOptionPane.showInputDialog("ingresa tu nombre");
@@ -223,18 +233,40 @@ public class Vendedor extends Persona {
 			}
 		} while (z);
 		
-		Vehiculo vehiculo = new Vehiculo(0, patente, marca, modelo, 0, 0, null, precio);
+		
+		Vehiculo vehiculo = new Vehiculo(cliente, patente, marca, modelo,Integer.parseInt(ano),Integer.parseInt(estado),1, precio);
+		
+		if (cliente<=0) {
+
+			String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES (?,?,?,?,?,?)";
+			
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setFloat(1, Float.parseFloat(dni));
+				stmt.setString(2,nombre);
+				stmt.setString(3, apellido);
+				stmt.setString(4, direccion);
+				stmt.setInt(5, Integer.parseInt(altura));
+				stmt.setFloat(6,Float.parseFloat(telefono));
+				stmt.executeUpdate();
+				//conexion.close();
+				
+				//return true;
+			} catch (Exception e) {
+				System.err.println("test");
+				System.out.println(e.getMessage());
+				//return false;
+			}
+		}
 		
 		
 		
 	}
 
-	public void buscar_pieza() {
-		
-	}
+	public void buscar_pieza() {}/*Ver a stone*/
 
 	public void vender_auto() {
-
+		
 	}
 
 	public void registrar_venta() {
@@ -258,7 +290,7 @@ public class Vendedor extends Persona {
 	}
 
 	public void comprar_pieza() {
-
+		
 	}
 
 	public void revisar_deposito() {

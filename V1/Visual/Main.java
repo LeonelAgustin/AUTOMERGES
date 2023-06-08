@@ -127,8 +127,6 @@ public class Main {
 				} else {
 					if (cliente.TraerUsuarios(pass, user)) {
 						
-						
-						
 						System.err.println(cliente);
 					} else {
 						System.err.println("error");

@@ -78,7 +78,7 @@ public class Vehiculo {
 	
 	
 	//ventas module //unir con juan 
-	private int id;
+	private int id,idcliente;
 	private String precio;
 	private Cliente cliente;
 	
@@ -100,6 +100,13 @@ public class Vehiculo {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	public int getIdcliente() {
+		return idcliente;
+	}
+	public void setIdcliente(int idcliente) {
+		this.idcliente = idcliente;
+	}
 	public Vehiculo(int id,String patente,String marca, String modelo, int ano, int estado,Cliente cliente, String precio) {
 		this.marca = marca;
 		this.modelo = modelo;
@@ -110,6 +117,18 @@ public class Vehiculo {
 		this.precio = precio;
 		this.estado = estado;
 	}
+	public Vehiculo( int id,String patente,String marca, String modelo,  int ano, int estado, int idcliente,
+			String precio) {
+		this.marca = marca;
+		this.modelo = modelo;
+		this.patente = patente;
+		this.ano = ano;
+		this.estado = estado;
+		this.id = id;
+		this.idcliente = idcliente;
+		this.precio = precio;
+	}
+	
 	
 	
 	
