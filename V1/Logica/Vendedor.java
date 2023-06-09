@@ -16,13 +16,12 @@ public class Vendedor extends Persona {
 	LinkedList<Vehiculo> carro = new LinkedList<Vehiculo>();
 	private String tipo_cuenta;
 
-
 	Conexion con = new Conexion();
 
 	Connection conexion = con.conectar();
 
 	PreparedStatement stmt;
-	
+
 	public Vendedor(String nombre, String apellido, String dni, String id, String contrasena, String tipo_cuenta) {
 		super(nombre, apellido, dni, id, contrasena);
 		this.tipo_cuenta = tipo_cuenta;
@@ -175,7 +174,7 @@ public class Vendedor extends Persona {
 		String patente = JOptionPane.showInputDialog("ingresa tu apellido");
 		String ano = JOptionPane.showInputDialog("ingresa tu direccion");
 		String id = "0";
-		//String cliente = JOptionPane.showInputDialog("ingresa tu telefono");
+		// String cliente = JOptionPane.showInputDialog("ingresa tu telefono");
 		String precio = JOptionPane.showInputDialog("ingresa tu telefono");
 		String estado = JOptionPane.showInputDialog("ingresa tu telefono");
 		Verificar verificar = new Verificar();
@@ -187,7 +186,7 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		z=true;
+		z = true;
 		do {
 			if (verificar.verificarmodelo(modelo)) {
 				modelo = JOptionPane.showInputDialog("ingrese un modelo valida");
@@ -196,7 +195,7 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		z=true;
+		z = true;
 		do {
 			if (verificar.verificarpatente(patente)) {
 				patente = JOptionPane.showInputDialog("ingrese una patente valida");
@@ -205,7 +204,7 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		z=true;
+		z = true;
 		do {
 			if (verificar.verificarano(ano)) {
 				ano = JOptionPane.showInputDialog("ingrese una ano valida");
@@ -214,7 +213,7 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		z=true;
+		z = true;
 		do {
 			if (verificar.verificarprecio(precio)) {
 				precio = JOptionPane.showInputDialog("ingrese un precio valida");
@@ -223,7 +222,7 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		z=true;
+		z = true;
 		do {
 			if (verificar.verificarestado(estado)) {
 				estado = JOptionPane.showInputDialog("ingrese un estado valida");
@@ -232,41 +231,71 @@ public class Vendedor extends Persona {
 				z = true;
 			}
 		} while (z);
-		
-		
-		Vehiculo vehiculo = new Vehiculo(cliente, patente, marca, modelo,Integer.parseInt(ano),Integer.parseInt(estado),1, precio);
-		
-		if (cliente<=0) {
 
-			String sql ="INSERT INTO `persona`( `dni`, `nombre`, `apellido`, `direccion`, `altura`, `telefono`) VALUES (?,?,?,?,?,?)";
-			
+		Vehiculo vehiculo = new Vehiculo(cliente, patente, marca, modelo, Integer.parseInt(ano),
+				Integer.parseInt(estado), 1, precio);
+
+		registrar_auto_connetion(vehiculo);
+
+	}
+	
+	/*en caso de que la empresa compre un auto el cliente va a ser -1*/
+	public void registrar_auto_connetion(Vehiculo vehiculo) {
+		
+		if (vehiculo.getIdcliente() <= 0) {
+
+			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `año`, `accion_idaccion`, `cliente_idcliente`, `Precio`) VALUES (?,?,?,?,?,?,?)";
+
 			try {
 				stmt = conexion.prepareStatement(sql);
-				stmt.setFloat(1, Float.parseFloat(dni));
-				stmt.setString(2,nombre);
-				stmt.setString(3, apellido);
-				stmt.setString(4, direccion);
-				stmt.setInt(5, Integer.parseInt(altura));
-				stmt.setFloat(6,Float.parseFloat(telefono));
+				stmt.setString(1,vehiculo.getPatente());
+				stmt.setString(2, vehiculo.getMarca());
+				stmt.setString(3, vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(vehiculo.getAno())+".00"));
+				stmt.setInt(5, vehiculo.getEstado());
+				stmt.setInt(6, vehiculo.getIdcliente());
+				stmt.setFloat(7, Float.parseFloat(vehiculo.getPrecio()+".00"));
 				stmt.executeUpdate();
-				//conexion.close();
-				
-				//return true;
+				conexion.close();
+
+				// return true;
 			} catch (Exception e) {
 				System.err.println("test");
 				System.out.println(e.getMessage());
-				//return false;
+				// return false;
 			}
+		} else {
+			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `año`, `accion_idaccion`, `Precio`) VALUES (?,?,?,?,?,?)";
+
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,vehiculo.getPatente());
+				stmt.setString(2, vehiculo.getMarca());
+				stmt.setString(3, vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(vehiculo.getAno())+".00"));
+				stmt.setInt(5, vehiculo.getEstado());
+				stmt.setFloat(6, Float.parseFloat(vehiculo.getPrecio()+".00"));
+				stmt.executeUpdate();
+				// conexion.close();
+
+				// return true;
+			} catch (Exception e) {
+				System.err.println("test");
+				System.out.println(e.getMessage());
+				// return false;
+			}
+
 		}
 		
-		
-		
 	}
+	
+	
 
-	public void buscar_pieza() {}/*Ver a stone*/
+	public void buscar_pieza() {
+	}/* Ver a stone */
 
 	public void vender_auto() {
-		
+
 	}
 
 	public void registrar_venta() {
@@ -282,15 +311,16 @@ public class Vendedor extends Persona {
 		String direccion = JOptionPane.showInputDialog("ingresa tu direccion");
 		String altura = JOptionPane.showInputDialog("ingrese la altura de tu direccion");
 		String telefono = JOptionPane.showInputDialog("ingresa tu telefono");
-		String contrasena = JOptionPane.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
-		boolean aprobacion= login.RegistrarUsuario(contrasena,dni,nombre,apellido,direccion,altura,telefono);
+		String contrasena = JOptionPane
+				.showInputDialog("ingrese una contrase\u00f1a con un minimo de 6 caracteres y un maximo de 45");
+		boolean aprobacion = login.RegistrarUsuario(contrasena, dni, nombre, apellido, direccion, altura, telefono);
 		if (aprobacion) {
 			login.registro(contrasena, dni, nombre, apellido, direccion, altura, telefono);
 		}
 	}
 
 	public void comprar_pieza() {
-		
+
 	}
 
 	public void revisar_deposito() {
