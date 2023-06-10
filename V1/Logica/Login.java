@@ -307,7 +307,10 @@ public class Login {
 		switch (this.tipo) {
 		case "Ventas":
 			do {
-				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo);
+				Vehiculo vehiculo = new Vehiculo(0,null,null,null,0,0,0,null);
+				Cliente cliente = new Cliente(null,null,null,null,null);
+				Pieza pieza = new Pieza(0,0,null);
+				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo,vehiculo,pieza,cliente);
 				vendedor.menu_ventas();
 			} while (userkey);
 			break;

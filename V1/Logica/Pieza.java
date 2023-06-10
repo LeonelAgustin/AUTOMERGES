@@ -63,4 +63,25 @@ public class Pieza {
 	}
 
 
+	//cambiar en pieza final
+	
+	private String nombre_pieza;
+	public String getNombre_pieza() {
+		return nombre_pieza;
+	}
+
+
+	public void setNombre_pieza(String nombre_pieza) {
+		this.nombre_pieza = nombre_pieza;
+	}
+
+
+	public Pieza(int numero_de_sere, double precio, String nombre_pieza) {
+		this.numero_de_sere = numero_de_sere;
+		this.precio = precio;
+		this.nombre_pieza = nombre_pieza;
+	}
+	
+	
+	
 }

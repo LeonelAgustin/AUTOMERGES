@@ -3,6 +3,7 @@ package Logica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JCheckBox;
@@ -15,6 +16,9 @@ import negocio.Verificar;
 public class Vendedor extends Persona {
 	LinkedList<Vehiculo> carro = new LinkedList<Vehiculo>();
 	private String tipo_cuenta;
+	Vehiculo vehiculo;
+	Pieza pieza;
+	Cliente cliente;
 
 	Conexion con = new Conexion();
 
@@ -22,9 +26,12 @@ public class Vendedor extends Persona {
 
 	PreparedStatement stmt;
 
-	public Vendedor(String nombre, String apellido, String dni, String id, String contrasena, String tipo_cuenta) {
+	public Vendedor(String nombre, String apellido, String dni, String id, String contrasena, String tipo_cuenta,
+			Vehiculo vehiculo, Pieza pieza, Cliente cliente) {
 		super(nombre, apellido, dni, id, contrasena);
 		this.tipo_cuenta = tipo_cuenta;
+		this.vehiculo = vehiculo;
+		this.pieza = pieza;
 	}
 
 	public String getTipo_cuenta() {
@@ -34,6 +41,22 @@ public class Vendedor extends Persona {
 	// solo puede modificar administrador el tipo de cuenta
 	public void setTipo_cuenta(String tipo_cuenta) {
 		this.tipo_cuenta = tipo_cuenta;
+	}
+
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+
+	public Pieza getPieza() {
+		return pieza;
+	}
+
+	public void setPieza(Pieza pieza) {
+		this.pieza = pieza;
 	}
 
 	public void menu_ventas() {
@@ -123,7 +146,7 @@ public class Vendedor extends Persona {
 			switch (seleccion2) {
 			case 0:
 				dato = JOptionPane.showInputDialog("ingrese el ano del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `aï¿½o` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `a2\u00f1o` = " + dato;
 				break;
 			case 1:
 				dato = JOptionPane.showInputDialog("ingrese el modelo del auto");
@@ -155,6 +178,8 @@ public class Vendedor extends Persona {
 				try {
 					ResultSet resulta = stmt.executeQuery();
 					// id=resulta.getInt(1);
+					
+					
 					conexion.close();
 				} catch (Exception e) {
 					// id=-1;
@@ -234,27 +259,27 @@ public class Vendedor extends Persona {
 
 		Vehiculo vehiculo = new Vehiculo(cliente, patente, marca, modelo, Integer.parseInt(ano),
 				Integer.parseInt(estado), 1, precio);
-
-		registrar_auto_connetion(vehiculo);
+		this.vehiculo = vehiculo;
+		registrar_auto_connetion();
 
 	}
-	
-	/*en caso de que la empresa compre un auto el cliente va a ser -1*/
-	public void registrar_auto_connetion(Vehiculo vehiculo) {
-		
-		if (vehiculo.getIdcliente() <= 0) {
+
+	/* en caso de que la empresa compre un auto el cliente va a ser -1 */
+	public void registrar_auto_connetion() {
+
+		if (this.vehiculo.getIdcliente() <= 0) {
 
 			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `año`, `accion_idaccion`, `cliente_idcliente`, `Precio`) VALUES (?,?,?,?,?,?,?)";
 
 			try {
 				stmt = conexion.prepareStatement(sql);
-				stmt.setString(1,vehiculo.getPatente());
-				stmt.setString(2, vehiculo.getMarca());
-				stmt.setString(3, vehiculo.getModelo());
-				stmt.setFloat(4, Float.parseFloat(String.valueOf(vehiculo.getAno())+".00"));
-				stmt.setInt(5, vehiculo.getEstado());
-				stmt.setInt(6, vehiculo.getIdcliente());
-				stmt.setFloat(7, Float.parseFloat(vehiculo.getPrecio()+".00"));
+				stmt.setString(1, this.vehiculo.getPatente());
+				stmt.setString(2, this.vehiculo.getMarca());
+				stmt.setString(3, this.vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
+				stmt.setInt(5, this.vehiculo.getEstado());
+				stmt.setInt(6, this.vehiculo.getIdcliente());
+				stmt.setFloat(7, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
 				stmt.executeUpdate();
 				conexion.close();
 
@@ -269,12 +294,12 @@ public class Vendedor extends Persona {
 
 			try {
 				stmt = conexion.prepareStatement(sql);
-				stmt.setString(1,vehiculo.getPatente());
-				stmt.setString(2, vehiculo.getMarca());
-				stmt.setString(3, vehiculo.getModelo());
-				stmt.setFloat(4, Float.parseFloat(String.valueOf(vehiculo.getAno())+".00"));
-				stmt.setInt(5, vehiculo.getEstado());
-				stmt.setFloat(6, Float.parseFloat(vehiculo.getPrecio()+".00"));
+				stmt.setString(1, this.vehiculo.getPatente());
+				stmt.setString(2, this.vehiculo.getMarca());
+				stmt.setString(3, this.vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
+				stmt.setInt(5, this.vehiculo.getEstado());
+				stmt.setFloat(6, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
 				stmt.executeUpdate();
 				// conexion.close();
 
@@ -286,20 +311,92 @@ public class Vendedor extends Persona {
 			}
 
 		}
-		
+
 	}
-	
-	
 
 	public void buscar_pieza() {
-	}/* Ver a stone */
+		LinkedList<Pieza> piezas = new LinkedList<Pieza>();
+		String sql = "SELECT `Numero_de_pieza`, `nombre_Pieza`, `Pieza_precio` FROM `pieza` ";
+		String sql1 = "SELECT COUNT(*) FROM `pieza`";
+		String opciones[]={"<--","seleccionar","-->"};
+		String opciones2[]={"ver","comprar","salir"};
+		try {
+			ResultSet resulta1 = stmt.executeQuery(sql1);
+			stmt = conexion.prepareStatement(sql);
+			ResultSet resulta = stmt.executeQuery();
+			while (resulta1.next()&&resulta.next()) {
+				for (int i = 0; i < resulta1.getInt(1) ; i++) {
+					piezas.add(new Pieza(resulta.getInt(1),resulta.getInt(2),resulta.getString(3)));
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		int seleccion1;
+		int pagina;
+		String id1;
+		do {
+			seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Selector de opciones",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+				opciones, opciones[0]);
+			do {
+				id1=JOptionPane.showInputDialog("ingrese el id");
+			} while (id1.length()==0);
+		} while (seleccion1!=1); 
+			
+		do {
+			seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Selector de opciones",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+				opciones2, opciones2[0]);
+			if (seleccion1==1) {
+				vender_auto(false, Integer.parseInt(id1) );
+			}
+		} while (seleccion1!=2);
+	}
 
-	public void vender_auto() {
+	// si auto es falso se carga como pieza
+	// en caso de venta auto se pone cantidad en 0
+	public void vender_auto(boolean auto, int cantidad) {
+		if (auto) {
+			String sql = "INSERT INTO `factura`( `cliente_idcliente`, `Vehiculo_Id_auto`, `Precio`) VALUES ('?','?','?')";
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
+				stmt.setInt(2, this.vehiculo.getId());
+				stmt.setFloat(3, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
+				stmt.executeUpdate();
+				conexion.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		} else {
+			String sql = "INSERT INTO `factura`( `cliente_idcliente`, `Pieza_Numero_de_pieza`, `Precio`, `cantidad`) VALUES (?,?,?,?)";
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
+				stmt.setInt(2, this.vehiculo.getId());
+				stmt.setFloat(3, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
+				stmt.setInt(4, cantidad);
+				stmt.executeUpdate();
+				conexion.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 
+		}
 	}
 
 	public void registrar_venta() {
-		// generar factura
+		String sql = "UPDATE `vehiculo` SET `accion_idaccion`='?' WHERE id_auto = 5";
+		try {
+			stmt = conexion.prepareStatement(sql);
+			stmt.setInt(1, this.vehiculo.getId());
+			stmt.executeUpdate();
+			conexion.close();
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	public void registrar_cliente() {
@@ -319,12 +416,28 @@ public class Vendedor extends Persona {
 		}
 	}
 
-	public void comprar_pieza() {
 
-	}
 
 	public void revisar_deposito() {
-
+		String sql = "SELECT count(*) FROM `deposito_has_vehiculo` WHERE `estacionado`= 1";
+		try {
+			stmt = conexion.prepareStatement(sql);
+			ResultSet resulta = stmt.executeQuery();
+			if (resulta.getInt(1) == 0 ) {
+				JOptionPane.showMessageDialog(null,"el estacionamiento del depocito esta vacio"); 	
+			}else {
+				if (resulta.getInt(1) <= 0 &&resulta.getInt(1) > 150 ) {
+					JOptionPane.showMessageDialog(null,"el estacionamiento del depocito tiene " + resulta.getInt(1)); 
+				}else {
+					if (resulta.getInt(1) == 150) {
+						JOptionPane.showMessageDialog(null,"el estacionamiento del depocito esta lleno");
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }
