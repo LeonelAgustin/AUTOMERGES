@@ -132,7 +132,7 @@ public class Login {
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
 				this.setTipo(datos[4]);
-				conexion.close();
+				//conexion.close();
 				this.clave=clave;
 				return true;
 			}
@@ -165,7 +165,7 @@ public class Login {
 				this.setNombre(datos[1]);
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
-				conexion.close();
+				//conexion.close();
 				this.clave=clave;
 				return true;
 			}
@@ -292,7 +292,7 @@ public class Login {
 			stmt.setString(2,contrasena);
 
 			stmt.executeUpdate();
-			conexion.close();
+			//conexion.close();
 			return true;
 
 		} catch (Exception excepcion) {
@@ -313,8 +313,8 @@ public class Login {
 				Cliente cliente = new Cliente("","","","","");
 				Pieza pieza = new Pieza(0,0,null);
 				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo,vehiculo,pieza,cliente);
-				vendedor.vendedor();
-			} while (userkey);
+				userkey=vendedor.vendedor();
+			} while (!userkey);
 			break;
 		case "Mecanico":
 			

@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -445,14 +446,42 @@ public class Verificar {
 		String error = "";
 		// System.err.println(contrasena.length());
 
-		Pattern pat = Pattern.compile("([a­zA­Z]{3,4})*([0-9]{3,3})");
-		Matcher mat = pat.matcher(patente);
+		if (patente.length() <= 6 && patente.length() >= 7) {
+			if (patente.length() == 6) {
+				for (int i = 0; i < patente.length(); i++) {
+					if (i <= 0 && i > 3) {
+						if (patente.charAt(i)<'A'||patente.charAt(i)>'Z') {
+							
+						}else {
+							error="la patente no es valida";
+						}
+					} else {
+						if (patente.charAt(i)<'0'||patente.charAt(i)>'9') {
+							
+						}else {
+							error="la patente no es valida";
+						}
+					}
+				}
+			} else {
+				for (int i = 0; i < patente.length(); i++) {
+					if (i <= 0 && i > 4) {
+						if (patente.charAt(i)<'A'||patente.charAt(i)>'Z') {
+							
+						}else {
+							error="la patente no es valida";
+						}
+					} else {
+						if (patente.charAt(i)<'0'||patente.charAt(i)>'9') {
+							
+						}else {
+							error="la patente no es valida";
+						}
+					}
+				}
+			}
 
-		if (mat.matches()) {
-
-		} else {
-			error = patente + " no es una patente valida";
-		}
+		} 
 
 		// System.err.println(error);
 		if (error.equals("")) {
@@ -481,8 +510,8 @@ public class Verificar {
 				}
 			}
 
-		}else {
-			
+		} else {
+
 			if (marca.length() <= 4 && marca.length() >= 0) {
 				error = "la marca tiene que tener un minimo de 4 caracteres " + marca.length();
 			} else {
@@ -492,7 +521,7 @@ public class Verificar {
 				}
 
 			}
-			
+
 		}
 		// System.err.println(error);
 		if (error.equals("")) {
@@ -503,7 +532,7 @@ public class Verificar {
 		}
 
 	}
-	
+
 	public boolean verificarano(String ano) {
 		String error = "";
 		// System.err.println(contrasena.length());
@@ -526,20 +555,20 @@ public class Verificar {
 		}
 
 	}
-	
+
 	public boolean verificarestado(String estado) {
 		String error = "";
 		// System.err.println(contrasena.length());
-		boolean stop = estado.length()==1;
+		boolean stop = estado.length() == 1;
 		Pattern pat = Pattern.compile("([0-5]{1,1})");
 		Matcher mat = pat.matcher(estado);
 
-		if (mat.matches()&&stop) {
+		if (mat.matches() && stop) {
 
 		} else {
 			error = estado + " no es una estado valida";
 		}
-		
+
 		// System.err.println(error);
 		if (error.equals("")) {
 			return true;
@@ -549,19 +578,21 @@ public class Verificar {
 		}
 
 	}
-	
+
 	public boolean verificarprecio(String precio) {
 		String error = "";
 		// System.err.println(contrasena.length());
+		
+		
 		Pattern pat = Pattern.compile("([0-9]{1,28})([.]{1})([0-9]{2})");
 		Matcher mat = pat.matcher(precio);
 
 		if (mat.matches()) {
 
 		} else {
-			error = precio + " no es una precio valido";
+			error = precio + " no es una precio valido el formato es 400.00";
 		}
-		
+
 		// System.err.println(error);
 		if (error.equals("")) {
 			return true;
@@ -571,7 +602,7 @@ public class Verificar {
 		}
 
 	}
-	
+
 	public boolean verificarmodelo(String modelo) {
 		String error = "";
 		char errorcaracter[] = new char[modelo.length()];
@@ -591,8 +622,8 @@ public class Verificar {
 				}
 			}
 
-		}else {
-			
+		} else {
+
 			if (modelo.length() <= 4 && modelo.length() >= 0) {
 				error = "la modelo tiene que tener un minimo de 4 caracteres " + modelo.length();
 			} else {
@@ -602,7 +633,7 @@ public class Verificar {
 				}
 
 			}
-			
+
 		}
 		// System.err.println(error);
 		if (error.equals("")) {

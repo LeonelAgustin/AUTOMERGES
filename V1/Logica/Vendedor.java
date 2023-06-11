@@ -122,8 +122,12 @@ public class Vendedor extends Persona {
 			} else {
 				buscar_auto(true);
 			}
-
-			registrarcompra();
+			if (this.vehiculo.getPatente() != "") {
+				registrarcompra();
+			}else {
+				System.err.println("auto es nulo");
+			}
+			
 			
 			break;
 		case 1:
@@ -182,7 +186,9 @@ public class Vendedor extends Persona {
 			buscar_pieza();
 			int cantida = Integer.parseInt(JOptionPane.showInputDialog("ingrese la cantidad de piezas"));
 			if (cantida>0) {
-				vender_auto(false, cantida);
+				if (this.pieza.getNombre_pieza() != null) {
+					vender_auto(false, cantida);
+				}
 			}
 			
 			break;
@@ -215,12 +221,13 @@ public class Vendedor extends Persona {
 																							// defecto.
 					s, s[0]);
 			z = seleccion2 == 0;
+			if (!this.vehiculo.getPatente().equals("")) {
 			if (z) {
 					informe_cargar("reparar",1);
 			} else {
 					informe_cargar("restaurar",2);
 			}
-			
+			}
 			break;
 		case 4:
 			revisar_deposito();
@@ -236,14 +243,17 @@ public class Vendedor extends Persona {
 
 			if (q) {
 				registrar_auto(-1);
+				
 			} else {
 			Boolean wait=buscar_usuario(Integer.parseInt(JOptionPane.showInputDialog("ingrese el id de usuario")));
 			
 				do {
 					//System.err.println(wait);
 				} while (!wait);
+				if (this.cliente.getId() != null) {
+					registrar_auto(Integer.parseInt(this.cliente.getId()));
+				}
 				
-				registrar_auto(Integer.parseInt(this.cliente.getId()));
 			}
 			break;
 		case 6:
@@ -449,6 +459,7 @@ public class Vendedor extends Persona {
 		String precio = JOptionPane.showInputDialog("ingresa el precio");
 		String estado = JOptionPane.showInputDialog("ingresa la accion");
 		Verificar verificar = new Verificar();
+		System.err.println("finished");
 		do {
 			if (!verificar.verificarmarca(marca)) {
 				marca = JOptionPane.showInputDialog("ingrese una marca valida");
@@ -456,8 +467,8 @@ public class Vendedor extends Persona {
 			} else {
 				z = true;
 			}
-		} while (z);
-		z = true;
+		} while (!z);
+		//z = true;
 		do {
 			if (!verificar.verificarmodelo(modelo)) {
 				modelo = JOptionPane.showInputDialog("ingrese un modelo valida");
@@ -465,17 +476,18 @@ public class Vendedor extends Persona {
 			} else {
 				z = true;
 			}
-		} while (z);
-		z = true;
+		} while (!z);
+		//z = true;
 		do {
+			patente.toUpperCase();
 			if (!verificar.verificarpatente(patente)) {
 				patente = JOptionPane.showInputDialog("ingrese una patente valida");
 				z = false;
 			} else {
 				z = true;
 			}
-		} while (z);
-		z = true;
+		} while (!z);
+		//z = true;
 		do {
 			if (!verificar.verificarano(ano)) {
 				ano = JOptionPane.showInputDialog("ingrese una ano valida");
@@ -483,8 +495,8 @@ public class Vendedor extends Persona {
 			} else {
 				z = true;
 			}
-		} while (z);
-		z = true;
+		} while (!z);
+		//z = true;
 		do {
 			if (!verificar.verificarprecio(precio)) {
 				precio = JOptionPane.showInputDialog("ingrese un precio valida");
@@ -492,8 +504,8 @@ public class Vendedor extends Persona {
 			} else {
 				z = true;
 			}
-		} while (z);
-		z = true;
+		} while (!z);
+		//z = true;
 		do {
 			if (!verificar.verificarestado(estado)) {
 				estado = JOptionPane.showInputDialog("ingrese una accion valida");
@@ -501,20 +513,22 @@ public class Vendedor extends Persona {
 			} else {
 				z = true;
 			}
-		} while (z);
-
-		Vehiculo vehiculo = new Vehiculo(cliente, patente, marca, modelo, Integer.parseInt(ano),
-				Integer.parseInt(estado), 1, precio);
+			System.err.println("finished");
+		} while (!z);
+		
+		Vehiculo vehiculo = new Vehiculo(1, patente, marca, modelo, Integer.parseInt(ano),
+				Integer.parseInt(estado), cliente, precio);
 		this.vehiculo = vehiculo;
+		System.err.println(this.vehiculo.toString());
 		registrar_auto_connetion();
 
 	}
 
 	/* en caso de que la empresa compre un auto el cliente va a ser -1 */
 	public void registrar_auto_connetion() {
-
-		if (this.vehiculo.getIdcliente() <= 0) {
-
+		System.err.println("recived");
+		if (this.vehiculo.getIdcliente() >= 0) {
+			System.err.println("cliente");
 			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `a\u00f1o`, `accion_idaccion`, `cliente_idcliente`, `Precio`) VALUES (?,?,?,?,?,?,?)";
 
 			try {
@@ -525,7 +539,8 @@ public class Vendedor extends Persona {
 				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
 				stmt.setInt(5, this.vehiculo.getEstado());
 				stmt.setInt(6, this.vehiculo.getIdcliente());
-				stmt.setFloat(7, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
+				stmt.setFloat(7, Float.parseFloat(this.vehiculo.getPrecio() ));
+				System.err.println(stmt.toString());
 				stmt.executeUpdate();
 				//conexion.close();
 
@@ -537,7 +552,7 @@ public class Vendedor extends Persona {
 			}
 		} else {
 			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `a\u00f1o`, `accion_idaccion`, `Precio`) VALUES (?,?,?,?,?,?)";
-
+			System.err.println("registro");
 			try {
 				stmt = conexion.prepareStatement(sql);
 				stmt.setString(1, this.vehiculo.getPatente());
@@ -545,7 +560,8 @@ public class Vendedor extends Persona {
 				stmt.setString(3, this.vehiculo.getModelo());
 				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
 				stmt.setInt(5, this.vehiculo.getEstado());
-				stmt.setFloat(6, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
+				stmt.setFloat(6, Float.parseFloat(this.vehiculo.getPrecio()));
+				System.err.println(stmt.toString());
 				stmt.executeUpdate();
 				// conexion.close();
 
