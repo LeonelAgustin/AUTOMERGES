@@ -112,12 +112,13 @@ public class Login {
 	}
 	
 	public boolean TraerEmleados(String clave, String usuario) {
-		String sql = "SELECT empleado.idempleado,persona.nombre,persona.apellido,persona.dni,empleado_tipo.Nombre clase FROM `empleado` INNER JOIN empleado_tipo on empleado_tipo.idempleado_tipo = empleado.empleado_tipo_idempleado_tipo INNER JOIN persona on Persona.idPersona=empleado.Persona_idPersona WHERE persona.dni = "
-				+ usuario + " && empleado.clave LIKE \"" + clave + "\";";
+		String sql = "SELECT empleado.idempleado,persona.nombre,persona.apellido,persona.dni,empleado_tipo.Nombre clase FROM `empleado` INNER JOIN empleado_tipo on empleado_tipo.idempleado_tipo = empleado.empleado_tipo_idempleado_tipo INNER JOIN persona on Persona.idPersona=empleado.Persona_idPersona WHERE persona.dni = ? && empleado.clave LIKE ?";
 		String[] datos = new String[5];
 		try {
 
 			stmt = conexion.prepareStatement(sql);
+			stmt.setString(2, clave);
+			stmt.setInt(1,Integer.parseInt(usuario));
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
 				datos[0] = String.valueOf(result.getInt(1));
@@ -146,12 +147,13 @@ public class Login {
 	}
 
 	public boolean  TraerUsuarios(String clave, String usuario) {
-		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE persona.dni = "
-				+ usuario + " && cliente.clave LIKE \"" + clave + "\";";
+		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE persona.dni = ? && cliente.clave LIKE ?";
 		String[] datos = new String[5];
 		try {
 			
 			stmt = conexion.prepareStatement(sql);
+			stmt.setString(2, clave);
+			stmt.setInt(1,Integer.parseInt(usuario));
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
 				datos[0] = String.valueOf(result.getInt(1));
@@ -307,11 +309,11 @@ public class Login {
 		switch (this.tipo) {
 		case "Ventas":
 			do {
-				Vehiculo vehiculo = new Vehiculo(0,null,null,null,0,0,0,null);
-				Cliente cliente = new Cliente(null,null,null,null,null);
+				Vehiculo vehiculo = new Vehiculo(0,"","","",0,0,0,"");
+				Cliente cliente = new Cliente("","","","","");
 				Pieza pieza = new Pieza(0,0,null);
 				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo,vehiculo,pieza,cliente);
-				vendedor.menu_ventas();
+				vendedor.vendedor();
 			} while (userkey);
 			break;
 		case "Mecanico":

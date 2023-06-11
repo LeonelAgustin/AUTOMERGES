@@ -13,7 +13,7 @@ public class Main {
 		//String usuario;
 		//char aux[] = { ' ', ' ' };
 		final String tipo_de_cuenta[] = { "cliente", "empleado" };
-		final String opciones[] = { "Registrarse", "Logearse" };
+		final String opciones[] = { "Registrarse", "Logearse","salir" };
 		/*
 		 * final String
 		 * tipo_de_empleado[]={"ventas","administrador","restauracion","reparacion",
@@ -65,7 +65,7 @@ public class Main {
 
 		JCheckBox chec = new JCheckBox("Prueba");
 		// filtra cliente de empleado
-		boolean key = false;
+		boolean key = true;
 		Login empleado = new Login(0, 0, null, null, null, null);
 		Login cliente = new Login(0, 0, null, null);
 		do {
@@ -107,7 +107,8 @@ public class Main {
 				}
 					
 			} else {
-
+				if(seleccion2==1) {
+				
 				int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
 						tipo_de_cuenta, tipo_de_cuenta[0]);
@@ -132,8 +133,13 @@ public class Main {
 						System.err.println("error");
 					}
 				}
+				
+			}else {
+				key=false;
 			}
-			
+				
+				
+			}
 			
 			
 		} while (key);
