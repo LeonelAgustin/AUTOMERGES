@@ -1,9 +1,10 @@
-package logica;
+package Logica;
 
 import java.util.Arrays;
 
 public class Informe {
 
+	private int codinforme;
     private Cliente cliente;
     private Pieza pieza;
     private Vehiculo vehiculo;
@@ -13,7 +14,7 @@ public class Informe {
     private boolean isauto;
     //private double precio;
     //
-	public Informe(Cliente cliente, Vehiculo vehiculo,int tipo,boolean isfactura) {
+	public Informe(int codinforme,Cliente cliente, Vehiculo vehiculo,int tipo,boolean isfactura) {
 		this.cliente = cliente;
 		this.vehiculo = vehiculo;
 		this.asunto=transaccion[tipo];
@@ -21,7 +22,7 @@ public class Informe {
 		this.isauto=true;
 	}
 	
-	public Informe(Cliente cliente, Pieza pieza,int tipo,boolean isfactura) {
+	public Informe(int codinforme,Cliente cliente, Pieza pieza,int tipo,boolean isfactura) {
 		this.cliente = cliente;
 		this.pieza = pieza;
 		this.asunto=transaccion[tipo];
@@ -29,6 +30,15 @@ public class Informe {
 		this.isauto=false;
 	}
 	
+	
+	public int getCodinforme() {
+		return codinforme;
+	}
+
+	public void setCodinforme(int codinforme) {
+		this.codinforme = codinforme;
+	}
+
 	public Vehiculo getVehiculo() {
 		return vehiculo;
 	}
@@ -71,14 +81,14 @@ public class Informe {
 	public String toString() {
 		if (isfactura) {
 			if (isauto) {
-				return "factura \n cliente=" + cliente + "\n  auto=" + vehiculo + "\n asunto=" + asunto ;
+				return "factura \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\nauto=" + vehiculo.getMarca() + "  "+ vehiculo.getModelo() + "\nasunto=" + asunto ;
 			}
-			return "factura \n cliente=" + cliente + "\n pieza=" + pieza + "asunto=" + asunto ;
+			return "factura \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\npieza=" + pieza.getNumero_de_sere() + "\nasunto=" + asunto ;
 		}else {
 			if (isauto) {
-				return "Informe \n cliente=" + cliente + "\n  auto=" + vehiculo + "\n asunto=" + asunto ;
+				return "Informe \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\nauto=" +  vehiculo.getMarca() + "  "+ vehiculo.getModelo() + "\nasunto=" + asunto ;
 			}
-			return "Informe \n cliente=" + cliente + "\n pieza=" + pieza + "asunto=" + asunto ;
+			return "Informe \ncliente=" + cliente.getNombre() +"  "+ cliente.getApellido() + "\npieza=" + pieza.getNumero_de_sere() + "\nasunto=" + asunto ;
 		}
 		
 	}

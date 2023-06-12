@@ -1,11 +1,22 @@
-package logica;
+package Logica;
 
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import conexion.Conexion;
 
 public abstract class Persona {
-
+	Conexion con = new Conexion();
+	
+	Connection conexion = con.conectar();
+	
+	PreparedStatement stmt;
+	
 	private String nombre , apellido , dni , tipo_cuenta , id ,contrasena ;
 	//falta historial de compra ventas resparacion
 
+	//empleado 
 	public Persona(String nombre, String apellido, String dni, String tipo_cuenta, String id, String contrasena) {
 		super();
 		this.nombre = nombre;
@@ -17,16 +28,24 @@ public abstract class Persona {
 	}
 	
 	
-
-	public Persona(String nombre, String apellido, String dni, String id, String contrasena) {
+	//cliente
+	public Persona(String id,String dni,String nombre, String apellido, String contrasena) {
 		super();
+		this.id = id;
+		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.dni = dni;
-		this.id = id;
 		this.contrasena = contrasena;
 	}
 
+
+	//test
+	public Persona(int parseInt, int parseInt2, String string) {
+		super();
+		this.id = id;
+		this.dni = dni;
+		this.nombre = nombre;
+	}
 
 
 	public String getNombre() {
@@ -82,5 +101,9 @@ public abstract class Persona {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", tipo_cuenta=" + tipo_cuenta
 				+ ", id=" + id + ", contrasena=" + contrasena + "]";
 	}
+	
+	
+	
+	
 		
 }

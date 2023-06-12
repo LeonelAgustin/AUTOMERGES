@@ -1,21 +1,41 @@
-package logica;
+package Logica;
 
 public class Pieza {
+	private String nombre;
 	private int numero_de_sere;
-
 	private double precio;
 	private String importada;
-	private String estado;
+	private int estado;
 	
-	public String getEstado() {
+	public Pieza(int num,double precio,String importada){
+		this.setNumero_de_sere(num);
+		this.setPrecio(precio);
+		this.setImportada(importada);
+		this.setEstado(estado);
+	}
+	
+	
+	
+	public String getNombre_pieza() {
+		return nombre;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public int getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-
 
 	public int getNumero_de_sere() {
 		return numero_de_sere;
@@ -32,11 +52,7 @@ public class Pieza {
 	}
 
 
-	@Override
-	public String toString() {
-		return "pieza [numero_de_sere=" + numero_de_sere + ", precio=" + precio + ", importada=" + importada
-				+ ", estado=" + estado + "]";
-	}
+	
 
 
 	public void setPrecio(double precio) {
@@ -56,16 +72,11 @@ public class Pieza {
 	}
 
 
-	public Pieza(int numero_de_sere, double precio, String importada, String estado) {
-		super();
-		this.numero_de_sere = numero_de_sere;
-		this.precio = precio;
-		this.importada = importada;
-		this.estado = estado;
+	@Override
+	public String toString() {
+		return "pieza [numero_de_sere=" + numero_de_sere + ", precio=" + precio + ", importada=" + importada
+				+ ", estado=" + estado + "]";
 	}
-
-
-	
 
 
 }

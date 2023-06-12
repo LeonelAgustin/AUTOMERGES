@@ -1,73 +1,46 @@
-package logica;
+package Logica;
 
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import conexion.Conexion;
 
 public class EncargadoTaller extends Persona {
-	private int id_Etaller;
-	private String claveT;
+	private String idEtaller;
+	private int claveE ;
+	
+	
 
-	public EncargadoTaller(String nombre, String apellido, String dni, String tipo_cuenta, String id, String contrasena,
-			int id_Etaller, String claveT) {
-		super(nombre, apellido, dni, tipo_cuenta, id, contrasena);
-		this.id_Etaller = id_Etaller;
-		this.claveT = claveT;
+	public EncargadoTaller(String nombre, String apellido,
+			String dni, String id, String contrasena, String tipo_cuenta) {
+		super(nombre, apellido, dni, id, contrasena);
+		
+	}
+ 
+	public String getIdEtaller() {
+		return idEtaller;
 	}
 
-	public int getId_Etaller() {
-		return id_Etaller;
+	public void setIdEtaller(String idEtaller) {
+		this.idEtaller = idEtaller;
 	}
 
-	public void setId_Etaller(int id_Etaller) {
-		this.id_Etaller = id_Etaller;
+	public int getClaveE() {
+		return claveE;
 	}
 
-	public String getClaveT() {
-		return claveT;
-	}
-
-	public void setClaveT(String claveT) {
-		this.claveT = claveT;
+	public void setClaveE(int claveE) {
+		this.claveE = claveE;
 	}
 
 	@Override
 	public String toString() {
-		return "EncargadoTaller [id_Etaller=" + id_Etaller + ", claveT=" + claveT + "]";
+		return "EncargadoTaller [idEtaller=" + idEtaller + ", claveE=" + claveE + "]";
 	}
-
-	public Informe1 completarInforme(Informe1 informe1) {
-
-		switch (informe1.getasunto()) {
-		case "restauracion":
-
-			String info = "Revisando informe como Encargado del taller\nCodigo:"+informe1.getCod_informe()+"\nAsunto:restauracion\nVehiculo:"
-					+ informe1.getAuto().getModelo() + "\nDueño:" + informe1.getCliente().getNombre() + "\nTerminado:"
-					+ informe1.isTerminado() + "\nHoras de trabajo:0" + "\nMateriales:Sin especificar" + "Mecanico:Sin asignar\n";
-
-			String nombre = JOptionPane
-					.showInputDialog(info + "Ingrese el mecanico a quien quiere asignarle el trabajo");
-
-			informe1.getEmpleado().setNombre(nombre);
-
-			JOptionPane.showMessageDialog(null, "asignado trabajo de restauracion al mecanico:" + nombre);
-
-			break;
-
-		case "reparacion":
-
-			String info1 = "Revisando informe como Encargado del taller\nCodigo:"+informe1.getCod_informe()+"\nAsunto:reparacion\nVehiculo:"
-					+ informe1.getAuto().getModelo() + "\nDueño:" + informe1.getCliente().getNombre() + "\nTerminado:"
-					+ informe1.isTerminado() + "\nHoras de trabajo:0" +"\nPieza:Sin especificar"+ "\n" + "Mecanico:Sin asignar\n";
-
-			int identificador1 = Integer.parseInt(JOptionPane.showInputDialog(info1 + "Ingrese el id del mecanico a quien quiere asignarle el trabajo")); 
-					
-
-			informe1.getEmpleado().setId_mecanico(identificador1);
-
-			JOptionPane.showMessageDialog(null, "asignado trabajo de reparacion al mecanico :" + identificador1 );
-
-			break;
-		}
-		//devuelve el informe completado
-		return informe1;
+	
+	public Informe completarIforme (Informe informe1) {
+		
+		return null;
 	}
+	
 }
