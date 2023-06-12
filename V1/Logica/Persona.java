@@ -3,10 +3,6 @@ package Logica;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.LinkedList;
-
-import com.mysql.jdbc.log.Log;
 
 import conexion.Conexion;
 
@@ -44,14 +40,14 @@ public abstract class Persona {
 
 
 	//test
+	/*
 	public Persona(int parseInt, int parseInt2, String string) {
 		super();
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
 	}
-
-
+	*/
 	public String getNombre() {
 		return nombre;
 	}
