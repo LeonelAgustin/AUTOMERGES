@@ -305,25 +305,31 @@ public class Login {
 	
 	
 	public void menu_transport() {
+		Vehiculo vehiculo = new Vehiculo(0,"","","",0,0,0,"");
+		Cliente cliente = new Cliente("","","","","");
+		Pieza pieza = new Pieza(0,0,null);
+		
+		Informe informe1 = new Informe (0,cliente,vehiculo,3,true);
+		
+		
 		boolean userkey = true;
 		switch (this.tipo) {
 		case "Ventas":
 			do {
-				Vehiculo vehiculo = new Vehiculo(0,"","","",0,0,0,"");
-				Cliente cliente = new Cliente("","","","","");
-				Pieza pieza = new Pieza(0,0,null);
+				
 				Vendedor vendedor = new Vendedor(this.nombre,this.apellido, String.valueOf(this.dni) , String.valueOf(this.id) ,this.clave,this.tipo,vehiculo,pieza,cliente);
 				vendedor.vendedor();
 			} while (userkey);
 			break;
 		case "Mecanico":
-			Vehiculo vehiculo = new Vehiculo(0,"","","",0,0,0,"");
-			Cliente cliente = new Cliente("","","","","");
-			Mecanico pedro = null;
-			Informe informe1 = new Informe (0,cliente,vehiculo,3,true);
+			/*String nombre, String apellido,	String dni, String id, String contrasena, String tipo_cuenta*/
+			
+			Mecanico pedro = new Mecanico(this.nombre,this.apellido,String.valueOf(this.dni) ,String.valueOf(this.id),this.clave,this.tipo);
 			pedro.completarInforme(informe1);
 			break;
 		case "Encargado del deposito":
+			/*String nombre, String apellido, String dni, String tipo_cuenta,String id,String contrasena*/
+			EncargadoDeposito encarD = new EncargadoDeposito(this.nombre,this.apellido,String.valueOf(this.dni) ,String.valueOf(this.id),this.clave,this.tipo);
 			
 			break;
 		case "fabricante":

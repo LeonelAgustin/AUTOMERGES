@@ -11,8 +11,7 @@ import conexion.Conexion;
 
 public class Mecanico extends Persona{
 	
-	public Mecanico(String nombre, String apellido,
-			String dni, String id, String contrasena, String tipo_cuenta) {
+	public Mecanico(String nombre, String apellido,	String dni, String id, String contrasena, String tipo_cuenta) {
 		super(nombre, apellido, dni, id, contrasena);
 		
 	}
@@ -30,10 +29,7 @@ public class Mecanico extends Persona{
 	}
 	
 	public void completarInforme(Informe informe) {
-		 /*completar y devuelve el informe*/
-		
-		
-		
+		 
 		double precio1 = 0;
 		double total;
 		int res,res2, estado=0;
@@ -143,5 +139,6 @@ public class Mecanico extends Persona{
 		
 		return nueva;
 	}
+	
 
 }

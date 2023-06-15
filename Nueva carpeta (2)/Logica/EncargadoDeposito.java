@@ -6,11 +6,10 @@ public class EncargadoDeposito extends Persona{
 	private int id_encarDepo;
 	private int claveD;
 	
-	public EncargadoDeposito(String nombre, String apellido, String dni, String tipo_cuenta, String id,
-			String contrasena, int id_encarDepo, int claveD) {
+	public EncargadoDeposito(String nombre, String apellido, String dni, String id,
+			String contrasena, String tipo_cuenta) {
 		super(nombre, apellido, dni, tipo_cuenta, id, contrasena);
-		this.id_encarDepo = id_encarDepo;
-		this.claveD = claveD;
+		
 	}
 
 	public int getId_encarDepo() {

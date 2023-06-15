@@ -2,6 +2,7 @@ package Logica;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
@@ -84,6 +85,11 @@ public class Orden {
 			System.out.println("Hubo un error"+e.getMessage());
 			return false;
 		}
+	}
+	
+	public LinkedList<Orden> mostrarOrden() {
+		
+		return null;
 	}
 	
 	
