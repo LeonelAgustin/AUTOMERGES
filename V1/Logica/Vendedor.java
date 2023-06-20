@@ -520,7 +520,7 @@ public class Vendedor extends Persona {
 			stmt.setInt(1, cliente_id);
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
-				this.cliente.setId(String.valueOf(result.getInt(1)));
+				this.cliente.setId(String.valueOf(result.getLong(1)));
 				this.cliente.setNombre(result.getString(2));
 				this.cliente.setApellido(result.getString(3));
 				this.cliente.setDni(String.format("%.0f", result.getFloat(4)));
