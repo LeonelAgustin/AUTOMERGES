@@ -185,17 +185,17 @@ public class Vendedor extends Persona {
 
 			for (int i = 0; i < this.carro.size(); i++) {
 
-				mensaje = mensaje + this.carro.get(i).getId() + "  " + this.carro.get(i).getMarca()
-						+ "  " + this.carro.get(i).getModelo();
+				mensaje = mensaje + this.carro.get(i).getId() + "  " + this.carro.get(i).getMarca() + "  "
+						+ this.carro.get(i).getModelo();
 
 			}
 			if (!mensaje.equals("")) {
-			JOptionPane.showMessageDialog(null, mensaje);
-			int zero ;
-			do {
-			zero= Integer.parseInt(JOptionPane.showInputDialog("ingrese el id"));
-			} while (zero<0);
-			
+				JOptionPane.showMessageDialog(null, mensaje);
+				int zero;
+				do {
+					zero = Integer.parseInt(JOptionPane.showInputDialog("ingrese el id"));
+				} while (zero < 0);
+
 				for (int i = 0; i < this.carro.size(); i++) {
 					if (this.carro.get(i).getId() == zero) {
 						this.vehiculo.setId(this.carro.get(i).getId());
@@ -208,11 +208,11 @@ public class Vendedor extends Persona {
 					}
 				}
 				System.err.println(this.vehiculo);
-				
-					registrar_venta();
-					System.err.println("registro terminado");
-					vender_auto(true,0);
-					System.err.println("registro terminado 2");
+
+				registrar_venta();
+				System.err.println("registro terminado");
+				vender_auto(true, 0);
+				System.err.println("registro terminado 2");
 			} else {
 				JOptionPane.showMessageDialog(null, "no hay autos a la venta");
 			}
@@ -230,12 +230,13 @@ public class Vendedor extends Persona {
 			 * informef.setasunto("venta"); informef.setPieza(pieza);
 			 * JOptionPane.showMessageDialog(null, informef.toString());
 			 */
-			JOptionPane.showMessageDialog(null,"esta funcion no funciona");
-			/*
+			// JOptionPane.showMessageDialog(null,"esta funcion no funciona");
+
 			buscar_usuario(Integer.parseInt(JOptionPane.showInputDialog("ingrese el id de usuario")));
 			if (buscar_pieza()) {
+				System.err.println("buscarpieza" + true);
 				partes();
-				System.err.println(true);
+				
 			} else {
 				System.err.println(false);
 			}
@@ -250,7 +251,7 @@ public class Vendedor extends Persona {
 					}
 				}
 			}
-			*/
+
 			break;
 		case 3:
 			/*
@@ -259,8 +260,7 @@ public class Vendedor extends Persona {
 			 * informe.setasunto("venta"); informe.setVehiculo(vehiculo);
 			 * JOptionPane.showMessageDialog(null, informe.toString());
 			 */
-			
-			
+
 			int rts = Integer.parseInt(JOptionPane.showInputDialog("ingrese el id de usuario"));
 			buscar_usuario(rts);
 			String r[] = { "registrar auto", "seleccionar auto" };
@@ -273,7 +273,7 @@ public class Vendedor extends Persona {
 				registrar_auto(Integer.parseInt(this.cliente.getId()));
 			} else {
 				buscar_auto(true);
-				
+
 				String mensajel = "";
 				for (int i = 0; i < this.carro.size(); i++) {
 					mensajel = mensajel + this.carro.get(i).getId() + " " + this.carro.get(i).getMarca() + " "
@@ -307,7 +307,8 @@ public class Vendedor extends Persona {
 					if (this.cliente.getNombre() != null && !this.cliente.getNombre().equals("")) {
 
 						seleccion2 = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
-								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono
+																										// por
 																										// defecto.
 								s, s[0]);
 						z = seleccion2 == 0;
@@ -326,8 +327,6 @@ public class Vendedor extends Persona {
 				}
 			}
 
-			
-			
 			break;
 		case 4:
 			revisar_deposito();
@@ -346,8 +345,8 @@ public class Vendedor extends Persona {
 				registrar_auto(-1);
 
 			} else {
-				buscar_usuario(
-						Integer.parseInt(JOptionPane.showInputDialog("ingrese el id de usuario")));;
+				buscar_usuario(Integer.parseInt(JOptionPane.showInputDialog("ingrese el id de usuario")));
+				;
 				if (this.cliente.getId() != null) {
 					registrar_auto(Integer.parseInt(this.cliente.getId()));
 				}
@@ -356,9 +355,10 @@ public class Vendedor extends Persona {
 			break;
 		case 6:
 			buscar_auto(false);
-			String flatering = null; 
+			String flatering = null;
 			for (int i = 0; i < this.carro.size(); i++) {
-				flatering = flatering  + this.carro.get(i).getId() +" "+  this.carro.get(i).getMarca() + " "+ this.carro.get(i).getModelo() + " " + this.carro.get(i).getPatente() + "/n";
+				flatering = flatering + this.carro.get(i).getId() + " " + this.carro.get(i).getMarca() + " "
+						+ this.carro.get(i).getModelo() + " " + this.carro.get(i).getPatente() + "/n";
 			}
 			JOptionPane.showMessageDialog(null, flatering);
 			break;
@@ -391,8 +391,7 @@ public class Vendedor extends Persona {
 			System.err.println("1");
 			System.err.println(e.getMessage());
 		}
-		
-		
+
 		try {
 			stmt = conexion.prepareStatement(sql1);
 			stmt.setInt(1, accion);
@@ -450,25 +449,22 @@ public class Vendedor extends Persona {
 				break;
 			}
 
-			
-				try {
-					stmt = conexion.prepareStatement(sql);
-					ResultSet resulta = stmt.executeQuery();
-					// id=resulta.getInt(1);
-					while (resulta.next()) {
-						Vehiculo ki = new Vehiculo(resulta.getInt(1), resulta.getString(2), resulta.getString(3),
-								resulta.getString(4), Integer.parseInt(String.format("%.0f", resulta.getFloat(5))),
-								resulta.getInt(6), resulta.getInt(7), String.format("%.2f", resulta.getFloat(8)));
-						this.carro.add(ki);
-					}
-
-					// conexion.close();
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-					// id=-1;
+			try {
+				stmt = conexion.prepareStatement(sql);
+				ResultSet resulta = stmt.executeQuery();
+				// id=resulta.getInt(1);
+				while (resulta.next()) {
+					Vehiculo ki = new Vehiculo(resulta.getInt(1), resulta.getString(2), resulta.getString(3),
+							resulta.getString(4), Integer.parseInt(String.format("%.0f", resulta.getFloat(5))),
+							resulta.getInt(6), resulta.getInt(7), String.format("%.2f", resulta.getFloat(8)));
+					this.carro.add(ki);
 				}
 
-			
+				// conexion.close();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				// id=-1;
+			}
 
 		} else {
 
@@ -545,7 +541,7 @@ public class Vendedor extends Persona {
 		try {
 
 			stmt = conexion.prepareStatement(sql);
-			//stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
+			// stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
 				Vehiculo ki = new Vehiculo(result.getInt(1), result.getString(2), result.getString(3),
@@ -705,7 +701,7 @@ public class Vendedor extends Persona {
 
 	public boolean buscar_pieza() {
 		// LinkedList<Pieza> piezas = new LinkedList<Pieza>();
-		String sql1 = "SELECT * FROM `pieza` WHERE 1";
+		String sql1 = "SELECT `Numero_de_pieza`, `nombre_Pieza`, `Pieza_precio` FROM `pieza` WHERE 1";
 		// String sql1 = "SELECT COUNT(*) FROM `pieza`";
 		String opciones[] = { "<--", "seleccionar", "-->" };
 		String opciones2[] = { "comprar", "salir" };
@@ -713,27 +709,26 @@ public class Vendedor extends Persona {
 			// ResultSet resulta1 = stmt.executeQuery(sql1);
 			stmt = conexion.prepareStatement(sql1);
 			ResultSet resulta = stmt.executeQuery();
-
 			while (resulta.next()) {
-				System.err.println(resulta.getString(2));
-				this.pieza.setNumero_de_sere(resulta.getInt(1));
+				//System.err.println(resulta.getString(2));
+				this.pieza.setNumero_de_sere((int) resulta.getLong(1));
 				this.pieza.setNombre_pieza(resulta.getString(2));
-				this.pieza.setPrecio(Double.parseDouble(String.format("%.2f", resulta.getFloat(3))));
-				System.err.println(resulta.getInt(2));
+				//String aux =String.format("%.2f", resulta.getFloat(3));
+				//System.err.println(aux);
+				this.pieza.setPrecio(resulta.getDouble(3));
+				//System.err.println(resulta.getInt(2));
 				this.piezas.add(this.pieza);
-				
 			}
+			
+			
 			return true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return false;
 		}
-			
-		
 
 	}
-	
-	
+
 	public void partes() {
 		String opciones2[] = { "comprar", "salir" };
 		String mensaje = "";
@@ -741,57 +736,54 @@ public class Vendedor extends Persona {
 		if (!this.piezas.isEmpty()) {
 
 			for (int i = 0; i < piezas.size(); i++) {
-				mensaje = mensaje + this.piezas.get(i).getNumero_de_sere() + ""
-						+ this.piezas.get(i).getNombre_pieza() + "" + this.piezas.get(i).getPrecio();
+				mensaje = mensaje + this.piezas.get(i).getNumero_de_sere() + "" + this.piezas.get(i).getNombre_pieza()
+						+ "" + this.piezas.get(i).getPrecio();
 			}
-				JOptionPane.showMessageDialog(null, mensaje);
-				int seleccion1;
-				// int pagina;
-				String id1;
-				/*
-				 * do { seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion",
-				 * "Selector de opciones", JOptionPane.YES_NO_CANCEL_OPTION,
-				 * JOptionPane.QUESTION_MESSAGE, null, // null para icono por opciones,
-				 * opciones[0]); } while (seleccion1 != 1);
-				 */
-				do {
-					id1 = JOptionPane.showInputDialog("ingrese el id");
-				} while (id1.length() == 0);
-				
-				for (int j = 0; j < this.piezas.size(); j++) {
-					
+			JOptionPane.showMessageDialog(null, mensaje);
+			int seleccion1;
+			// int pagina;
+			String id1;
+			/*
+			 * do { seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion",
+			 * "Selector de opciones", JOptionPane.YES_NO_CANCEL_OPTION,
+			 * JOptionPane.QUESTION_MESSAGE, null, // null para icono por opciones,
+			 * opciones[0]); } while (seleccion1 != 1);
+			 */
+			do {
+				id1 = JOptionPane.showInputDialog("ingrese el id");
+			} while (id1.length() == 0);
+
+			for (int j = 0; j < this.piezas.size(); j++) {
+
+			}
+
+			do {
+				seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Selector de opciones",
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
+						opciones2, opciones2[0]);
+				if (seleccion1 == 1) {
+					//vender_auto(false, Integer.parseInt(id1));
 				}
-				
-				do {
-					seleccion1 = JOptionPane.showOptionDialog(null, "Seleccione una opcion",
-							"Selector de opciones", JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, // null para icono por
-							opciones2, opciones2[0]);
-					if (seleccion1 == 1) {
-						vender_auto(false, Integer.parseInt(id1));
-					}
-				} while (seleccion1 != 1);
-			
-			
+			} while (seleccion1 != 1);
+
 		} else {
 			JOptionPane.showMessageDialog(null, "no hay piezas");
-			
 		}
 	}
-	
 
 	// si auto es falso se carga como pieza
 	// en caso de venta auto se pone cantidad en 0
 	public void vender_auto(boolean auto, int cantidad) {
 		int id = Integer.parseInt(this.cliente.getId());
+		System.out.println("cantidad :"+ cantidad);
 		if (auto) {
 			String sql = "INSERT INTO `factura`( `cliente_idcliente`, `Vehiculo_Id_auto`, `Precio`) VALUES (?,?,?)";
 			System.err.println(this.vehiculo.getPrecio());
 			try {
 				stmt = conexion.prepareStatement(sql);
-				stmt.setInt(1, id);
-				stmt.setInt(2, this.vehiculo.getId());
-				stmt.setFloat(3, Float.parseFloat(this.vehiculo.getPrecio()+".00"));
+				stmt.setLong(1, id);
+				stmt.setLong(2, this.vehiculo.getId());
+				stmt.setDouble(3, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
 				stmt.executeUpdate();
 				System.err.println(stmt.toString());
 				// conexion.close();
@@ -803,15 +795,15 @@ public class Vendedor extends Persona {
 			String sql = "INSERT INTO `factura`( `cliente_idcliente`, `Pieza_Numero_de_pieza`, `Precio`, `cantidad`) VALUES (?,?,?,?)";
 			try {
 				stmt = conexion.prepareStatement(sql);
-				stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
-				stmt.setInt(2, this.vehiculo.getId());
-				stmt.setFloat(3, Float.parseFloat(this.vehiculo.getPrecio() ));
+				stmt.setLong(1, Integer.parseInt(this.cliente.getId()));
+				stmt.setLong(2, this.pieza.getNumero_de_sere());
+				stmt.setDouble(3, this.pieza.getPrecio());
+				stmt.setLong(4, cantidad);
 				System.err.println(stmt.toString());
-				stmt.setInt(4, cantidad);
 				stmt.executeUpdate();
 				// conexion.close();
 			} catch (Exception e) {
-				// TODO: handle exception
+				System.out.println(e.getMessage());
 			}
 
 		}
@@ -853,9 +845,8 @@ public class Vendedor extends Persona {
 		try {
 			stmt = conexion.prepareStatement(sql);
 			ResultSet resulta = stmt.executeQuery();
-
 			while (resulta.next()) {
-System.err.println(resulta.getInt(1));
+				System.err.println(resulta.getInt(1));
 				if (resulta.getInt(1) == 0) {
 					JOptionPane.showMessageDialog(null, "el estacionamiento del depocito esta vacio");
 				} else {
@@ -869,7 +860,6 @@ System.err.println(resulta.getInt(1));
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -896,5 +886,6 @@ System.err.println(resulta.getInt(1));
 		}
 
 	}
+
 
 }
