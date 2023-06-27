@@ -10,13 +10,6 @@ import conexion.Conexion;
 import negocio.Verificar;
 
 public class Login {
-	/*
-	String dat= "dat";
-	char gi=dat.charAt(0);
-	*/
-	//final char tipo[] = {'c','e'};
-	//final char empleado[]= {'v','a','r','i','d'};
-	//final String tipo_de_usuario[]={"cliente","ventas","administrador","restauracion","reparacion","deposito"};
 	
 	private boolean resul; 
 
@@ -24,9 +17,6 @@ public class Login {
 	public String toString() {
 		return "Empleado: id=" + id	+ ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", tipo=" + tipo;
 	}
-
-
-
 	Conexion con = new Conexion();
 
 	Connection conexion = con.conectar();
@@ -57,12 +47,7 @@ public class Login {
 		this.clave = null;
 	}
 
-	/*
 	
-	public Login(boolean resul) {
-		this.resul = resul;
-	}
-	 */
 	public boolean isResul() {
 		return resul;
 	}
@@ -140,7 +125,7 @@ public class Login {
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
 				this.setTipo(datos[4]);
-				//conexion.close();
+				
 				this.clave=clave;
 				return true;
 			}
@@ -173,7 +158,7 @@ public class Login {
 				this.setNombre(datos[1]);
 				this.setApellido(datos[2]);
 				this.setDni(Integer.parseInt(datos[3]));
-				//conexion.close();
+				
 				this.clave=clave;
 				return true;
 			}
@@ -254,7 +239,6 @@ public class Login {
 			stmt.setInt(5, Integer.parseInt(altura));
 			stmt.setFloat(6,Float.parseFloat(telefono));
 			stmt.executeUpdate();
-			//conexion.close();
 			
 			return true;
 		} catch (Exception e) {
@@ -266,8 +250,7 @@ public class Login {
 	
 	public boolean registro1(String contrasena, String dni, String nombre, String apellido, String direccion,
 			String altura, String telefono) {
-		//float dnif=Float.parseFloat( dni+".00");
-		//float telefonof=Float.parseFloat(telefono+".00");
+
 		String sql = "SELECT idPersona FROM `persona` ORDER BY idPersona DESC LIMIT 1;";
 		try {
 			stmt = conexion.prepareStatement(sql);
@@ -300,7 +283,7 @@ public class Login {
 			stmt.setString(2,contrasena);
 
 			stmt.executeUpdate();
-			//conexion.close();
+			
 			return true;
 
 		} catch (Exception excepcion) {
@@ -325,7 +308,8 @@ public class Login {
 			} while (!userkey);
 			break;
 		case "Mecanico":
-			
+			Mecanico pablo = new Mecanico ("pablo","gutierrez","123546","05","pablo321","mecanico");
+			pablo.loginMecanico();
 			break;
 		case "Encargado del deposito":
 			
@@ -334,7 +318,7 @@ public class Login {
 			
 			break;
 		case "Administrador":
-			Adminstrador nuevo = new Adminstrador ("leonel","de la cruz","123546","01","pato123","administrador");
+			Administrador nuevo = new Administrador ("leonel","de la cruz","123546","01","pato123","administrador");
 			if( nuevo.verEmpleados()==null) {
 				JOptionPane.showMessageDialog(null, "Lista vacia, todavia no hay usuarios");
 			}else {
@@ -343,7 +327,7 @@ public class Login {
 			}
 			break;
 		case "Encargado de taller":
-			
+			EncargadoTaller pedro = new EncargadoTaller ("pedro","gonzalez","123546","03","pedro123","Encargado de taller");
 			break;
 		default:
 			
@@ -352,43 +336,6 @@ public class Login {
 	}
 	
 	
-	
-	
-/*
-
-	public String d(String value) {
-	if (value.charAt(0)==tipo[0]) {
-		return tipo_de_usuario[0];
-	}
-	if (value.charAt(0)==tipo[1]) {
-		
-		if (value.charAt(1)==empleado[0]) {
-			return tipo_de_usuario[1];
-		}	
-		if (value.charAt(1)==empleado[1]) {
-			return tipo_de_usuario[2];
-		}	
-		if (value.charAt(1)==empleado[2]) {
-			return tipo_de_usuario[3];
-		}	
-		if (value.charAt(1)==empleado[3]) {
-			return tipo_de_usuario[4];
-		}	
-		if (value.charAt(1)==empleado[4]) {
-			return tipo_de_usuario[5];
-		}	
-		
-		if (value.charAt(1)==' ') {
-			return "error";
-		}
-		
-	}
-	
-	
-	
-	return "0"; 
-	}
-	*/
 	
 }
 

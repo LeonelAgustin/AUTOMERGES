@@ -22,27 +22,47 @@ public class Mecanico extends Persona{
 	}
 	
 	public void loginMecanico() {
-		String usuario = JOptionPane.showInputDialog("Ingrese su usuario como mecanico");
-		int contra = Integer.parseInt(JOptionPane.showInputDialog("ingrese su contrasenia de mecanico"));
-		JOptionPane.showMessageDialog(null, "Bienvenido mecanico:"+usuario);
-		this.completarInforme(null);
+		int b,c,d,e=0;
+		/*String usuario = JOptionPane.showInputDialog("Ingrese su usuario como mecanico");
+		int contra = Integer.parseInt(JOptionPane.showInputDialog("ingrese su contrasenia de mecanico"));*/
+		Pieza pieza = new Pieza(0,0,null);
+		Cliente cliente = new Cliente("","","","","");
+		Informe aux = new Informe(0,cliente,pieza,0,false);
+		JOptionPane.showMessageDialog(null, "Bienvenido mecanico:"+this.getNombre());
+		int a = Integer.parseInt(JOptionPane.showInputDialog("Bienvenido mecanico:"+this.getNombre()+"\n1-Empezar a trabajar\n2-Terminar jornada laboral")) ;
+		
+		switch (a) {
+		case 1:
+			b = Integer.parseInt(JOptionPane.showInputDialog("Elija un Nº informe para empezar a trabajar\n"+aux.verInformes()));
+			
+			break;
+
+		case 2:
+			
+			
+			break;
+		}
+		
+		this.completarInforme();
 	}
 	
-	public void completarInforme(Informe informe) {
+	public Informe completarInforme() {
 		 
+		Informe nuevo = null;
+		
 		double precio1 = 0;
 		double total;
 		int res,res2, estado=0;
 		int horas = 0;
 		String material = "";
 		
-		switch (informe.getasunto()) {
+		switch (nuevo.getasunto()) {
 		
 		case "restauracion":
 			
 			for (int i = 0; i < 2; i++) {
 				
-			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Restauracion\nIndique que materiales uso para restaurar el vehiculo:"+informe.getVehiculo().getModelo()+"\n1-Aleaciones de hierro\n2-Aleaciones de aluminio\n3-Aluminio de magnesio\n4-Plasticos\n5-Cristales\nOtro"));
+			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Restauracion\nIndique que materiales uso para restaurar el vehiculo:"+nuevo.getVehiculo().getModelo()+"\n1-Aleaciones de hierro\n2-Aleaciones de aluminio\n3-Aluminio de magnesio\n4-Plasticos\n5-Cristales\nOtro"));
 			switch (a) {
 			case 1:
 				JOptionPane.showMessageDialog(null,"Se agrego Aleacion de hierro");
@@ -84,26 +104,27 @@ public class Mecanico extends Persona{
 			
 		case "reparacion":
 			
-			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Reparacion\nIndique si necesita una pieza particular para reparar  el vehiculo:"+informe.getVehiculo().getModelo()+"\n1-Necesito una pieza de fabrica\n2-Tengo lo necesario para hacer el trabajo"));
+			int a = Integer.parseInt(JOptionPane.showInputDialog("Asunto:Reparacion\nIndique si necesita una pieza particular para reparar  el vehiculo:"+nuevo.getVehiculo().getModelo()+"\n1-Necesito una pieza de fabrica\n2-Tengo lo necesario para hacer el trabajo"));
 			if (a==1) {
 				this.generarOrden();
 			} if (a==2) {
 				
 					JOptionPane.showMessageDialog(null, "Indique los datos de la pieza para completar el informe");
 					
-					informe.getPieza().setNumero_de_sere(Integer.parseInt(JOptionPane.showInputDialog("Indique el numero de serie de la pieza")));
-					informe.getPieza().setNombre(JOptionPane.showInputDialog("Indique el nombre de la pieza"));
-					informe.getPieza().setPrecio(Double.parseDouble(JOptionPane.showInputDialog("Indique el precio de la pieza")));
+					nuevo.getPieza().setNumero_de_sere(Integer.parseInt(JOptionPane.showInputDialog("Indique el numero de serie de la pieza")));
+					nuevo.getPieza().setNombre(JOptionPane.showInputDialog("Indique el nombre de la pieza"));
+					nuevo.getPieza().setPrecio(Double.parseDouble(JOptionPane.showInputDialog("Indique el precio de la pieza")));
 
 				
 				horas = Integer.parseInt(JOptionPane.showInputDialog("Indique cuantas horas le llevo hacer la reparacion"));
-				precio1 = informe.getPieza().getPrecio();
+				precio1 = nuevo.getPieza().getPrecio();
 			}
 			
 			total = (precio1/2)*horas;
-			JOptionPane.showMessageDialog(null, "Informe completado \nCodigo de informe:"+informe.getCodinforme()+"\nAsunto:"+informe.getasunto()+"\nAuto:"+informe.getVehiculo().getModelo()+"\nPieza Nº:"+informe.getPieza().getNumero_de_sere()+"\nMateriales:"+material+"\nCliente:"+informe.getCliente().getNombre()+"\nPrecio a cobrar:"+total+"\nMecanico:"+this.getNombre()+" "+this.getApellido()+"Horas de trabajo:"+horas);
+			JOptionPane.showMessageDialog(null, "Informe completado \nCodigo de informe:"+nuevo.getCodinforme()+"\nAsunto:"+nuevo.getasunto()+"\nAuto:"+nuevo.getVehiculo().getModelo()+"\nPieza Nº:"+nuevo.getPieza().getNumero_de_sere()+"\nMateriales:"+material+"\nCliente:"+nuevo.getCliente().getNombre()+"\nPrecio a cobrar:"+total+"\nMecanico:"+this.getNombre()+" "+this.getApellido()+"Horas de trabajo:"+horas);
 			break;
 		}
+		return nuevo;
 		
 		
 	}

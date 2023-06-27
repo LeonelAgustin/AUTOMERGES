@@ -1,12 +1,13 @@
 package Logica;
 import java.sql.ResultSet;
+
 import java.util.LinkedList;
 
-public class Adminstrador extends Persona{
+public class Administrador extends Persona{
 	LinkedList <Login> empleados=new LinkedList <Login>();
 	private int claveA;
 
-	public Adminstrador(String nombre, String apellido,
+	public Administrador(String nombre, String apellido,
 			String dni, String id, String contrasena, String tipo_cuenta) {
 		super(nombre, apellido, dni, id, contrasena);
 	}
