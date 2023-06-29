@@ -309,6 +309,7 @@ public class Login {
 		switch (this.tipo) {
 		case "Ventas":
 			do {
+				System.err.println(this.getDni());
 				Vehiculo vehiculo = new Vehiculo(0,"","","",0,0,0,"");
 				Cliente cliente = new Cliente("","","","","");
 				Pieza pieza = new Pieza(0,0,null);

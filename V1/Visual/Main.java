@@ -4,6 +4,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import Logica.Login;
+import UI.LoginUX;
 
 
 public class Main {
@@ -109,29 +110,21 @@ public class Main {
 			} else {
 				if(seleccion2==1) {
 				
-				int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
+				/*int seleccion = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
-						tipo_de_cuenta, tipo_de_cuenta[0]);
-				String user = JOptionPane.showInputDialog("ingrese el dni");
-				String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
-				System.err.println('\u00BA');
-
-
-			
-				if (seleccion == 1) {
-					if (empleado.TraerEmleados(pass, user)) {
-						empleado.menu_transport();
-						System.err.println(empleado);
-					} else {
-						System.err.println("error");
-					}
-				} else {
-					if (cliente.TraerUsuarios(pass, user)) {
-						
-						System.err.println(cliente);
-					} else {
-						System.err.println("error");
-					}
+						tipo_de_cuenta, tipo_de_cuenta[0]);*/
+				//String user = JOptionPane.showInputDialog("ingrese el dni");
+			//	String pass = JOptionPane.showInputDialog("ingrese la contrase\u00f1a");
+				//System.err.println('\u00BA');
+				//String datos[] = new String[2];
+				//System.err.println(seleccion);
+				LoginUX loginUX = new LoginUX();
+				loginUX.run();
+				try {
+					loginUX.wait();
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
 				}
 				
 			}else {
