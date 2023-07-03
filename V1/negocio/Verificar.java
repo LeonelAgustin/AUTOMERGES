@@ -53,11 +53,13 @@ public class Verificar {
 
 		}
 
+		System.err.println(contrasena);
+		
 		System.err.println(error);
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -110,7 +112,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -166,7 +168,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -222,7 +224,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -277,7 +279,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -330,7 +332,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -383,7 +385,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -402,7 +404,7 @@ public class Verificar {
 				if (q < '0' || q > '9') {
 					errorcaracter[errorconter] = q;
 					errorconter++;
-					// error = error + "el caracter " + q + "\n";
+					 error = error + "el caracter " + q + "\n";
 				}
 			}
 
@@ -436,7 +438,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -487,7 +489,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -506,7 +508,7 @@ public class Verificar {
 				if (q < '0' || q > '9') {
 					errorcaracter[errorconter] = q;
 					errorconter++;
-					// error = error + "el caracter " + q + " no es numerico\n";
+					 error = error + "el caracter " + q + " no es numerico\n";
 				}
 			}
 
@@ -527,7 +529,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -550,7 +552,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -573,7 +575,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -597,7 +599,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 
@@ -639,7 +641,7 @@ public class Verificar {
 		if (error.equals("")) {
 			return true;
 		} else {
-			JOptionPane.showMessageDialog(null, error);
+			//JOptionPane.showMessageDialog(null, error);
 			return false;
 		}
 

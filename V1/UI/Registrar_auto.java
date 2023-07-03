@@ -1,92 +1,118 @@
 package UI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JEditorPane;
-import javax.swing.JComboBox;
-import java.awt.Button;
-import java.awt.Canvas;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
 
-public class Registrar_auto extends JFrame {
+import Logica.Vendedor;
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registrar_auto frame = new Registrar_auto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+public class registrar_auto extends JPanel {
+	private JTextField patente;
+	private JTextField marca;
+	private JTextField modelo;
+	private JTextField ano;
+	private JTextField precio;
+	private JTable table;
+	private Vendedor vendedor;
+	private String cliente="";
+	
+	public Vendedor getVendedor() {
+		return vendedor;
 	}
-
+		public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
 	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
-	public Registrar_auto() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	public registrar_auto() {
+		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Registrar auto");
-		lblNewLabel.setBounds(240, 17, 111, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("Patente");
+		lblNewLabel.setBounds(66, 55, 45, 13);
+		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Marca");
-		lblNewLabel_1.setBounds(52, 121, 107, 20);
-		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(375, 55, 45, 13);
+		add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Patente");
-		lblNewLabel_2.setBounds(406, 121, 107, 20);
-		contentPane.add(lblNewLabel_2);
+		JLabel lblNewLabel_2 = new JLabel("Modelo");
+		lblNewLabel_2.setBounds(66, 127, 45, 13);
+		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Modelo");
-		lblNewLabel_3.setBounds(52, 193, 107, 20);
-		contentPane.add(lblNewLabel_3);
+		JLabel lblNewLabel_3 = new JLabel("ano");
+		lblNewLabel_3.setBounds(375, 127, 45, 13);
+		add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_5 = new JLabel("A\u00f1o");
-		lblNewLabel_5.setBounds(406, 193, 107, 20);
-		contentPane.add(lblNewLabel_5);
+		JLabel lblNewLabel_4 = new JLabel("accion");
+		lblNewLabel_4.setBounds(66, 212, 45, 13);
+		add(lblNewLabel_4);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBounds(52, 146, 107, 20);
-		contentPane.add(editorPane);
+		JLabel lblNewLabel_5 = new JLabel("precio");
+		lblNewLabel_5.setBounds(375, 212, 45, 13);
+		add(lblNewLabel_5);
 		
-		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setBounds(406, 146, 107, 20);
-		contentPane.add(editorPane_1);
+		JButton btnNewButton = new JButton("Registrar auto");
 		
-		JEditorPane editorPane_2 = new JEditorPane();
-		editorPane_2.setBounds(52, 215, 107, 20);
-		contentPane.add(editorPane_2);
+		btnNewButton.setBounds(140, 428, 213, 47);
+		add(btnNewButton);
 		
-		JEditorPane editorPane_4 = new JEditorPane();
-		editorPane_4.setBounds(406, 215, 107, 20);
-		contentPane.add(editorPane_4);
+		JComboBox accion = new JComboBox();
+		accion.setModel(new DefaultComboBoxModel(new String[] {"Reparar", "Restaurar", "Comprar","Vender","Vendido"}));
+		accion.setBounds(44, 235, 88, 21);
+		add(accion);
 		
-		Button button = new Button("Registrar");
-		button.addActionListener(new ActionListener() {
+		patente = new JTextField();
+		patente.setBounds(40, 78, 96, 19);
+		add(patente);
+		patente.setColumns(10);
+		
+		marca = new JTextField();
+		marca.setBounds(349, 78, 96, 19);
+		add(marca);
+		marca.setColumns(10);
+		
+		modelo = new JTextField();
+		modelo.setBounds(40, 147, 96, 19);
+		add(modelo);
+		modelo.setColumns(10);
+		
+		ano = new JTextField();
+		ano.setBounds(349, 147, 96, 19);
+		add(ano);
+		ano.setColumns(10);
+		
+		precio = new JTextField();
+		precio.setBounds(349, 236, 96, 19);
+		add(precio);
+		precio.setColumns(10);
+
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			int accion_suma= accion.getSelectedIndex()+1;
+			String accion_ev =  String.valueOf(accion_suma) ;
+			
+			if (cliente=="") {
+				cliente="-1";
+			}
+			//int cliente,String marca ,String modelo,String patente,String ano,String precio,String estad o
+			vendedor.registrarauto(Integer.parseInt(cliente),marca.getText() ,modelo.getText(),patente.getText(),ano.getText(),precio.getText(),accion_ev);
 			}
 		});
-		button.setBounds(229, 348, 122, 33);
-		contentPane.add(button);
+		
+	}
+	public String getCliente() {
+		return cliente;
+	}
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 }

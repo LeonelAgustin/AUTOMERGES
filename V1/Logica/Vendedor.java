@@ -17,6 +17,7 @@ import negocio.Verificar;
 public class Vendedor extends Persona {
 	LinkedList<Vehiculo> carro = new LinkedList<Vehiculo>();
 	LinkedList<Pieza> piezas = new LinkedList<Pieza>();
+	LinkedList<Cliente> clientes = new LinkedList<Cliente>();
 	private String tipo_cuenta;
 	Vehiculo vehiculo;
 	Pieza pieza;
@@ -40,6 +41,18 @@ public class Vendedor extends Persona {
 		this.pieza = pieza;
 		this.cliente = cliente;
 	}
+	
+	
+
+	public LinkedList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(LinkedList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+
 
 	public String getTipo_cuenta() {
 		return tipo_cuenta;
@@ -265,8 +278,7 @@ public class Vendedor extends Persona {
 			buscar_usuario(rts);
 			String r[] = { "registrar auto", "seleccionar auto" };
 			int seleccion2 = JOptionPane.showOptionDialog(chec, "Seleccione una opcion", "Selector de opciones",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por
-																							// defecto.
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // null para icono por // defecto.
 					r, r[0]);
 			boolean z = seleccion2 == 0;
 			if (z) {
@@ -406,6 +418,64 @@ public class Vendedor extends Persona {
 		return false;
 	}
 
+	
+	public boolean buscador(String dato,int seleccion2) {
+		String sql = "*";
+		
+		
+			this.carro.clear();
+			switch (seleccion2) {
+			case 0:
+				//dato = JOptionPane.showInputDialog("ingrese el a\u00f1o del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `a\u00f1o` = " + dato;
+				break;
+			case 1:
+				//dato = JOptionPane.showInputDialog("ingrese el modelo del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `modelo` LIKE \"%" + dato + "%\"";
+				break;
+			case 2:
+				//dato = JOptionPane.showInputDialog("ingrese la marca del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `marca` LIKE \"%" + dato + "%\"";
+				break;
+			case 3:
+				//dato = JOptionPane.showInputDialog("ingrese el precio del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `Precio` = " + dato;
+				break;
+			case 4:
+				//dato = JOptionPane.showInputDialog("ingrese el id del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `Id_auto` = " + dato;
+				break;
+			case 5:
+				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `Patente` LIKE \"%" + dato + "%\"";
+				break;
+			default:
+				sql = "SELECT * FROM `vehiculo` WHERE 1";
+				break;
+			}
+
+			try {
+				stmt = conexion.prepareStatement(sql);
+				ResultSet resulta = stmt.executeQuery();
+				// id=resulta.getInt(1);
+				while (resulta.next()) {
+					Vehiculo ki = new Vehiculo(resulta.getInt(1), resulta.getString(2), resulta.getString(3),
+							resulta.getString(4), Integer.parseInt(String.format("%.0f", resulta.getFloat(5))),
+							resulta.getInt(6), resulta.getInt(7), String.format("%.2f", resulta.getFloat(8)));
+					//System.err.println(ki);
+					this.carro.add(ki);
+				}
+				
+				return true;
+				// conexion.close();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				// id=-1;
+				return false;
+			}
+		}
+	
+	
 	public void buscar_auto(boolean isventa) {
 		String sql = "*";
 		final String tr[] = { "buscar por a\u00f1o", "buscar por modelo", "buscar por marca", "buscar por precio",
@@ -511,21 +581,22 @@ public class Vendedor extends Persona {
 		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE cliente.idcliente = ? ";
 		// String[] datos = new String[5];
 		try {
-
+			
 			stmt = conexion.prepareStatement(sql);
 			stmt.setInt(1, cliente_id);
 			ResultSet result = stmt.executeQuery();
 			while (result.next()) {
-				this.cliente.setId(String.valueOf(result.getLong(1)));
-				this.cliente.setNombre(result.getString(2));
-				this.cliente.setApellido(result.getString(3));
-				this.cliente.setDni(String.format("%.0f", result.getFloat(4)));
+				this.cliente.setId(String.valueOf(result.getLong("idcliente")));
+				this.cliente.setNombre(result.getString("nombre"));
+				this.cliente.setApellido(result.getString("apellido"));
+				this.cliente.setDni(String.format("%.0f", result.getFloat("dni")));
 				// conexion.close();
-				System.err.println(result.getString(2));
-				return true;
+				//System.err.println(result.getString(2));
+				
 			}
-
-			return false;
+			System.err.println();
+			return true;
+		
 
 		} catch (Exception excepcion) {
 			System.out.println(excepcion.getMessage());
@@ -534,6 +605,37 @@ public class Vendedor extends Persona {
 
 	}
 
+	public boolean buscar_usuarios() {
+
+		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE 1";
+		// String[] datos = new String[5];
+		try {
+			clientes.clear();
+			stmt = conexion.prepareStatement(sql);
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				//this.cliente.setId();
+				//this.cliente.setNombre();
+				//this.cliente.setApellido();
+				//this.cliente.setDni();
+				// conexion.close();
+				Cliente tr = new Cliente(String.valueOf(result.getLong(1)), result.getString(2), result.getString(3), String.format("%.0f", result.getFloat(4)), null);
+				this.clientes.add(tr);
+				System.err.println(result.getString(2));
+				
+			}
+
+			return true;
+
+		} catch (Exception excepcion) {
+			System.out.println(excepcion.getMessage());
+			System.err.println("es aqui");
+			return false;
+		}
+
+	}
+	
+	
 	public boolean buscar_anuncios() {
 
 		String sql = " SELECT   `Id_auto`, `Patente`, `marca`, `modelo`, `año`, `accion_idaccion`, `cliente_idcliente`, `Precio` FROM `vehiculo` WHERE accion_idaccion = 4 ";
@@ -571,6 +673,132 @@ public class Vendedor extends Persona {
 
 	}
 
+	
+	public void registrarauto(int cliente,String marca ,String modelo,String patente,String ano,String precio,String estado) {
+		boolean z;
+	
+		Verificar verificar = new Verificar();
+		System.err.println("finished");
+		/*
+		do {
+			if (!verificar.verificarmarca(marca)) {
+				//marca = JOptionPane.showInputDialog("ingrese una marca valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (!z);
+		// z = true;
+		do {
+			if (!verificar.verificarmodelo(modelo)) {
+				//modelo = JOptionPane.showInputDialog("ingrese un modelo valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (!z);
+		// z = true;
+		do {
+			patente.toUpperCase();
+			if (!verificar.verificarpatente(patente)) {
+				//patente = JOptionPane.showInputDialog("ingrese una patente valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (!z);
+		// z = true;
+		do {
+			if (!verificar.verificarano(ano)) {
+				//ano = JOptionPane.showInputDialog("ingrese una ano valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (!z);
+		// z = true;
+		do {
+			if (!verificar.verificarprecio(precio)) {
+			//	precio = JOptionPane.showInputDialog("ingrese un precio valida");
+				z = false;
+			} else {
+				z = true;
+			}
+		} while (!z);
+		// z = true;
+		do {
+			if (!verificar.verificarestado(estado)) {
+				//estado = JOptionPane.showInputDialog("ingrese una accion valida");
+				z = false;
+			} else {
+				z = true;
+			}
+			System.err.println("finished");
+		} while (!z);
+		 */
+		Vehiculo vehiculo = new Vehiculo(1, patente, marca, modelo, Integer.parseInt(ano), Integer.parseInt(estado),
+				cliente, precio);
+		this.vehiculo = vehiculo;
+		System.err.println(this.vehiculo.toString());
+		registrarautoconnetion();
+
+	}
+
+	/* en caso de que la empresa compre un auto el cliente va a ser -1 */
+	public void registrarautoconnetion() {
+		System.err.println("recived");
+		if (this.vehiculo.getIdcliente() >= 0) {
+			System.err.println("cliente");
+			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `a\u00f1o`, `accion_idaccion`, `cliente_idcliente`, `Precio`) VALUES (?,?,?,?,?,?,?)";
+
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1, this.vehiculo.getPatente());
+				stmt.setString(2, this.vehiculo.getMarca());
+				stmt.setString(3, this.vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
+				stmt.setInt(5, this.vehiculo.getEstado());
+				stmt.setInt(6, this.vehiculo.getIdcliente());
+				stmt.setFloat(7, Float.parseFloat(this.vehiculo.getPrecio()));
+				System.err.println(stmt.toString());
+				stmt.executeUpdate();
+				// conexion.close();
+
+				// return true;
+			} catch (Exception e) {
+				System.err.println("test");
+				System.out.println(e.getMessage());
+				// return false;
+			}
+		} else {
+			String sql = "INSERT INTO `vehiculo`( `Patente`, `marca`, `modelo`, `a\u00f1o`, `accion_idaccion`, `Precio`) VALUES (?,?,?,?,?,?)";
+			System.err.println("registro");
+			try {
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1, this.vehiculo.getPatente());
+				stmt.setString(2, this.vehiculo.getMarca());
+				stmt.setString(3, this.vehiculo.getModelo());
+				stmt.setFloat(4, Float.parseFloat(String.valueOf(this.vehiculo.getAno()) + ".00"));
+				stmt.setInt(5, this.vehiculo.getEstado());
+				stmt.setFloat(6, Float.parseFloat(this.vehiculo.getPrecio()));
+				System.err.println(stmt.toString());
+				stmt.executeUpdate();
+				// conexion.close();
+
+				// return true;
+			} catch (Exception e) {
+				System.err.println("test");
+				System.out.println(e.getMessage());
+				// return false;
+			}
+
+		}
+		JOptionPane.showMessageDialog(null, "auto registrado");
+	}
+	
+	
+	
+	
 	public void registrar_auto(int cliente) {
 		boolean z;
 		String marca = JOptionPane.showInputDialog("ingresa la marca del vehiculo");
@@ -865,6 +1093,35 @@ public class Vendedor extends Persona {
 		}
 	}
 
+	
+	public String verestacionamiento() {
+		String sql = "SELECT count(*) FROM `deposito_has_vehiculo` WHERE `estacionado`= 1";
+		System.err.println();
+		String mensaja="";
+		try {
+			stmt = conexion.prepareStatement(sql);
+			ResultSet resulta = stmt.executeQuery();
+			while (resulta.next()) {
+				System.err.println(resulta.getInt(1));
+				if (resulta.getInt(1) == 0) {
+					mensaja=  "el estacionamiento del depocito esta vacio";
+				} else {
+					if (resulta.getInt(1) >= 0 || resulta.getInt(1) > 150) {
+						mensaja="el estacionamiento del depocito tiene " + resulta.getInt(1);
+					} else {
+						if (resulta.getInt(1) == 150) {
+							mensaja="el estacionamiento del depocito esta lleno";
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mensaja;
+	}
+	
+	
 	public void registrarcompra() {
 		String sql2 = "SELECT `Id_auto` FROM `vehiculo` WHERE Patente LIKE ?;";
 		String sql = "UPDATE `vehiculo` SET `accion_idaccion`= 3 ,`cliente_idcliente`= null WHERE Id_auto = ?";
@@ -886,6 +1143,7 @@ public class Vendedor extends Persona {
 		}
 
 	}
+
 
 
 }
