@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import Logica.Cliente;
 import Logica.Vendedor;
 
 public class seleccionar_auto extends JPanel {

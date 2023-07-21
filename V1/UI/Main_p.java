@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.Font;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -153,12 +155,18 @@ public class Main_p extends JFrame {
 											p.setLogueado(true);
 											panelprincipal.revalidate();
 											panelprincipal.repaint();
-											menu2();
+											Timer myTimer = new Timer(10000, menuactivador());
+											
 										}
 									}
 								}
 
 							}
+						}
+
+						private ActionListener menuactivador() {
+							menu2();
+							return null;
 						}
 
 					});
@@ -361,10 +369,12 @@ public class Main_p extends JFrame {
 				menu();
 			}
 		});
-		comprar_auto comprar_auto = new comprar_auto();
+		comprar_auto comprar_auto = new comprar_auto(vendedor);
+		comprar_auto.setVendedor(vendedor);
 		comprar_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
+				//sumbit
 		JButton btnNewButton = new JButton("realizar compra");
 		btnNewButton.setBounds(196, 437, 150, 36);
 		comprar_auto_acc.add(btnNewButton);

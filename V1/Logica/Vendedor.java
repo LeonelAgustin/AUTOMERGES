@@ -424,38 +424,57 @@ public class Vendedor extends Persona {
 		
 		
 			this.carro.clear();
+			try {
+				
 			switch (seleccion2) {
 			case 0:
 				//dato = JOptionPane.showInputDialog("ingrese el a\u00f1o del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `a\u00f1o` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `a\u00f1o` = ?"  ;
+				stmt = conexion.prepareStatement(sql);
+				stmt.setLong(1, Integer.parseInt(dato));
 				break;
 			case 1:
 				//dato = JOptionPane.showInputDialog("ingrese el modelo del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `modelo` LIKE \"%" + dato + "%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `modelo` LIKE ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,"%"+dato+"%");
+				
 				break;
 			case 2:
 				//dato = JOptionPane.showInputDialog("ingrese la marca del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `marca` LIKE \"%" + dato + "%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `marca` LIKE ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,"%"+dato+"%");
 				break;
 			case 3:
 				//dato = JOptionPane.showInputDialog("ingrese el precio del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `Precio` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `Precio` = ?" ;
+				stmt = conexion.prepareStatement(sql);
+				stmt.setLong(1, Integer.parseInt(dato));
 				break;
 			case 4:
 				//dato = JOptionPane.showInputDialog("ingrese el id del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `Id_auto` = " + dato;
+				sql = "SELECT * FROM `vehiculo` WHERE `Id_auto` = ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setLong(1, Integer.parseInt(dato));
 				break;
 			case 5:
 				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `Patente` LIKE \"%" + dato + "%\"";
+				sql = "SELECT * FROM `vehiculo` WHERE `Patente` LIKE ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,"%"+dato+"%");
+				break;
+			case 6:
+				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `accion_idaccion` = ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,dato);
 				break;
 			default:
 				sql = "SELECT * FROM `vehiculo` WHERE 1";
 				break;
 			}
-
-			try {
-				stmt = conexion.prepareStatement(sql);
+				System.err.println(stmt.toString());
 				ResultSet resulta = stmt.executeQuery();
 				// id=resulta.getInt(1);
 				while (resulta.next()) {
@@ -470,6 +489,7 @@ public class Vendedor extends Persona {
 				// conexion.close();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
+				System.err.println("yes");
 				// id=-1;
 				return false;
 			}
@@ -608,7 +628,7 @@ public class Vendedor extends Persona {
 	public boolean buscar_usuarios() {
 
 		String sql = "SELECT cliente.idcliente,persona.nombre,persona.apellido,persona.dni FROM `cliente` INNER JOIN persona on Persona.idPersona=cliente.Persona_idPersona WHERE 1";
-		// String[] datos = new String[5];
+		String[] datos = new String[5];
 		try {
 			clientes.clear();
 			stmt = conexion.prepareStatement(sql);
@@ -619,9 +639,19 @@ public class Vendedor extends Persona {
 				//this.cliente.setApellido();
 				//this.cliente.setDni();
 				// conexion.close();
-				Cliente tr = new Cliente(String.valueOf(result.getLong(1)), result.getString(2), result.getString(3), String.format("%.0f", result.getFloat(4)), null);
+				//
+				datos[0]=String.valueOf(result.getLong("idcliente"));
+				//
+				datos[1]=result.getString("nombre");
+				//
+				datos[2]=result.getString("apellido");
+				//
+				datos[3]=String.format("%.0f", result.getFloat("dni"));
+				//System.err.println("dato" +datos[3]);
+				Cliente tr = new Cliente(datos[0],datos[3],datos[1],datos[2], null);
+				System.err.println(tr);
 				this.clientes.add(tr);
-				System.err.println(result.getString(2));
+				//System.err.println(result.getString(2));
 				
 			}
 

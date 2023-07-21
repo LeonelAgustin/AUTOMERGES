@@ -11,10 +11,15 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class panel_auxiliar extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -81,6 +86,26 @@ public class panel_auxiliar extends JFrame {
 		JButton comprar_auto_acc = new JButton("Comprar auto");
 		comprar_auto_acc.setBounds(35, 28, 120, 38);
 		panel.add(comprar_auto_acc);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(223, 0, 557, 556);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 210, 533, 340);
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column"
+			}
+		));
+		scrollPane.setViewportView(table);
 		
 	}
 }
