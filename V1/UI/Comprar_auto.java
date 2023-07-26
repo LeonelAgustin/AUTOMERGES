@@ -12,9 +12,24 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class comprar_auto extends JPanel {
 
+	String nombre[] = { "id", "patene", "Marca", "modelo", "ano", "cliente", "precio" };
+	String autos[][] = { { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
+			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
+			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
+			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " } };
+
+	datatable modelo = new datatable(autos, nombre);
+
+	String noauto[][] = { { "no hay datos", " ", " ", " ", " ", " " } };
+
+	datatable nomodelo = new datatable(noauto, nombre);
+
+	
 	private Vendedor vendedor;
 	private JTable table;
 
@@ -29,8 +44,15 @@ public class comprar_auto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public comprar_auto(Vendedor vendedor) {
-		vendedor.buscar_auto(true);
+	public comprar_auto() {
+		addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				vendedor.buscar_auto(true);
+			}
+		});
+		
+		
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Comprar auto");
@@ -45,13 +67,22 @@ public class comprar_auto extends JPanel {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null},
-			},
-			new String[] {
-				"New column"
-			}
-		));
+				new Object[][] {
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+				},
+				new String[] {
+					"id", "patene", "Marca", "modelo", "ano", "cliente"
+				}
+			));
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Seleccionar Cliente");
@@ -59,4 +90,7 @@ public class comprar_auto extends JPanel {
 		add(btnNewButton);
 
 	}
+	
+	
+	
 }

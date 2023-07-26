@@ -470,6 +470,12 @@ public class Vendedor extends Persona {
 				stmt = conexion.prepareStatement(sql);
 				stmt.setString(1,dato);
 				break;
+			case 7:
+				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `cliente_idcliente` = ?";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,dato);
+				break;
 			default:
 				sql = "SELECT * FROM `vehiculo` WHERE 1";
 				break;

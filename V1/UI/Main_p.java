@@ -36,6 +36,13 @@ public class Main_p extends JFrame {
 	JPanel panel_opcion = new JPanel();
 	registrar_auto registrar_auto = new registrar_auto();
 	buscar_cliente buscar_cliente = new buscar_cliente();
+	buscar_cliente buscar_cliente_1 = new buscar_cliente();
+	buscar_cliente buscar_cliente_2 = new buscar_cliente();
+	buscar_cliente buscar_cliente_3 = new buscar_cliente();
+	comprar_auto comprar_auto = new comprar_auto();
+	RR_auto rrAuto = new RR_auto();
+	Vender_pieza vender_pieza = new Vender_pieza();
+	Vender_auto vender_auto = new Vender_auto();
 	loginaux p = new loginaux();
 	registro r = new registro();
 
@@ -70,6 +77,7 @@ public class Main_p extends JFrame {
 	 * Create the frame.
 	 */
 	public Main_p() {
+		setTitle("Automerges");
 		menu();
 	}
 
@@ -279,33 +287,70 @@ public class Main_p extends JFrame {
 				panel_opcion.repaint();
 			}
 		});
-
+		
 		vender_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
-				// panel_opcion.add(buscar);
+				panel_opcion.add(vender_auto);
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 			}
 		});
-
+		
 		vender_pieza_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
-				// panel_opcion.add(buscar);
+				panel_opcion.add(vender_pieza);
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 			}
 		});
-
+		rrAuto.setVendedor(vendedor);
 		reparar_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
-				// panel_opcion.add(buscar);
+				panel_opcion.add(rrAuto);
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 			}
 		});
+		
+		//main panel 
+				JButton btnNewButton = new JButton("seleccionar cliente");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RR_vauto(1);
+						//System.err.println("click");
+					}
+				});
+				btnNewButton.setBounds(188, 96, 192, 37);
+				rrAuto.add(btnNewButton);
+				
+
+				JButton seleccion_3 = new JButton("seleccionar");
+				seleccion_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rrAuto.setClient(buscar_cliente_3.seleccionarcliente());
+						//System.out.println(rrAuto.getClient());
+						RR_vauto(0);
+					}
+				});
+				
+				JButton atras_3 = new JButton("atras");
+				atras_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RR_vauto(0);
+					}
+				});
+
+				atras_3.setBounds(125, 502, 96, 29);
+				buscar_cliente_3.add(atras_3);
+				buscar_cliente_3.setVendedor(vendedor);
+				buscar_cliente_3.obtener_seleccion();
+				seleccion_3.setBounds(346, 502, 96, 29);
+				buscar_cliente_3.add(seleccion_3);
+				buscar_cliente_3.revalidate();
+		
 
 		registrar_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -369,13 +414,18 @@ public class Main_p extends JFrame {
 				menu();
 			}
 		});
-		comprar_auto comprar_auto = new comprar_auto(vendedor);
+		
+		
 		comprar_auto.setVendedor(vendedor);
 		comprar_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
+				panel_opcion.add(comprar_auto);
+				panel_opcion.revalidate();
+				panel_opcion.repaint();
+				
 				//sumbit
-		JButton btnNewButton = new JButton("realizar compra");
+		/*JButton btnNewButton = new JButton("realizar compra");
 		btnNewButton.setBounds(196, 437, 150, 36);
 		comprar_auto_acc.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -383,12 +433,12 @@ public class Main_p extends JFrame {
 				venderauto(0);
 			}
 		});
-		
+		*/
 		
 		
 		JButton btnNewButton_1 = new JButton("seleccionar cliente");
 		btnNewButton_1.setBounds(196, 340, 150, 36);
-		comprar_auto_acc.add(btnNewButton_1);
+		//comprar_auto_acc.add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				venderauto(1);
@@ -399,13 +449,13 @@ public class Main_p extends JFrame {
 		
 		JButton btnNewButton_2 = new JButton("seleccione un auto");
 		btnNewButton_2.setBounds(196, 249, 150, 36);
-		comprar_auto_acc.add(btnNewButton_2);
+		//comprar_auto_acc.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				venderauto(2);
 			}
 		});
-				panel_opcion.add(comprar_auto);
+			
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 
@@ -432,22 +482,62 @@ public class Main_p extends JFrame {
 
 	}
 
-	public void venderauto(int giga) {
+	public void venderauto(int hyper) {
 
-		switch (giga) {
+		switch (hyper) {
 		case 0:
 			panel_opcion.removeAll();
-			panel_opcion.add(registrar_auto);
+			panel_opcion.add(vender_auto);
 			break;
 
 		case 1:
 			panel_opcion.removeAll();
-			panel_opcion.add(buscar_cliente);
+			panel_opcion.add(buscar_cliente_1);
 			break;
+		
+		}
+		panel_opcion.revalidate();
+		panel_opcion.repaint();
+	}
+	
+	
+	public void comprarauto(int mega) {
+
+		switch (mega) {
+		case 0:
+			panel_opcion.removeAll();
+			panel_opcion.add(comprar_auto);
+			break;
+
+		case 1:
+			panel_opcion.removeAll();
+			panel_opcion.add(buscar_cliente_2);
+			break;
+		
+		}
+		panel_opcion.revalidate();
+		panel_opcion.repaint();
+	}
+	
+	public void RR_vauto(int extra) {
+
+		switch (extra) {
+		case 0:
+			panel_opcion.removeAll();
+			panel_opcion.add(rrAuto);
+			break;
+ 
+		case 1:
+			panel_opcion.removeAll();
+			panel_opcion.add(buscar_cliente_3);
+			break;
+			
 		case 2:
 			panel_opcion.removeAll();
-			panel_opcion.add(buscar_cliente);
+			panel_opcion.add(rrAuto);
+			
 			break;
+		
 		}
 		panel_opcion.revalidate();
 		panel_opcion.repaint();
