@@ -100,4 +100,19 @@ public class buscar_cliente extends JPanel {
 		return  table.getModel().getValueAt(table.getSelectedRow(),0).toString();
 	}
 
+	public String seleccionarcliente_nombre() {
+		return  table.getModel().getValueAt(table.getSelectedRow(),1).toString()  + " " + table.getModel().getValueAt(table.getSelectedRow(),2).toString();
+	}
+	
+	public String seleccionarnombre() {
+		return  table.getModel().getValueAt(table.getSelectedRow(),0).toString();
+	}
+	
+	public String seleccionarapellido() {
+		return  table.getModel().getValueAt(table.getSelectedRow(),0).toString();
+	}
+	
+	public String seleccionardni() {
+		return  table.getModel().getValueAt(table.getSelectedRow(),0).toString();
+	}
 }

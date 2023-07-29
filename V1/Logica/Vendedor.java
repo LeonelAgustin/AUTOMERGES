@@ -389,7 +389,7 @@ public class Vendedor extends Persona {
 	}
 
 	public boolean informe_cargar(String asunto, int accion) {
-
+		System.err.println("enter");
 		String sql = "INSERT INTO `informe`( `asunto`, `estados_idestados`, `Vehiculo_Id_auto`) VALUES (?,4,?)";
 		String sql1 = "UPDATE `vehiculo` SET `accion_idaccion`= ? WHERE `Id_auto`=?";
 
@@ -472,7 +472,13 @@ public class Vendedor extends Persona {
 				break;
 			case 7:
 				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
-				sql = "SELECT * FROM `vehiculo` WHERE `cliente_idcliente` = ?";
+				sql = "SELECT * FROM `vehiculo` WHERE `cliente_idcliente`= ? and accion_idaccion != 2 and accion_idaccion != 1;";
+				stmt = conexion.prepareStatement(sql);
+				stmt.setString(1,dato);
+				break;
+			case 8:
+				//dato = JOptionPane.showInputDialog("ingrese el patente del auto");
+				sql = "SELECT * FROM `vehiculo` WHERE `cliente_idcliente`= ?";
 				stmt = conexion.prepareStatement(sql);
 				stmt.setString(1,dato);
 				break;
@@ -501,6 +507,20 @@ public class Vendedor extends Persona {
 			}
 		}
 	
+	public String res(int one_piece) {
+		String sql = "SELECT `Pieza_Numero_de_pieza` FROM `pieza_has_deposito` WHERE `stock` = ?";
+		try {
+			stmt = conexion.prepareStatement(sql);
+			stmt.setInt(1, one_piece);
+			ResultSet resulta = stmt.executeQuery();
+			while (resulta.next()) {
+				return resulta.getString(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "";
+	}
 	
 	public void buscar_auto(boolean isventa) {
 		String sql = "*";
@@ -674,7 +694,7 @@ public class Vendedor extends Persona {
 	
 	public boolean buscar_anuncios() {
 
-		String sql = " SELECT   `Id_auto`, `Patente`, `marca`, `modelo`, `año`, `accion_idaccion`, `cliente_idcliente`, `Precio` FROM `vehiculo` WHERE accion_idaccion = 4 ";
+		String sql = " SELECT   `Id_auto`, `Patente`, `marca`, `modelo`, `a\u00f1o`, `accion_idaccion`, `cliente_idcliente`, `Precio` FROM `vehiculo` WHERE accion_idaccion = 4 ";
 		this.carro.clear();
 		try {
 
@@ -1040,6 +1060,21 @@ public class Vendedor extends Persona {
 	public void vender_auto(boolean auto, int cantidad) {
 		int id = Integer.parseInt(this.cliente.getId());
 		System.out.println("cantidad :"+ cantidad);
+		System.out.println(this.cliente.getId());
+		String auto_precio = "";
+		for (int i = 0; i < this.vehiculo.getPrecio().length(); i++) {
+			if (i==0) {
+				auto_precio = "";
+			}
+			if (this.vehiculo.getPrecio().charAt(i)!=',') {
+				auto_precio += this.vehiculo.getPrecio().charAt(i);
+			}else {
+				auto_precio += '.';
+			}
+		}
+		
+		
+		
 		if (auto) {
 			String sql = "INSERT INTO `factura`( `cliente_idcliente`, `Vehiculo_Id_auto`, `Precio`) VALUES (?,?,?)";
 			System.err.println(this.vehiculo.getPrecio());
@@ -1047,7 +1082,7 @@ public class Vendedor extends Persona {
 				stmt = conexion.prepareStatement(sql);
 				stmt.setLong(1, id);
 				stmt.setLong(2, this.vehiculo.getId());
-				stmt.setDouble(3, Float.parseFloat(this.vehiculo.getPrecio() + ".00"));
+				stmt.setDouble(3, Float.parseFloat(auto_precio));
 				stmt.executeUpdate();
 				System.err.println(stmt.toString());
 				// conexion.close();
@@ -1074,10 +1109,26 @@ public class Vendedor extends Persona {
 	}
 
 	public void registrar_venta() {
-		String sql = "UPDATE `vehiculo` SET `accion_idaccion`= 5 WHERE id_auto = ?";
+		String sql = "UPDATE `vehiculo` SET `accion_idaccion`= 5 , `cliente_idcliente`= ?  WHERE id_auto = ?";
 		try {
 			stmt = conexion.prepareStatement(sql);
-			stmt.setInt(1, this.vehiculo.getId());
+			stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
+			stmt.setInt(2, this.vehiculo.getId());
+			stmt.executeUpdate();
+			// conexion.close();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+	}
+	
+	
+	public void registrar_ventap() {
+		String sql = "UPDATE `vehiculo` SET `accion_idaccion`= 5 , `cliente_idcliente`= ?  WHERE id_auto = ?";
+		try {
+			stmt = conexion.prepareStatement(sql);
+			stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
+			stmt.setInt(2, this.vehiculo.getId());
 			stmt.executeUpdate();
 			// conexion.close();
 		} catch (Exception e) {

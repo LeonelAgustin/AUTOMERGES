@@ -87,7 +87,7 @@ public class Buscar_auto extends JPanel {
 		this.vendedor = vendedor;
 	}
 
-	String value[] = new String[5];
+	String value[] = new String[6];
 	int floating = -1;
 	String buscar_dato = null;
 

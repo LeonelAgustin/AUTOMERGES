@@ -39,6 +39,7 @@ public class Main_p extends JFrame {
 	buscar_cliente buscar_cliente_1 = new buscar_cliente();
 	buscar_cliente buscar_cliente_2 = new buscar_cliente();
 	buscar_cliente buscar_cliente_3 = new buscar_cliente();
+	buscar_cliente buscar_cliente_4 = new buscar_cliente();
 	comprar_auto comprar_auto = new comprar_auto();
 	RR_auto rrAuto = new RR_auto();
 	Vender_pieza vender_pieza = new Vender_pieza();
@@ -288,8 +289,11 @@ public class Main_p extends JFrame {
 			}
 		});
 		
+		
+		
 		vender_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				vender_auto.table_generator();
 				panel_opcion.removeAll();
 				panel_opcion.add(vender_auto);
 				panel_opcion.revalidate();
@@ -297,14 +301,101 @@ public class Main_p extends JFrame {
 			}
 		});
 		
+		//main panel 
+		JButton btnNewButton_vender = new JButton("seleccionar cliente");
+		btnNewButton_vender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				venderauto(1);
+				//System.err.println("click");
+			}
+		});
+		btnNewButton_vender.setBounds(188, 96, 192, 37);
+		vender_auto.add(btnNewButton_vender);
+		vender_auto.setVendedor(vendedor);
+
+		JButton seleccion_1 = new JButton("seleccionar");
+		seleccion_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vender_auto.setClient(buscar_cliente_1.seleccionarcliente());
+				vender_auto.setNombre_apellido(buscar_cliente_1.seleccionarcliente_nombre());
+				vender_auto.setNombrec(buscar_cliente_1.seleccionarnombre());
+				vender_auto.setApellidoc(buscar_cliente_1.seleccionarapellido());
+				vender_auto.setDni(buscar_cliente_1.seleccionardni());
+				vender_auto.title();
+				//System.out.println(rrAuto.getClient());
+				venderauto(0);
+			}
+		});
+		
+		JButton atras_1 = new JButton("atras");
+		atras_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				venderauto(0);
+			}
+		});
+
+		atras_1.setBounds(125, 502, 96, 29);
+		buscar_cliente_1.add(atras_1);
+		buscar_cliente_1.setVendedor(vendedor);
+		buscar_cliente_1.obtener_seleccion();
+		seleccion_1.setBounds(346, 502, 96, 29);
+		buscar_cliente_1.add(seleccion_1);
+		buscar_cliente_1.revalidate();
+		
+		
 		vender_pieza_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_opcion.removeAll();
+				vender_pieza.setVendedor(vendedor);
+				vender_pieza.generar_tabla();
 				panel_opcion.add(vender_pieza);
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 			}
 		});
+		
+		//main panel 
+		JButton btnNewButton_pieza = new JButton("seleccionar cliente");
+		btnNewButton_pieza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				venderpieza(1);
+				//System.err.println("click");
+			}
+		});
+		btnNewButton_pieza.setBounds(188, 96, 192, 37);
+		vender_pieza.add(btnNewButton_pieza);
+		
+
+		JButton seleccion_5 = new JButton("seleccionar");
+		seleccion_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vender_pieza.setClient(buscar_cliente_4.seleccionarcliente());
+				//System.out.println(rrAuto.getClient());
+				venderpieza(0);
+			}
+		});
+		
+		JButton atras_5 = new JButton("atras");
+		atras_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				venderpieza(0);
+			}
+		});
+
+		atras_5.setBounds(125, 502, 96, 29);
+		buscar_cliente_4.add(atras_5);
+		buscar_cliente_4.setVendedor(vendedor);
+		buscar_cliente_4.obtener_seleccion();
+		seleccion_5.setBounds(346, 502, 96, 29);
+		buscar_cliente_4.add(seleccion_5);
+		buscar_cliente_4.revalidate();
+
+		
+		
+		
+		
+		
+		
 		rrAuto.setVendedor(vendedor);
 		reparar_auto_acc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -367,6 +458,7 @@ public class Main_p extends JFrame {
 				seleccion.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						registrar_auto.setCliente(buscar_cliente.seleccionarcliente());
+
 						registrarautol(0);
 					}
 				});
@@ -424,6 +516,44 @@ public class Main_p extends JFrame {
 				panel_opcion.revalidate();
 				panel_opcion.repaint();
 				
+				
+//
+				JButton btnNewButton_4 = new JButton("seleccionar cliente");
+				btnNewButton_4.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						comprarauto(1);
+						//System.err.println("click");
+					}
+				});
+				btnNewButton_4.setBounds(188, 96, 192, 37);
+				comprar_auto.add(btnNewButton_4);
+				
+
+				JButton seleccion_2 = new JButton("seleccionar");
+				seleccion_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						comprar_auto.setClient(buscar_cliente_2.seleccionarcliente());
+						comprar_auto.table_generator();
+						//System.out.println(rrAuto.getClient());
+						comprarauto(0);
+					}
+				});
+				
+				JButton atras_2 = new JButton("atras");
+				atras_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						comprarauto(0);
+					}
+				});
+
+				atras_2.setBounds(125, 502, 96, 29);
+				buscar_cliente_2.add(atras_2);
+				buscar_cliente_2.setVendedor(vendedor);
+				buscar_cliente_2.obtener_seleccion();
+				seleccion_2.setBounds(346, 502, 96, 29);
+				buscar_cliente_2.add(seleccion_2);
+				buscar_cliente_2.revalidate();
+				
 				//sumbit
 		/*JButton btnNewButton = new JButton("realizar compra");
 		btnNewButton.setBounds(196, 437, 150, 36);
@@ -464,9 +594,9 @@ public class Main_p extends JFrame {
 
 	}
 
-	public void registrarautol(int giga) {
+	public void registrarautol(int The_Ultimate_Runner) {
 
-		switch (giga) {
+		switch (The_Ultimate_Runner) {
 		case 0:
 			panel_opcion.removeAll();
 			panel_opcion.add(registrar_auto);
@@ -543,4 +673,22 @@ public class Main_p extends JFrame {
 		panel_opcion.repaint();
 	}
 
+	public void venderpieza(int ultra) {
+
+		switch (ultra) {
+		case 0:
+			panel_opcion.removeAll();
+			panel_opcion.add(vender_pieza);
+			break;
+
+		case 1:
+			panel_opcion.removeAll();
+			panel_opcion.add(buscar_cliente_4);
+			break;
+		
+		}
+		panel_opcion.revalidate();
+		panel_opcion.repaint();
+	}
+	
 }
