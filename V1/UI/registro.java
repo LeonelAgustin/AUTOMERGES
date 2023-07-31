@@ -18,6 +18,7 @@ import Logica.Login;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JProgressBar;
 
 public class registro extends JPanel {
 	private JTextField dni_p;
@@ -37,6 +38,8 @@ public class registro extends JPanel {
 	private JLabel altura_l;
 	private JButton btnNewButton;
 
+	JProgressBar progressBar = new JProgressBar();
+	
 	String dni=null;
 	String contrasena=null;
 	String telefono=null;
@@ -147,6 +150,7 @@ public class registro extends JPanel {
 		
 		
 		btnNewButton = new JButton("registrarse");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -230,16 +234,19 @@ public class registro extends JPanel {
 		}
 		
 		if (errores==0) {
+			progressBar.setVisible(true);
 			boolean aprobacion=true;
 			if (aprobacion) {
 				aprobacion=false;
 				aprobacion=empleado.registro(contrasena, dni, nombre, apellido, direccion, altura, telefono);
 			}
+			progressBar.setValue(25);
 			do {
 				//System.err.println("cargando... 20%");
 			} while (!aprobacion);
 				aprobacion=false;
 				aprobacion=empleado.registro1(contrasena, dni, nombre, apellido, direccion, altura, telefono);
+			progressBar.setValue(75);
 			do {
 				//System.err.println("cargando... 50%");
 			} while (!aprobacion);
@@ -254,18 +261,38 @@ public class registro extends JPanel {
 				nombre_d.setText("");
 				apellido_d.setText("");
 				JOptionPane.showMessageDialog(null,"registro realizado correctamente");
+				progressBar.setValue(100);
+				if (aprobacion) {
+					delete();
+				}
+				progressBar.setVisible(false);
 		}
 		
 		
-		System.err.println("contrasena " + (!verificar.verificarcontrasena(contrasena)) + " confirmar contrasena "+ (!contrasena.equals(contrasena2) )+ " dni "+ ((!verificar.verificardni(dni)))  + " nombre "+(!verificar.verificarnombre(nombre)) + " apellido "+(!verificar.verificarapellido(apellido)) + " direccion " + (!verificar.verificardireccion(direccion)) +" altura " + (!verificar.verificaraltura(altura)) + " telefono " + (!verificar.verificartelefono(telefono))  );
+		//System.err.println("contrasena " + (!verificar.verificarcontrasena(contrasena)) + " confirmar contrasena "+ (!contrasena.equals(contrasena2) )+ " dni "+ ((!verificar.verificardni(dni)))  + " nombre "+(!verificar.verificarnombre(nombre)) + " apellido "+(!verificar.verificarapellido(apellido)) + " direccion " + (!verificar.verificardireccion(direccion)) +" altura " + (!verificar.verificaraltura(altura)) + " telefono " + (!verificar.verificartelefono(telefono))  );
 		
 		lblNewLabel.revalidate();
 		lblNewLabel.repaint();
+		
 		}
 		});
 		btnNewButton.setBounds(179, 470, 129, 50);
 		add(btnNewButton);
+		progressBar.setVisible(false);
+		progressBar.setBounds(81, 530, 328, 19);
+		add(progressBar);
 
-		
+	
+	}
+
+	public void delete() {
+		dni_p.setText("");
+		contrasena_d.setText("");
+		telefono_d.setText("");
+		contrasena2_d.setText("");
+		nombre_d.setText("");
+		apellido_d.setText("");
+		direccion_d.setText("");
+		altura_d.setText("");
 	}
 }

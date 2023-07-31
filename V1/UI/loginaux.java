@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.SwingConstants;
 
 public class loginaux extends JPanel {
 	private JPasswordField contrasena_i;
@@ -30,7 +31,6 @@ public class loginaux extends JPanel {
 	private String usuario;
 	JLabel Contrasena_p = new JLabel("Contrasena");
 	JLabel Usuario_p = new JLabel("Usuario");
-	
 	
 	public String getContrasena() {
 		return contrasena;
@@ -66,12 +66,12 @@ public class loginaux extends JPanel {
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBackground(new Color(0, 0, 0));
-		separator_1.setBounds(271, 223, 165, 2);
+		separator_1.setBounds(271, 224, 165, 2);
 		add(separator_1);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBackground(new Color(0, 0, 0));
-		separator.setBounds(52, 222, 165, 2);
+		separator.setBounds(52, 224, 165, 2);
 		add(separator);
 
 
@@ -82,6 +82,7 @@ public class loginaux extends JPanel {
 		Contrasena_p.setBounds(271, 158, 119, 33);
 		add(Contrasena_p);
 		contrasena_i = new JPasswordField();
+		contrasena_i.setBackground(Color.WHITE);
 		
 		contrasena_i.setEchoChar('*');
 		contrasena_i.setBounds(271, 192, 165, 33);
@@ -89,14 +90,16 @@ public class loginaux extends JPanel {
 		add(contrasena_i);
 		
 		usuario_i = new JTextField();
-		usuario_i.setBounds(52, 190, 165, 33);
+		usuario_i.setBackground(Color.WHITE);
+		usuario_i.setBounds(52, 192, 165, 33);
 		usuario_i.setBorder(null);
 		add(usuario_i);
 		usuario_i.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Login");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_2.setBounds(240, 31, 119, 60);
+		lblNewLabel_2.setBounds(52, 31, 384, 60);
 		add(lblNewLabel_2);
 		JButton Usuario = new JButton("Usuario");
 		JButton Empleado = new JButton("Empleado");
@@ -159,6 +162,11 @@ public class loginaux extends JPanel {
 		}
 		revalidate();
 		repaint();
+	}
+	
+	public void delete() {
+		contrasena_i.setText("");
+		usuario_i.setText("");
 	}
 	
 }

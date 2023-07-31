@@ -18,8 +18,11 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class comprar_auto extends JPanel {
 
@@ -115,6 +118,23 @@ public class comprar_auto extends JPanel {
 				}
 			));
 		tablecontainer_1.setViewportView(table);
+		
+		JButton btnNewButton = new JButton("comprar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!seleccionarauto().equals("-1")) {
+					for (int i = 0; i < vendedor.getCarro().size(); i++) {
+						if (seleccionarauto().equals(String.valueOf(vendedor.getCarro().get(i).getId()))) {
+							vendedor.setVehiculo(vendedor.getCarro().get(i));
+							vendedor.registrarcompra();
+							table_generator();
+						}
+					}
+				}
+			}
+		});
+		btnNewButton.setBounds(158, 430, 217, 32);
+		add(btnNewButton);
 
 	}
 	
@@ -177,7 +197,13 @@ public class comprar_auto extends JPanel {
 		repaint();
 	}
 	public String seleccionarauto() {
-		System.err.println(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
-		return table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+		//System.err.println(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+		String t;
+		try {
+			 t =table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+		} catch (Exception e) {
+			 t = "-1";
+		}
+		return t;
 	}
 }

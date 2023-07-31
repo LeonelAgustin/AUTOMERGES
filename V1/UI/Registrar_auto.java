@@ -13,6 +13,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 
 import Logica.Vendedor;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class registrar_auto extends JPanel {
 	private JTextField patente;
@@ -37,27 +39,33 @@ public class registrar_auto extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Patente");
-		lblNewLabel.setBounds(66, 55, 45, 13);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(44, 55, 92, 13);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Marca");
-		lblNewLabel_1.setBounds(375, 55, 45, 13);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(349, 55, 96, 13);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Modelo");
-		lblNewLabel_2.setBounds(66, 127, 45, 13);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(44, 127, 88, 13);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("ano");
-		lblNewLabel_3.setBounds(375, 127, 45, 13);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(349, 127, 96, 13);
 		add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("accion");
-		lblNewLabel_4.setBounds(66, 212, 45, 13);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setBounds(44, 212, 88, 13);
 		add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("precio");
-		lblNewLabel_5.setBounds(375, 212, 45, 13);
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setBounds(349, 212, 96, 13);
 		add(lblNewLabel_5);
 		
 		JButton btnNewButton = new JButton("Registrar auto");
@@ -66,7 +74,7 @@ public class registrar_auto extends JPanel {
 		add(btnNewButton);
 		
 		JComboBox accion = new JComboBox();
-		accion.setModel(new DefaultComboBoxModel(new String[] {"Reparar", "Restaurar", "Comprar","Vender","Vendido"}));
+		accion.setModel(new DefaultComboBoxModel(new String[] {"Reparar", "Restaurar", "Comprar", "Vender", "Vendido"}));
 		accion.setBounds(44, 235, 88, 21);
 		add(accion);
 		
@@ -94,6 +102,12 @@ public class registrar_auto extends JPanel {
 		precio.setBounds(349, 236, 96, 19);
 		add(precio);
 		precio.setColumns(10);
+		
+		JLabel lblNewLabel_6 = new JLabel("Registrar auto");
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_6.setBounds(154, 24, 159, 31);
+		add(lblNewLabel_6);
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

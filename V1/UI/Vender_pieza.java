@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 
 import Logica.Vendedor;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.HTML;
+
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -69,6 +71,7 @@ public class Vender_pieza extends JPanel {
 
 		JButton btnNewButton = new JButton("Vender pieza");
 		btnNewButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
 				setCantidad(textField.getText());
 				if (!getCantidad().isEmpty()) {
@@ -76,7 +79,19 @@ public class Vender_pieza extends JPanel {
 					if (numero > 0) {
 						if (client != null) {
 							if (!client.isEmpty()) {
-								vender_parte(numero);
+								if (!table.getModel().getValueAt(table.getSelectedRow(), 0).toString().equals("-1")) {
+								for (int i = 0; i < vendedor.getPiezas().size(); i++) {
+									String val=	seleccionarauto();
+									if (vendedor.getPiezas().get(i).equals(val)) {
+										vendedor.setPieza(vendedor.getPiezas().get(i));
+									}
+								}
+								if (Integer.parseInt(seleccionarstock())>=Integer.parseInt(cantidad)) {
+									vender_parte(numero);
+								}
+								
+								
+								}
 							}
 						}
 					} else {
@@ -117,13 +132,20 @@ public class Vender_pieza extends JPanel {
 			}
 			for (int i = 0; i < aux.length; i++) {
 				String aux2 = vendedor.res(Integer.parseInt(aux[i][1]));
+				
 				if (aux2.isBlank()) {
 					aux[i][1] = "no encontrado";
 				} else {
-					aux[i][1] = aux2;
+					aux[i][1] = aux2; 
 				}
 			}
-
+			
+			for (int i = 0; i < aux.length; i++) {
+				if (!aux[i][1].equals("no encontrado")) {
+					
+				}
+			}
+			
 		} else {
 			aux = piezas;
 		}
@@ -142,5 +164,33 @@ public class Vender_pieza extends JPanel {
 			}
 		}
 		vendedor.vender_auto(false, end_of_za_warudo);
+		if (!seleccionarstock().equals("no encontrado")) {
+			int send= Integer.parseInt(cantidad)-Integer.parseInt(seleccionarstock());
+			vendedor.registrar_ventap(send);
+		}
+		generar_tabla();
+	}
+	
+	public String seleccionarauto() {
+		//System.err.println(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+		String t;
+		try {
+			 t =table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+		} catch (Exception e) {
+			 t = "-1";
+		}
+		
+		
+		return t;
+	}
+	public String seleccionarstock() {
+		//System.err.println(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+		String t;
+		try {
+			 t =table.getModel().getValueAt(table.getSelectedRow(), 1).toString();
+		} catch (Exception e) {
+			 t = "-1";
+		}
+		return t;
 	}
 }

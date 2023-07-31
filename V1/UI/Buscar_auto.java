@@ -364,7 +364,12 @@ public class Buscar_auto extends JPanel {
 			}
 			
 			table.removeAll();
-			tablecontainer.remove(anadertable);
+			try {
+				tablecontainer.remove(anadertable);
+			} catch (Exception e) {
+				System.err.println("no existe");
+			}
+			
 			datatable modelo_new = new datatable(aux, nombre);
 			table.setModel(modelo_new);
 			tablecontainer.add(table);

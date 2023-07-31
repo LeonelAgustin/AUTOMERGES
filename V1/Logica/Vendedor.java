@@ -507,19 +507,24 @@ public class Vendedor extends Persona {
 			}
 		}
 	
-	public String res(int one_piece) {
-		String sql = "SELECT `Pieza_Numero_de_pieza` FROM `pieza_has_deposito` WHERE `stock` = ?";
+	public String res(int one_piece) { 
+		String sql = "SELECT `stock` FROM `pieza_has_deposito` WHERE   `Pieza_Numero_de_pieza` = ?";
+		String resp = null;
 		try {
 			stmt = conexion.prepareStatement(sql);
 			stmt.setInt(1, one_piece);
 			ResultSet resulta = stmt.executeQuery();
 			while (resulta.next()) {
-				return resulta.getString(1);
+				resp= resulta.getString(1);
 			}
+			if (resp==null) {
+				resp="";
+			}
+			return resp;
 		} catch (Exception e) {
-			// TODO: handle exception
+			return "";
 		}
-		return "";
+		
 	}
 	
 	public void buscar_auto(boolean isventa) {
@@ -1123,12 +1128,12 @@ public class Vendedor extends Persona {
 	}
 	
 	
-	public void registrar_ventap() {
-		String sql = "UPDATE `vehiculo` SET `accion_idaccion`= 5 , `cliente_idcliente`= ?  WHERE id_auto = ?";
+	public void registrar_ventap(int cantidad) {
+		String sql = "UPDATE `pieza_has_deposito` SET `stock`= ?  WHERE `Pieza_Numero_de_pieza`= ? ";
 		try {
 			stmt = conexion.prepareStatement(sql);
-			stmt.setInt(1, Integer.parseInt(this.cliente.getId()));
-			stmt.setInt(2, this.vehiculo.getId());
+			stmt.setInt(1, cantidad);
+			stmt.setInt(2, this.pieza.getNumero_de_sere());
 			stmt.executeUpdate();
 			// conexion.close();
 		} catch (Exception e) {

@@ -150,6 +150,7 @@ public class Main_p extends JFrame {
 											p.setLogueado(true);
 											panelprincipal.revalidate();
 											panelprincipal.repaint();
+											p.delete();
 											System.err.println("no exeiste el menu pero esta loqueado");
 										}
 									}
@@ -164,6 +165,7 @@ public class Main_p extends JFrame {
 											p.setLogueado(true);
 											panelprincipal.revalidate();
 											panelprincipal.repaint();
+											p.delete();
 											Timer myTimer = new Timer(10000, menuactivador());
 											
 										}
