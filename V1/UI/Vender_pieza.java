@@ -165,7 +165,8 @@ public class Vender_pieza extends JPanel {
 		}
 		vendedor.vender_auto(false, end_of_za_warudo);
 		if (!seleccionarstock().equals("no encontrado")) {
-			int send= Integer.parseInt(cantidad)-Integer.parseInt(seleccionarstock());
+			int send= (Integer.parseInt(cantidad) - Integer.parseInt(seleccionarstock()) ) * -1;
+		
 			vendedor.registrar_ventap(send);
 		}
 		generar_tabla();

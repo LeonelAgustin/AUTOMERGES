@@ -30,7 +30,7 @@ public class seleccionar_auto extends JPanel {
 		public void setVendedor(Vendedor vendedor) {
 		this.vendedor = vendedor;
 	}
-		String nombre[] = {"id", "patene", "Marca", "modelo", "ano", "cliente" ,"precio"};
+		String nombre[] = {"id", "patente", "Marca", "modelo", "ano", "cliente" ,"precio"};
 		String autos[][] = {{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "},{" "," "," "," "," "," "}};
 
 	datatable modelo = new datatable(autos, nombre);

@@ -50,7 +50,7 @@ public class RR_auto extends JPanel {
 		this.vendedor = vendedor;
 	}
 
-	String nombre[] = { "id", "patene", "Marca", "modelo", "ano", "cliente", "precio" };
+	String nombre[] = { "id", "patente", "Marca", "modelo", "ano", "cliente", "precio" };
 	String autos[][] = { { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
 			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
 			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },

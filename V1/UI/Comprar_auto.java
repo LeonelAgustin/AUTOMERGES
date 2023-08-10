@@ -52,7 +52,7 @@ public class comprar_auto extends JPanel {
 
 	PreparedStatement stmt;
 
-	String nombre[] = { "id", "patene", "Marca", "modelo", "ano", "cliente", "precio" };
+	String nombre[] = { "id", "patente", "Marca", "modelo", "ano", "cliente", "precio" };
 	String autos[][] = { { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
 			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
 			{ " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " }, { " ", " ", " ", " ", " ", " " },
